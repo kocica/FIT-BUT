@@ -1,0 +1,66 @@
+\hypertarget{group__ZmenaKapacity}{}\section{Realokace pameti.}
+\label{group__ZmenaKapacity}\index{Realokace pameti.@{Realokace pameti.}}
+
+
+Zmena velikosti alokovane pameti pro objekty.  
+
+
+\subsection*{Funkce}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$ \hyperlink{group__ZmenaKapacity_ga0d8702f8bee3bccb81380e012a615a3d}{resize\+\_\+cluster} (struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$c, int new\+\_\+cap)
+\begin{DoxyCompactList}\small\item\em Zmeni velikost shluku. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Proměnné}
+\begin{DoxyCompactItemize}
+\item 
+const int \hyperlink{group__ZmenaKapacity_gafb09f2bf4615f5ac7a91807aa086d4c3}{C\+L\+U\+S\+T\+E\+R\+\_\+\+C\+H\+U\+NK}
+\begin{DoxyCompactList}\small\item\em Doporuceny pocet pro realokaci. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailní popis}
+Zmena velikosti alokovane pameti pro objekty. 
+
+
+
+\subsection{Dokumentace funkcí}
+\index{Realokace pameti.@{Realokace pameti.}!resize\+\_\+cluster@{resize\+\_\+cluster}}
+\index{resize\+\_\+cluster@{resize\+\_\+cluster}!Realokace pameti.@{Realokace pameti.}}
+\subsubsection[{\texorpdfstring{resize\+\_\+cluster(struct cluster\+\_\+t $\ast$c, int new\+\_\+cap)}{resize_cluster(struct cluster_t *c, int new_cap)}}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf cluster\+\_\+t}$\ast$ resize\+\_\+cluster (
+\begin{DoxyParamCaption}
+\item[{struct {\bf cluster\+\_\+t} $\ast$}]{c, }
+\item[{int}]{new\+\_\+cap}
+\end{DoxyParamCaption}
+)}\hypertarget{group__ZmenaKapacity_ga0d8702f8bee3bccb81380e012a615a3d}{}\label{group__ZmenaKapacity_ga0d8702f8bee3bccb81380e012a615a3d}
+
+
+Zmeni velikost shluku. 
+
+Zmena kapacity shluku \textquotesingle{}c\textquotesingle{} na kapacitu \textquotesingle{}new\+\_\+cap\textquotesingle{}.
+
+
+\begin{DoxyParams}{Parametry}
+{\em c} & \mbox{[}out\mbox{]} Ukazatel na shluk objektu jehoz velikost jsme zmenili. \\
+\hline
+{\em new\+\_\+cap} & \mbox{[}in\mbox{]} Nova kapacita (max pocet objektu) shluku. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Návratová hodnota}
+Shluk se zmenenou velikosti.
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+\textquotesingle{}c\textquotesingle{} nesmi ukazovat na \textquotesingle{}N\+U\+LL\textquotesingle{}, \textquotesingle{}new\+\_\+cap\textquotesingle{} musi byt vetsi rovno nule, stejne jako kapacita shluku. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Pri chybne realokaci \textquotesingle{}c\textquotesingle{} ukazuje na N\+U\+LL, v opacnem pripade na realokovanou pamet. Do \textquotesingle{}capacity\textquotesingle{} se ulozi \textquotesingle{}new\+\_\+cap\textquotesingle{}. 
+\end{DoxyPostcond}
+
+
+\subsection{Dokumentace proměnných}
+\index{Realokace pameti.@{Realokace pameti.}!C\+L\+U\+S\+T\+E\+R\+\_\+\+C\+H\+U\+NK@{C\+L\+U\+S\+T\+E\+R\+\_\+\+C\+H\+U\+NK}}
+\index{C\+L\+U\+S\+T\+E\+R\+\_\+\+C\+H\+U\+NK@{C\+L\+U\+S\+T\+E\+R\+\_\+\+C\+H\+U\+NK}!Realokace pameti.@{Realokace pameti.}}
+\subsubsection[{\texorpdfstring{C\+L\+U\+S\+T\+E\+R\+\_\+\+C\+H\+U\+NK}{CLUSTER_CHUNK}}]{\setlength{\rightskip}{0pt plus 5cm}const int C\+L\+U\+S\+T\+E\+R\+\_\+\+C\+H\+U\+NK}\hypertarget{group__ZmenaKapacity_gafb09f2bf4615f5ac7a91807aa086d4c3}{}\label{group__ZmenaKapacity_gafb09f2bf4615f5ac7a91807aa086d4c3}
+
+
+Doporuceny pocet pro realokaci. 
+
+Realokovani po jednom prvku je prilis narocne, proto se pocet navysuje o tuto doporucenou hodnotu. 

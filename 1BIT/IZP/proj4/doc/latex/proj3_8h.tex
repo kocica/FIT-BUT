@@ -1,0 +1,43 @@
+\hypertarget{proj3_8h}{}\section{Dokumentace souboru proj3.\+h}
+\label{proj3_8h}\index{proj3.\+h@{proj3.\+h}}
+\subsection*{Třídy}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structobj__t}{obj\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Reprezentace jednoho objektu ve shluku. \end{DoxyCompactList}\item 
+struct \hyperlink{structcluster__t}{cluster\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Reprezentace shluku objektu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Funkce}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__DynamickaPamet_ga96db0862471d90abb3d80103ef3695f7}{init\+\_\+cluster} (struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$c, int cap)
+\begin{DoxyCompactList}\small\item\em Provede inicialiaci clusteru. \end{DoxyCompactList}\item 
+void \hyperlink{group__DynamickaPamet_ga8289f092f205baeb13cf33cfffa15324}{clear\+\_\+cluster} (struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$c)
+\begin{DoxyCompactList}\small\item\em Vycisti shluk z pameti. \end{DoxyCompactList}\item 
+struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$ \hyperlink{group__DynamickaPamet_ga0d8702f8bee3bccb81380e012a615a3d}{resize\+\_\+cluster} (struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$c, int new\+\_\+cap)
+\begin{DoxyCompactList}\small\item\em Zmeni velikost shluku. \end{DoxyCompactList}\item 
+void \hyperlink{group__Objekty_gab6269b64b2c7f4842a51c58b2d86a2e5}{append\+\_\+cluster} (struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$c, struct \hyperlink{structobj__t}{obj\+\_\+t} obj)
+\begin{DoxyCompactList}\small\item\em Prida objekt do shluku. \end{DoxyCompactList}\item 
+void \hyperlink{group__Objekty_gac39a25fdec1f4952ec92ee5407893158}{merge\+\_\+clusters} (struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$c1, struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$c2)
+\begin{DoxyCompactList}\small\item\em Spoji dva shluky do jednoho a pote je seradi. \end{DoxyCompactList}\item 
+int \hyperlink{group__Objekty_gaf73744f9128e4605127b40932a730a48}{remove\+\_\+cluster} (struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$carr, int narr, int idx)
+\begin{DoxyCompactList}\small\item\em Odstrani shluk z pole shluku. \end{DoxyCompactList}\item 
+int \hyperlink{group__Objekty_ga9d928923d43120cb53ddff210a087061}{load\+\_\+clusters} (char $\ast$filename, struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$$\ast$arr)
+\begin{DoxyCompactList}\small\item\em Nacita objekty ze souboru a uklada je do shluku, jez naalokuje. \end{DoxyCompactList}\item 
+void \hyperlink{group__Objekty_ga12718af9e3e31b61bf703ec260e22450}{sort\+\_\+cluster} (struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$c)
+\begin{DoxyCompactList}\small\item\em Seradi objekty v shluku. \end{DoxyCompactList}\item 
+float \hyperlink{group__Shlukovani_ga703ce6afddf65026b68645bc5394405b}{obj\+\_\+distance} (struct \hyperlink{structobj__t}{obj\+\_\+t} $\ast$o1, struct \hyperlink{structobj__t}{obj\+\_\+t} $\ast$o2)
+\begin{DoxyCompactList}\small\item\em Zjisti vzdalenost dvou objektu. \end{DoxyCompactList}\item 
+float \hyperlink{group__Shlukovani_gaf336f28a62c28da792f6def84f432bb2}{cluster\+\_\+distance} (struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$c1, struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$c2)
+\begin{DoxyCompactList}\small\item\em Hleda dva nejvzdalenejsi objekty. \end{DoxyCompactList}\item 
+void \hyperlink{group__Shlukovani_ga5f16d682e7c859f7bd3f27697c2b7cc0}{find\+\_\+neighbours} (struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$carr, int narr, int $\ast$c1, int $\ast$c2)
+\begin{DoxyCompactList}\small\item\em Nalezne dva nejvhodnejsi sousedy (shluky). \end{DoxyCompactList}\item 
+void \hyperlink{group__Tisk_ga322bfd43ab7a3fa830cd69e79b7eef06}{print\+\_\+cluster} (struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$c)
+\begin{DoxyCompactList}\small\item\em Tiskne jeden shluk. \end{DoxyCompactList}\item 
+void \hyperlink{group__Tisk_gad350e6021e5fead00ff2eeec4d134525}{print\+\_\+clusters} (struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$carr, int narr)
+\begin{DoxyCompactList}\small\item\em Tiskne jednotlive shluky. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Proměnné}
+\begin{DoxyCompactItemize}
+\item 
+const int \hyperlink{group__DynamickaPamet_gafb09f2bf4615f5ac7a91807aa086d4c3}{C\+L\+U\+S\+T\+E\+R\+\_\+\+C\+H\+U\+NK}
+\begin{DoxyCompactList}\small\item\em Doporuceny pocet pro realokaci. \end{DoxyCompactList}\end{DoxyCompactItemize}

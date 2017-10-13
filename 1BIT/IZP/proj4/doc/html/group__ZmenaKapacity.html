@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>proj3: Realokace pameti.</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">proj3
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generováno programem Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Hledat');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hlavní&#160;stránka</span></a></li>
+      <li class="current"><a href="modules.html"><span>Moduly</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li><a href="files.html"><span>Soubory</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Hledat" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funkce</a> &#124;
+<a href="#var-members">Proměnné</a>  </div>
+  <div class="headertitle">
+<div class="title">Realokace pameti.</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Zmena velikosti alokovane pameti pro objekty.  
+<a href="#details">...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funkce</h2></td></tr>
+<tr class="memitem:ga0d8702f8bee3bccb81380e012a615a3d"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structcluster__t.html">cluster_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZmenaKapacity.html#ga0d8702f8bee3bccb81380e012a615a3d">resize_cluster</a> (struct <a class="el" href="structcluster__t.html">cluster_t</a> *c, int new_cap)</td></tr>
+<tr class="memdesc:ga0d8702f8bee3bccb81380e012a615a3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zmeni velikost shluku.  <a href="#ga0d8702f8bee3bccb81380e012a615a3d">...</a><br /></td></tr>
+<tr class="separator:ga0d8702f8bee3bccb81380e012a615a3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Proměnné</h2></td></tr>
+<tr class="memitem:gafb09f2bf4615f5ac7a91807aa086d4c3"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZmenaKapacity.html#gafb09f2bf4615f5ac7a91807aa086d4c3">CLUSTER_CHUNK</a></td></tr>
+<tr class="memdesc:gafb09f2bf4615f5ac7a91807aa086d4c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doporuceny pocet pro realokaci.  <a href="#gafb09f2bf4615f5ac7a91807aa086d4c3">...</a><br /></td></tr>
+<tr class="separator:gafb09f2bf4615f5ac7a91807aa086d4c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailní popis</h2>
+<p>Zmena velikosti alokovane pameti pro objekty. </p>
+<h2 class="groupheader">Dokumentace funkcí</h2>
+<a class="anchor" id="ga0d8702f8bee3bccb81380e012a615a3d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structcluster__t.html">cluster_t</a>* resize_cluster </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structcluster__t.html">cluster_t</a> *&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>new_cap</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Zmeni velikost shluku. </p>
+<p>Zmena kapacity shluku 'c' na kapacitu 'new_cap'.</p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>[out] Ukazatel na shluk objektu jehoz velikost jsme zmenili. </td></tr>
+    <tr><td class="paramname">new_cap</td><td>[in] Nova kapacita (max pocet objektu) shluku. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Návratová hodnota</dt><dd>Shluk se zmenenou velikosti.</dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>'c' nesmi ukazovat na 'NULL', 'new_cap' musi byt vetsi rovno nule, stejne jako kapacita shluku. </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Pri chybne realokaci 'c' ukazuje na NULL, v opacnem pripade na realokovanou pamet. Do 'capacity' se ulozi 'new_cap'. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentace proměnných</h2>
+<a class="anchor" id="gafb09f2bf4615f5ac7a91807aa086d4c3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int CLUSTER_CHUNK</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doporuceny pocet pro realokaci. </p>
+<p>Realokovani po jednom prvku je prilis narocne, proto se pocet navysuje o tuto doporucenou hodnotu. </p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generováno programem &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>

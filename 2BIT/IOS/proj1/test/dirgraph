@@ -1,0 +1,312 @@
+#!/bin/sh
+
+# dirgraph
+# Filip Kocica, xkocic01 AT fit.vutbr.cz
+# Projekt 1, IOS, FIT VUT
+# 3.3.2017
+
+print_dirgraph() {
+
+  cd "$1" > /dev/null 2>&1 || { >&2 echo "Error, path does not exist"; exit 1; }
+
+	find . > /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		>&2 echo "ERROR."
+		exit 1
+	fi
+
+	echo -n "Root directory: "
+	echo $1
+
+	echo -n "Directories: "
+	if [ "$IGNOR" = "" ]; then
+		t=`find . -type d | wc -l` > /dev/null 2>&1
+		echo $t
+	else
+		t=`find . -type d \( -not -path "*$IGNOR*" ! -iname "*$IGNOR*" \) | wc -l` > /dev/null 2>&1
+		echo $t
+	fi
+
+	echo -n "All files: "
+	if [ "$IGNOR" = "" ]; then
+		t=`find . -type f | wc -l` > /dev/null 2>&1
+		echo $t
+	else
+		t=`find . -type f \( -not -path "*$IGNOR*" ! -iname "*$IGNOR*" \) | wc -l` > /dev/null 2>&1
+		echo $t
+	fi
+
+	echo "File size histogram:"
+  print_size_histogram
+
+  echo "File type histogram:"
+  print_type_histogram
+}
+
+
+print_type_histogram() {
+	files=0
+	max=0
+
+	OIFS="$IFS"
+	# cykli po newlinech
+	IFS=$'
+'
+
+	if [ "$IGNOR" = "" ]; then
+		files=`find . -type f` > /dev/null 2>&1
+	else
+		files=`find . -type f \( -not -path "*$IGNOR*" ! -iname "*$IGNOR*" \)` > /dev/null 2>&1
+	fi
+
+	# nic k tisknuti
+	if [ "$files" = "" ]; then
+		return 0
+	fi
+
+  # ziskej jmeno souboru
+  for d in $files; do
+    # je soubor citelny a existuje
+		if ! [ -r "$d" -a -f "$d" ]; then
+			continue
+		fi
+
+		# ziskej info o souboru
+    a=`file -b $d` > /dev/null 2>&1
+
+		# zkrat soubor, pokud je dlouhy
+  	if [ `echo "$a" | wc -m` -gt 41 ]; then
+			a=`echo "$a" | cut -c1-40`
+			a="$a..."
+		fi
+
+		# uloz za sebe popisy souboru
+		if [ "$data" = "" ]; then
+			data="$a
+"
+		else
+			data="$data$a
+"
+		fi
+	done
+
+	IFS="$OIFS"
+
+	# spocitej a setrid popisy souboru
+	description=`echo "$data" | sort | uniq -c | sort -n -r`
+	rows=`echo "$description" | wc -l`
+	for i in `seq 1 $(($rows-1))`
+	do
+		if [ $i -eq 11 ]; then
+			break
+		fi
+
+		line=`echo "$description" | awk "NR==$i"`
+		num=`echo $line | cut -d' ' -f1`
+
+		# max pocet
+		if [ $i -eq 1 ]; then
+			max=$num
+		fi
+
+		desc=`echo $line | cut -d' ' -f2-`
+
+		echo -n "  "
+		echo -n $desc
+
+		len=`echo "$desc" | wc -m`
+		if [ $len -ne 44 ]; then
+			for space in `seq 0 $((43-$len))`
+			do
+				echo -n " "
+			done
+		fi
+		echo -n ": "
+
+		# 47 = rezijni znaky
+		print_count_files $num 47 $max
+	done
+
+}
+
+
+print_size_histogram() {
+	jedna=0
+	dva=0
+	tri=0
+	ctyri=0
+	pet=0
+	sest=0
+	sedm=0
+	osm=0
+	devet=0
+
+	OIFS="$IFS"
+	# cykli po newlinech
+	IFS=$'
+'
+
+	if [ "$IGNOR" = "" ]; then
+		files=`find . -type f` > /dev/null 2>&1
+	else
+		files=`find . -type f \( -not -path "*$IGNOR*" ! -iname "*$IGNOR*" \)` > /dev/null 2>&1
+	fi
+
+	for d in $files; do
+		if [ ! -f "$d" ]; then
+    	continue;
+		fi
+
+		size=`wc -c < $d` > /dev/null 2>&1
+		if [ $? -ne 0 ]; then
+			>&2 echo "ERROR."
+			exit 1
+		fi
+
+			if [ $size -lt 100 ]; then
+				jedna=$(($jedna+1))
+			elif [ $size -ge 100 -a $size -lt 1024 ]; then
+				dva=$(($dva+1))
+			elif [ $size -ge 1024 -a $size -lt 10240 ]; then
+				tri=$(($tri+1))
+			elif [ $size -ge 10240 -a $size -lt 102400 ]; then
+				ctyri=$(($ctyri+1))
+			elif [ $size -ge 102400 -a $size -lt 1048576 ]; then
+				pet=$(($pet+1))
+			elif [ $size -ge 1048576 -a $size -lt 10485760 ]; then
+				sest=$(($sest+1))
+			elif [ $size -ge 10485760 -a $size -lt 104857600 ]; then
+				sedm=$(($sedm+1))
+			elif [ $size -ge 104857600 -a $size -lt 1073741824 ]; then
+				osm=$(($osm+1))
+			elif [ $size -ge 1073741824 ]; then
+				devet=$(($devet+1))
+			fi
+	done
+
+	IFS="$OIFS"
+
+	#najdi maximum [ano je to hrozne ale nemohl jsem pouzit pole :) (POSIX)]
+	max=$jedna
+	if [ $max -lt $dva ]; then max=$dva
+	fi
+	if [ $max -lt $tri ]; then max=$tri
+	fi
+	if [ $max -lt $ctyri ]; then max=$ctyri
+	fi
+	if [ $max -lt $pet ]; then max=$pet
+	fi
+	if [ $max -lt $sest ]; then max=$sest
+	fi
+	if [ $max -lt $sedm ]; then max=$sedm
+	fi
+	if [ $max -lt $osm ]; then max=$osm
+	fi
+	if [ $max -lt $devet ]; then max=$devet
+	fi
+
+	# 12 = rezijni znaky
+  echo -n "  <100 B  : "
+	print_count_files $jedna 12 $max
+	echo -n "  <1 KiB  : "
+	print_count_files $dva 12 $max
+	echo -n "  <10 KiB : "
+	print_count_files $tri 12 $max
+	echo -n "  <100 KiB: "
+	print_count_files $ctyri 12 $max
+	echo -n "  <1 MiB  : "
+	print_count_files $pet 12 $max
+	echo -n "  <10 MiB : "
+	print_count_files $sest 12 $max
+  echo -n "  <100 MiB: "
+	print_count_files $sedm 12 $max
+	echo -n "  <1 GiB  : "
+	print_count_files $osm 12 $max
+	echo -n "  >=1 GiB : "
+	print_count_files $devet 12 $max
+}
+
+
+print_count_files() {
+	delka_radku=$1
+	max_mrizek=0
+
+	# deleni nulou
+	if [ $3 -eq 0 ]; then
+		echo
+		return 0
+	fi
+
+	if [ "$NORMALIZACE" = true ]; then
+	  if [ -t 1 ]; then
+      max_mrizek=$((`tput cols`-$2-1))
+		else
+			max_mrizek=$((80-$2-1))
+  	fi
+
+		if [ $3 -gt $max_mrizek ]; then
+			delka_radku=$((($delka_radku * $max_mrizek) / $3))
+		fi
+	fi
+
+	if [ $delka_radku -eq 0 ]; then
+		echo #odradkuj
+		return 0 #ukonci fci
+	fi
+
+	for c in `seq 0 $(($delka_radku-1))`
+	do
+		echo -n "#"
+	done
+
+	echo
+}
+
+
+# Nastaveni POSIX modu
+POSIXLY_CORRECT=yes
+
+# globalni promenne pro detekci normalizace a ignorovaneho vyrazu + napoveda
+NORMALIZACE=false
+IGNOR=""
+NAPOVEDA="Napoveda: dirgraph [-i FILE_ERE] [-n] [DIR]\n
+					-i zpusobi ignoraci vyrazu FILE_ERE, nesmi byt KORENOVY ADRESAR\n
+					-n nastavi normalizaci vystupu\n
+					DIR umisteni zkoumaneho adr.,pri absenci se zkouma aktualni adr.\n
+          Zadny z parametru NENI povinny [znaci hranate zavorky]"
+
+# vice nez 4 argumenty -> error
+if [ $# -gt 4 ]; then
+	>&2 echo "ERROR: Prilis mnoho argumentu. Skript se ukonci."
+	echo $NAPOVEDA
+	exit 1
+fi
+
+# vstupni kontrola prepinacu pomoci getoption
+while getopts "ni:" OPTION; do
+    case $OPTION in
+        n) NORMALIZACE=true;;
+        i) IGNOR=${OPTARG};;
+        *) >&2 echo "ERROR." >&2
+					 exit 1;;
+    esac
+done
+
+# vyraz k ignoru je korenovy adresar -> error
+if [ "$IGNOR" = "/" ]; then
+	>&2 echo "ERROR: [-i FILE_ERE] FILE_ERE != "/"." >&2
+	exit 1
+fi
+
+# posun na dalsi argument, kde by mela byt cesta
+shift $(($OPTIND - 1))
+# pokud tam je vypis info
+if [ "$1" != "" ]; then
+	print_dirgraph $1
+# jinak vypis info o aktualnim adresari
+else
+	print_dirgraph .
+fi
+
+# Skript probehl v poradku
+exit 0

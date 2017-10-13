@@ -1,0 +1,120 @@
+\hypertarget{group__Shlukovani}{}\section{Shlukovani objektu.}
+\label{group__Shlukovani}\index{Shlukovani objektu.@{Shlukovani objektu.}}
+
+
+Pocitani vzdalenosti a hledani nejvhodnejsiho souseda.  
+
+
+\subsection*{Funkce}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{group__Shlukovani_ga703ce6afddf65026b68645bc5394405b}{obj\+\_\+distance} (struct \hyperlink{structobj__t}{obj\+\_\+t} $\ast$o1, struct \hyperlink{structobj__t}{obj\+\_\+t} $\ast$o2)
+\begin{DoxyCompactList}\small\item\em Zjisti vzdalenost dvou objektu. \end{DoxyCompactList}\item 
+float \hyperlink{group__Shlukovani_gaf336f28a62c28da792f6def84f432bb2}{cluster\+\_\+distance} (struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$c1, struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$c2)
+\begin{DoxyCompactList}\small\item\em Hleda dva nejvzdalenejsi objekty. \end{DoxyCompactList}\item 
+void \hyperlink{group__Shlukovani_ga5f16d682e7c859f7bd3f27697c2b7cc0}{find\+\_\+neighbours} (struct \hyperlink{structcluster__t}{cluster\+\_\+t} $\ast$carr, int narr, int $\ast$c1, int $\ast$c2)
+\begin{DoxyCompactList}\small\item\em Nalezne dva nejvhodnejsi sousedy (shluky). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailní popis}
+Pocitani vzdalenosti a hledani nejvhodnejsiho souseda. 
+
+
+
+\subsection{Dokumentace funkcí}
+\index{Shlukovani objektu.@{Shlukovani objektu.}!cluster\+\_\+distance@{cluster\+\_\+distance}}
+\index{cluster\+\_\+distance@{cluster\+\_\+distance}!Shlukovani objektu.@{Shlukovani objektu.}}
+\subsubsection[{\texorpdfstring{cluster\+\_\+distance(struct cluster\+\_\+t $\ast$c1, struct cluster\+\_\+t $\ast$c2)}{cluster_distance(struct cluster_t *c1, struct cluster_t *c2)}}]{\setlength{\rightskip}{0pt plus 5cm}float cluster\+\_\+distance (
+\begin{DoxyParamCaption}
+\item[{struct {\bf cluster\+\_\+t} $\ast$}]{c1, }
+\item[{struct {\bf cluster\+\_\+t} $\ast$}]{c2}
+\end{DoxyParamCaption}
+)}\hypertarget{group__Shlukovani_gaf336f28a62c28da792f6def84f432bb2}{}\label{group__Shlukovani_gaf336f28a62c28da792f6def84f432bb2}
+
+
+Hleda dva nejvzdalenejsi objekty. 
+
+Funkce pomoci \textquotesingle{}obj\+\_\+distance\textquotesingle{} najde dva nejvzdalenejsi objekty ze dvou shluku a vraci jejich vzdalenost.
+
+
+\begin{DoxyParams}{Parametry}
+{\em c1} & \mbox{[}in\mbox{]} Ukazatel na prvni shluk. \\
+\hline
+{\em c2} & \mbox{[}in\mbox{]} Ukazatel na druhy shluk. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Návratová hodnota}
+Vzdalenost dvou nejvzdalenejsich objektu z obou shluku.
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+Ani jeden shluk nesmi ukazovat na \textquotesingle{}N\+U\+LL\textquotesingle{} a jejich velikost \textquotesingle{}size\textquotesingle{} musi byt vetsi nez nula. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Nic. 
+\end{DoxyPostcond}
+\index{Shlukovani objektu.@{Shlukovani objektu.}!find\+\_\+neighbours@{find\+\_\+neighbours}}
+\index{find\+\_\+neighbours@{find\+\_\+neighbours}!Shlukovani objektu.@{Shlukovani objektu.}}
+\subsubsection[{\texorpdfstring{find\+\_\+neighbours(struct cluster\+\_\+t $\ast$carr, int narr, int $\ast$c1, int $\ast$c2)}{find_neighbours(struct cluster_t *carr, int narr, int *c1, int *c2)}}]{\setlength{\rightskip}{0pt plus 5cm}void find\+\_\+neighbours (
+\begin{DoxyParamCaption}
+\item[{struct {\bf cluster\+\_\+t} $\ast$}]{carr, }
+\item[{int}]{narr, }
+\item[{int $\ast$}]{c1, }
+\item[{int $\ast$}]{c2}
+\end{DoxyParamCaption}
+)}\hypertarget{group__Shlukovani_ga5f16d682e7c859f7bd3f27697c2b7cc0}{}\label{group__Shlukovani_ga5f16d682e7c859f7bd3f27697c2b7cc0}
+
+
+Nalezne dva nejvhodnejsi sousedy (shluky). 
+
+Funkce hleda v poli shluku \textquotesingle{}carr\textquotesingle{} o velikosti \textquotesingle{}narr\textquotesingle{} dva nejblizsi shluky podle metody nejvzdalenejsiho souseda. Nalezene shluky identifikuje jejich indexy v poli \textquotesingle{}carr\textquotesingle{} a ulozi na adresy \textquotesingle{}c1\textquotesingle{} a \textquotesingle{}c2\textquotesingle{}.
+
+
+\begin{DoxyParams}{Parametry}
+{\em carr} & \mbox{[}in\mbox{]} Ukazatel na prvni prvek pole shluku. \\
+\hline
+{\em narr} & \mbox{[}in\mbox{]} Pocet prvku pole shluku. \\
+\hline
+{\em c1} & \mbox{[}out\mbox{]} Zde se uklada index prvniho souseda (shluku). \\
+\hline
+{\em c2} & \mbox{[}out\mbox{]} Zde se uklada index druheho souseda (shluku). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Návratová hodnota}
+Nic.
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+\textquotesingle{}carr\textquotesingle{} nesmi ukazovat na \textquotesingle{}N\+U\+LL\textquotesingle{} a velikost \textquotesingle{}narr\textquotesingle{} musi byt $>$ 0. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\textquotesingle{}c1\textquotesingle{} a \textquotesingle{}c2\textquotesingle{} musi mit kladne ruzne hodnoty. 
+\end{DoxyPostcond}
+\index{Shlukovani objektu.@{Shlukovani objektu.}!obj\+\_\+distance@{obj\+\_\+distance}}
+\index{obj\+\_\+distance@{obj\+\_\+distance}!Shlukovani objektu.@{Shlukovani objektu.}}
+\subsubsection[{\texorpdfstring{obj\+\_\+distance(struct obj\+\_\+t $\ast$o1, struct obj\+\_\+t $\ast$o2)}{obj_distance(struct obj_t *o1, struct obj_t *o2)}}]{\setlength{\rightskip}{0pt plus 5cm}float obj\+\_\+distance (
+\begin{DoxyParamCaption}
+\item[{struct {\bf obj\+\_\+t} $\ast$}]{o1, }
+\item[{struct {\bf obj\+\_\+t} $\ast$}]{o2}
+\end{DoxyParamCaption}
+)}\hypertarget{group__Shlukovani_ga703ce6afddf65026b68645bc5394405b}{}\label{group__Shlukovani_ga703ce6afddf65026b68645bc5394405b}
+
+
+Zjisti vzdalenost dvou objektu. 
+
+Na zaklade souradnic \textquotesingle{}x\textquotesingle{} a \textquotesingle{}y\textquotesingle{} objektu vypocte eukleidovskou vzdalenost mezi dvema objekty.
+
+
+\begin{DoxyParams}{Parametry}
+{\em o1} & \mbox{[}in\mbox{]} Ukazatel na prvni objekt. \\
+\hline
+{\em o2} & \mbox{[}in\mbox{]} Ukazatel na druhy objekt. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Návratová hodnota}
+Vzdalenost mezi dvema objekty.
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+Ani jeden z objektu nesmi ukazovat na \textquotesingle{}N\+U\+LL\textquotesingle{}. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Ani jeden z objektu nesmi ukazovat na \textquotesingle{}N\+U\+LL\textquotesingle{}. 
+\end{DoxyPostcond}

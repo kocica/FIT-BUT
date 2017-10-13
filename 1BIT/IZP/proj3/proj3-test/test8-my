@@ -1,0 +1,6 @@
+Program runs in the following form:
+
+   ./proj3 FILE [N]
+
+- where FILE is name of text file, where object are defined.
+N is number of clusters we want to make (implicit: 1)

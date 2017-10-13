@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>proj3: Shlukovani objektu.</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">proj3
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generováno programem Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Hledat');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hlavní&#160;stránka</span></a></li>
+      <li class="current"><a href="modules.html"><span>Moduly</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li><a href="files.html"><span>Soubory</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Hledat" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funkce</a>  </div>
+  <div class="headertitle">
+<div class="title">Shlukovani objektu.</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Pocitani vzdalenosti a hledani nejvhodnejsiho souseda.  
+<a href="#details">...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funkce</h2></td></tr>
+<tr class="memitem:ga703ce6afddf65026b68645bc5394405b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Shlukovani.html#ga703ce6afddf65026b68645bc5394405b">obj_distance</a> (struct <a class="el" href="structobj__t.html">obj_t</a> *o1, struct <a class="el" href="structobj__t.html">obj_t</a> *o2)</td></tr>
+<tr class="memdesc:ga703ce6afddf65026b68645bc5394405b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zjisti vzdalenost dvou objektu.  <a href="#ga703ce6afddf65026b68645bc5394405b">...</a><br /></td></tr>
+<tr class="separator:ga703ce6afddf65026b68645bc5394405b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf336f28a62c28da792f6def84f432bb2"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Shlukovani.html#gaf336f28a62c28da792f6def84f432bb2">cluster_distance</a> (struct <a class="el" href="structcluster__t.html">cluster_t</a> *c1, struct <a class="el" href="structcluster__t.html">cluster_t</a> *c2)</td></tr>
+<tr class="memdesc:gaf336f28a62c28da792f6def84f432bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hleda dva nejvzdalenejsi objekty.  <a href="#gaf336f28a62c28da792f6def84f432bb2">...</a><br /></td></tr>
+<tr class="separator:gaf336f28a62c28da792f6def84f432bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5f16d682e7c859f7bd3f27697c2b7cc0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Shlukovani.html#ga5f16d682e7c859f7bd3f27697c2b7cc0">find_neighbours</a> (struct <a class="el" href="structcluster__t.html">cluster_t</a> *carr, int narr, int *c1, int *c2)</td></tr>
+<tr class="memdesc:ga5f16d682e7c859f7bd3f27697c2b7cc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nalezne dva nejvhodnejsi sousedy (shluky).  <a href="#ga5f16d682e7c859f7bd3f27697c2b7cc0">...</a><br /></td></tr>
+<tr class="separator:ga5f16d682e7c859f7bd3f27697c2b7cc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailní popis</h2>
+<p>Pocitani vzdalenosti a hledani nejvhodnejsiho souseda. </p>
+<h2 class="groupheader">Dokumentace funkcí</h2>
+<a class="anchor" id="gaf336f28a62c28da792f6def84f432bb2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float cluster_distance </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structcluster__t.html">cluster_t</a> *&#160;</td>
+          <td class="paramname"><em>c1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structcluster__t.html">cluster_t</a> *&#160;</td>
+          <td class="paramname"><em>c2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Hleda dva nejvzdalenejsi objekty. </p>
+<p>Funkce pomoci 'obj_distance' najde dva nejvzdalenejsi objekty ze dvou shluku a vraci jejich vzdalenost.</p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c1</td><td>[in] Ukazatel na prvni shluk. </td></tr>
+    <tr><td class="paramname">c2</td><td>[in] Ukazatel na druhy shluk. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Návratová hodnota</dt><dd>Vzdalenost dvou nejvzdalenejsich objektu z obou shluku.</dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>Ani jeden shluk nesmi ukazovat na 'NULL' a jejich velikost 'size' musi byt vetsi nez nula. </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Nic. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga5f16d682e7c859f7bd3f27697c2b7cc0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void find_neighbours </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structcluster__t.html">cluster_t</a> *&#160;</td>
+          <td class="paramname"><em>carr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>narr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>c1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>c2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Nalezne dva nejvhodnejsi sousedy (shluky). </p>
+<p>Funkce hleda v poli shluku 'carr' o velikosti 'narr' dva nejblizsi shluky podle metody nejvzdalenejsiho souseda. Nalezene shluky identifikuje jejich indexy v poli 'carr' a ulozi na adresy 'c1' a 'c2'.</p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">carr</td><td>[in] Ukazatel na prvni prvek pole shluku. </td></tr>
+    <tr><td class="paramname">narr</td><td>[in] Pocet prvku pole shluku. </td></tr>
+    <tr><td class="paramname">c1</td><td>[out] Zde se uklada index prvniho souseda (shluku). </td></tr>
+    <tr><td class="paramname">c2</td><td>[out] Zde se uklada index druheho souseda (shluku). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Návratová hodnota</dt><dd>Nic.</dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>'carr' nesmi ukazovat na 'NULL' a velikost 'narr' musi byt &gt; 0. </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>'c1' a 'c2' musi mit kladne ruzne hodnoty. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga703ce6afddf65026b68645bc5394405b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float obj_distance </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structobj__t.html">obj_t</a> *&#160;</td>
+          <td class="paramname"><em>o1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structobj__t.html">obj_t</a> *&#160;</td>
+          <td class="paramname"><em>o2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Zjisti vzdalenost dvou objektu. </p>
+<p>Na zaklade souradnic 'x' a 'y' objektu vypocte eukleidovskou vzdalenost mezi dvema objekty.</p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">o1</td><td>[in] Ukazatel na prvni objekt. </td></tr>
+    <tr><td class="paramname">o2</td><td>[in] Ukazatel na druhy objekt. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Návratová hodnota</dt><dd>Vzdalenost mezi dvema objekty.</dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>Ani jeden z objektu nesmi ukazovat na 'NULL'. </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Ani jeden z objektu nesmi ukazovat na 'NULL'. </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generováno programem &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>
