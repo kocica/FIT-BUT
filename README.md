@@ -1,18 +1,22 @@
 # FIT-BUT
 
-# Filip Kocica (xkocic01[at]stud[dot]fit[dot]vutbr[dot]cz)
+# Filip Kocica < xkocic01@stud.fit.vutbr.cz >
+
 
 Implementation of my school projects
 which may help some future students.
 
-Hope it helps some of you.
 
 1BIT:
+
+* Z
 
  + IEL
  + IUS
  + IZP 1..4
- 
+
+* L
+
  + IJC 1&2
  + INC
  + IOS 1&2
@@ -22,3 +26,5 @@ Hope it helps some of you.
 
  + IAL
  + IFJ
+ + IP1
+ + INP
