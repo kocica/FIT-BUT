@@ -1,30 +1,45 @@
 # FIT-BUT
 
-# Filip Kocica < xkocic01@stud.fit.vutbr.cz >
+# Filip Kočica < xkocic01@stud.fit.vutbr.cz >
 
 
-Implementation of my school projects
-which may help some future students.
+Implementace mých školních projektů spolu s informací o bodovém ohodnocení.
 
 
 1BIT:
 
-* Z
+* Zimní
 
- + IEL
- + IUS
- + IZP 1..4
+ + IZP Projekt 1 -- Práce s textem -- 5/5
+ + IZP Projekt 2 -- Iterační výpočty -- 7/7
+ + IZP Projekt 3 -- Jednoduchá shluková analýza -- 10/10
+ + IZP Projekt 4 -- Dokumentace zdrojového kódu -- 4/4
+ + IEL Semestrální projekt -- 8/12
+ + IUS Projekt -- Model informačního systému -- 18/25
 
-* L
+* Letní
 
- + IJC 1&2
- + INC
- + IOS 1&2
- + ITY 1..5
+ + IJC DU1 -- 12/15
+ + IJC DU2 -- 11/15
+ + INC Projekt -- Přístupový terminál 19/20
+ + IOS Projekt 1 -- 14/15
+ + IOS Projekt 2 -- 5/15 :(
+ + ITY P1 -- 10/10
+ + ITY P2 -- 15/15
+ + ITY P3 -- 5/15
+ + ITY P4 -- 15/15
+ + ITY P5 -- 15/15
  
 2BIT:
 
- + IAL
- + IFJ
- + IP1
- + INP
+* Zimní
+
+ + IAL P1 -- 8/10
+ + IAL P2 -- 10/10
+ + IFJ Kompilátor -- 15/15 + 5 prémiových; 5 za dokumentaci
+ + IP1 Technická zpráva -- -/100
+ + INP P1 -- 10/10
+ + INP P2 -- 23/23
+ + ISS -- Nedělal
+ 
+ * Letní
