@@ -5,11 +5,7 @@ Parameter xsthdpdir set to build/fpga
 
 
 Total REAL time to Xst completion: 0.00 secs
-<<<<<<< HEAD
 Total CPU time to Xst completion: 0.06 secs
-=======
-Total CPU time to Xst completion: 0.20 secs
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
  
 --> 
 TABLE OF CONTENTS
@@ -133,11 +129,7 @@ Analyzing hierarchy for entity <ram> in library <work> (architecture <behavioral
 
 Analyzing hierarchy for entity <lcd_controller> in library <work> (architecture <behavioral>) with generics.
 	CMDLEN = 100000
-<<<<<<< HEAD
 	LCD2x16 = false
-=======
-	LCD2x16 = true
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
 
 Analyzing hierarchy for entity <kb_controller> in library <work> (architecture <behavioral>).
 
@@ -192,13 +184,8 @@ Entity <tlv_bare_ifc> analyzed. Unit <tlv_bare_ifc> generated.
 
 Analyzing Entity <cpu> in library <work> (Architecture <behavioral>).
 WARNING:Xst:819 - "C:/fitkitSVN/apps/demo/test/fpga/cpu.vhd" line 91: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
-<<<<<<< HEAD
    <DATA_RDATA>, <OUT_BUSY>, <IN_VLD>, <IN_DATA>, <COUNTER_reg>, <CODE_DATA>
 WARNING:Xst:819 - "C:/fitkitSVN/apps/demo/test/fpga/cpu.vhd" line 424: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
-=======
-   <BREAK>, <DATA_RDATA>, <OUT_BUSY>, <IN_VLD>, <IN_DATA>, <COUNTER_reg>, <CODE_DATA>
-WARNING:Xst:819 - "C:/fitkitSVN/apps/demo/test/fpga/cpu.vhd" line 429: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
    <CODE_DATA>
 Entity <cpu> analyzed. Unit <cpu> generated.
 
@@ -211,11 +198,7 @@ Entity <ram> analyzed. Unit <ram> generated.
 
 Analyzing generic Entity <lcd_controller> in library <work> (Architecture <behavioral>).
 	CMDLEN = 100000
-<<<<<<< HEAD
 	LCD2x16 = false
-=======
-	LCD2x16 = true
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
 Entity <lcd_controller> analyzed. Unit <lcd_controller> generated.
 
 Analyzing Entity <kb_controller> in library <work> (Architecture <behavioral>).
@@ -261,7 +244,6 @@ Unit <SPI_ctrl> synthesized.
 
 Synthesizing Unit <cpu>.
     Related source file is "C:/fitkitSVN/apps/demo/test/fpga/cpu.vhd".
-<<<<<<< HEAD
 WARNING:Xst:1780 - Signal <BREAK> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
     Found finite state machine <FSM_1> for signal <act_state>.
     -----------------------------------------------------------------------
@@ -269,14 +251,6 @@ WARNING:Xst:1780 - Signal <BREAK> is never used or assigned. This unconnected si
     | Transitions        | 49                                             |
     | Inputs             | 16                                             |
     | Outputs            | 22                                             |
-=======
-    Found finite state machine <FSM_1> for signal <act_state>.
-    -----------------------------------------------------------------------
-    | States             | 27                                             |
-    | Transitions        | 54                                             |
-    | Inputs             | 16                                             |
-    | Outputs            | 20                                             |
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
     | Clock              | CLK                       (rising_edge)        |
     | Clock enable       | EN                        (positive)           |
     | Reset              | RESET                     (positive)           |
@@ -287,10 +261,6 @@ WARNING:Xst:1780 - Signal <BREAK> is never used or assigned. This unconnected si
     | Implementation     | automatic                                      |
     -----------------------------------------------------------------------
 WARNING:Xst:737 - Found 8-bit latch for signal <OUT_DATA>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-<<<<<<< HEAD
-=======
-WARNING:Xst:737 - Found 1-bit latch for signal <BREAK>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
     Using one-hot encoding for signal <instr>.
 WARNING:Xst:737 - Found 1-bit latch for signal <IN_REQ>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 INFO:Xst:2371 - HDL ADVISOR - Logic functions respectively driving the data and gate enable inputs of this latch share common terms. This situation will potentially lead to setup/hold violations and, as a result, to simulation problems. This situation may come from an incomplete case statement (all selector values are not covered). You should carefully review if it was in your intentions to describe such a latch.
@@ -353,11 +323,7 @@ Synthesizing Unit <lcd_controller>.
     Using one-hot encoding for signal <data_sel>.
     Found 32x9-bit ROM for signal <init_data>.
     Found 8-bit tristate buffer for signal <DISPLAY_DATA>.
-<<<<<<< HEAD
     Found 4-bit up counter for signal <addr_reg>.
-=======
-    Found 5-bit up counter for signal <addr_reg>.
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
     Found 8-bit register for signal <data_reg>.
     Found 5-bit up counter for signal <init_cnt>.
     Found 17-bit up counter for signal <t_cnt>.
@@ -549,24 +515,15 @@ Macro Statistics
  12-bit updown counter                                 : 1
  15-bit up counter                                     : 2
  17-bit up counter                                     : 1
-<<<<<<< HEAD
  4-bit up counter                                      : 1
  5-bit up counter                                      : 1
-=======
- 5-bit up counter                                      : 2
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
 # Registers                                            : 30
  1-bit register                                        : 24
  12-bit register                                       : 1
  16-bit register                                       : 1
  8-bit register                                        : 4
-<<<<<<< HEAD
 # Latches                                              : 4
  1-bit latch                                           : 2
-=======
-# Latches                                              : 5
- 1-bit latch                                           : 3
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
  8-bit latch                                           : 2
 # Comparators                                          : 2
  16-bit comparator equal                               : 1
@@ -626,7 +583,6 @@ Optimizing FSM <fpga_inst/lcd_u/pstate/FSM> on signal <pstate[1:14]> with one-ho
  wa3   | 00001000000000
 -------------------------
 Analyzing FSM <FSM_1> for best encoding.
-<<<<<<< HEAD
 Optimizing FSM <fpga_inst/bfcpu/act_state/FSM> on signal <act_state[1:32]> with one-hot encoding.
 -------------------------------------------------------
  State             | Encoding
@@ -664,40 +620,6 @@ Optimizing FSM <fpga_inst/bfcpu/act_state/FSM> on signal <act_state[1:32]> with 
  s_halt            | 00000000000000000000000000100000
  s_i_nop           | 00000000000000000100000000000000
 -------------------------------------------------------
-=======
-Optimizing FSM <fpga_inst/bfcpu/act_state/FSM> on signal <act_state[1:27]> with one-hot encoding.
---------------------------------------------------
- State             | Encoding
---------------------------------------------------
- s_inc_ptr         | 000000000000000000000000001
- s_dec_ptr         | 000000000000000000001000000
- s_inc_val         | 000000000000000000010000000
- s_dec_val         | 000000000000000000100000000
- s_inc_val_2       | 000000000000100000000000000
- s_dec_val_2       | 000000000001000000000000000
- s_print           | 000000000000000100000000000
- s_read            | 000000000000001000000000000
- s_print_2         | 000000000010000000000000000
- s_read_2          | 000000000100000000000000000
- s_while_s         | 000000000000000001000000000
- s_while_e         | 000000000000010000000000000
- s_while_s_fetch_0 | 000000010000000000000000000
- s_while_s_fetch_1 | 000000100000000000000000000
- s_while_e_fetch_0 | 000100000000000000000000000
- s_while_e_fetch_1 | 001000000000000000000000000
- s_while_e2        | 000010000000000000000000000
- s_while_e3        | 010000000000000000000000000
- s_while_s2        | 000000001000000000000000000
- s_while_s3        | 000001000000000000000000000
- s_while_e4        | 100000000000000000000000000
- s_idle            | 000000000000000000000000010
- s_decode          | 000000000000000000000010000
- s_fetch_0         | 000000000000000000000001000
- s_fetch_1         | 000000000000000000000000100
- s_halt            | 000000000000000000000100000
- s_i_nop           | 000000000000000010000000000
---------------------------------------------------
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
 Analyzing FSM <FSM_0> for best encoding.
 Optimizing FSM <spictrl/pstate/FSM> on signal <pstate[1:6]> with one-hot encoding.
 ----------------------
@@ -771,20 +693,12 @@ Macro Statistics
  12-bit updown counter                                 : 1
  15-bit up counter                                     : 2
  17-bit up counter                                     : 1
-<<<<<<< HEAD
  4-bit up counter                                      : 1
  5-bit up counter                                      : 1
 # Registers                                            : 68
  Flip-Flops                                            : 68
 # Latches                                              : 4
  1-bit latch                                           : 2
-=======
- 5-bit up counter                                      : 2
-# Registers                                            : 68
- Flip-Flops                                            : 68
-# Latches                                              : 5
- 1-bit latch                                           : 3
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
  8-bit latch                                           : 2
 # Comparators                                          : 2
  16-bit comparator equal                               : 1
@@ -814,13 +728,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-<<<<<<< HEAD
 # Registers                                            : 202
  Flip-Flops                                            : 202
-=======
-# Registers                                            : 198
- Flip-Flops                                            : 198
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
 
 =========================================================================
 
@@ -849,7 +758,6 @@ Design Statistics
 # IOs                              : 124
 
 Cell Usage :
-<<<<<<< HEAD
 # BELS                             : 612
 #      GND                         : 4
 #      INV                         : 16
@@ -862,45 +770,20 @@ Cell Usage :
 #      LUT4                        : 169
 #      LUT4_D                      : 8
 #      LUT4_L                      : 7
-=======
-# BELS                             : 615
-#      GND                         : 4
-#      INV                         : 16
-#      LUT1                        : 45
-#      LUT2                        : 88
-#      LUT2_D                      : 2
-#      LUT3                        : 77
-#      LUT3_D                      : 3
-#      LUT3_L                      : 3
-#      LUT4                        : 164
-#      LUT4_D                      : 12
-#      LUT4_L                      : 13
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
 #      MUXCY                       : 88
 #      MUXF5                       : 18
 #      VCC                         : 1
 #      XORCY                       : 81
-<<<<<<< HEAD
 # FlipFlops/Latches                : 220
 #      FD                          : 1
 #      FDC                         : 23
 #      FDCE                        : 143
-=======
-# FlipFlops/Latches                : 217
-#      FD                          : 1
-#      FDC                         : 23
-#      FDCE                        : 139
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
 #      FDE                         : 24
 #      FDP                         : 4
 #      FDPE                        : 3
 #      FDR                         : 3
 #      FDS                         : 1
-<<<<<<< HEAD
 #      LD                          : 10
-=======
-#      LD                          : 11
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
 #      LDE                         : 8
 # RAMS                             : 3
 #      RAMB16                      : 3
@@ -921,15 +804,9 @@ Device utilization summary:
 
 Selected Device : 3s50pq208-4 
 
-<<<<<<< HEAD
  Number of Slices:                      222  out of    768    28%  
  Number of Slice Flip Flops:            220  out of   1536    14%  
  Number of 4 input LUTs:                420  out of   1536    27%  
-=======
- Number of Slices:                      224  out of    768    29%  
- Number of Slice Flip Flops:            217  out of   1536    14%  
- Number of 4 input LUTs:                423  out of   1536    27%  
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
  Number of IOs:                         124
  Number of bonded IOBs:                 120  out of    124    96%  
  Number of BRAMs:                         3  out of      4    75%  
@@ -957,20 +834,11 @@ Clock Information:
 -------------------------------------------------------------------------+--------------------------------------+-------+
 Clock Signal                                                             | Clock buffer(FF name)                | Load  |
 -------------------------------------------------------------------------+--------------------------------------+-------+
-<<<<<<< HEAD
 SMCLK                                                                    | DCMclkgen/DCM_INST:CLKFX             | 205   |
 fpga_inst/bfcpu/act_state_FSM_FFd15                                      | NONE(fpga_inst/bfcpu/OUT_DATA_7)     | 8     |
 fpga_inst/bfcpu/DATA_WDATA_not0001(fpga_inst/bfcpu/DATA_WDATA_not00011:O)| NONE(*)(fpga_inst/bfcpu/DATA_WDATA_7)| 8     |
 fpga_inst/bfcpu/IN_REQ_not0001(fpga_inst/bfcpu/IN_REQ_not00011:O)        | NONE(*)(fpga_inst/bfcpu/IN_REQ)      | 1     |
 fpga_inst/bfcpu/DATA_RDWR_not0001(fpga_inst/bfcpu/DATA_RDWR_not0001:O)   | NONE(*)(fpga_inst/bfcpu/DATA_RDWR)   | 1     |
-=======
-SMCLK                                                                    | DCMclkgen/DCM_INST:CLKFX             | 201   |
-fpga_inst/bfcpu/act_state_FSM_FFd11                                      | NONE(fpga_inst/bfcpu/OUT_DATA_7)     | 8     |
-fpga_inst/bfcpu/DATA_WDATA_not0001(fpga_inst/bfcpu/DATA_WDATA_not00011:O)| NONE(*)(fpga_inst/bfcpu/DATA_WDATA_7)| 8     |
-fpga_inst/bfcpu/act_state_FSM_FFd23                                      | NONE(fpga_inst/bfcpu/BREAK)          | 1     |
-fpga_inst/bfcpu/IN_REQ_not0001(fpga_inst/bfcpu/IN_REQ_not00011:O)        | NONE(*)(fpga_inst/bfcpu/IN_REQ)      | 1     |
-fpga_inst/bfcpu/DATA_RDWR_not0001(fpga_inst/bfcpu/DATA_RDWR_not00012:O)  | NONE(*)(fpga_inst/bfcpu/DATA_RDWR)   | 1     |
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
 -------------------------------------------------------------------------+--------------------------------------+-------+
 (*) These 3 clock signal(s) are generated by combinatorial logic,
 and XST is not able to identify which are the primary clock signals.
@@ -982,11 +850,7 @@ Asynchronous Control Signals Information:
 ---------------------------------------+---------------------------------------+-------+
 Control Signal                         | Buffer(FF name)                       | Load  |
 ---------------------------------------+---------------------------------------+-------+
-<<<<<<< HEAD
 fpga_inst/cpu_rst(fpga_inst/cpu_rst1:O)| NONE(fpga_inst/bfcpu/COUNTER_reg_0)   | 113   |
-=======
-fpga_inst/cpu_rst(fpga_inst/cpu_rst1:O)| NONE(fpga_inst/bfcpu/COUNTER_reg_0)   | 109   |
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
 reset(reset1:O)                        | NONE(fpga_inst/kb_u/keybrd/cntr_reg_0)| 55    |
 SPI_FPGA_CS                            | IBUF                                  | 5     |
 ---------------------------------------+---------------------------------------+-------+
@@ -995,15 +859,9 @@ Timing Summary:
 ---------------
 Speed Grade: -4
 
-<<<<<<< HEAD
    Minimum period: 45.768ns (Maximum Frequency: 21.849MHz)
    Minimum input arrival time before clock: 8.305ns
    Maximum output required time after clock: 13.010ns
-=======
-   Minimum period: 37.168ns (Maximum Frequency: 26.905MHz)
-   Minimum input arrival time before clock: 8.305ns
-   Maximum output required time after clock: 12.834ns
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
    Maximum combinational path delay: No path found
 
 Timing Detail:
@@ -1012,17 +870,10 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'SMCLK'
-<<<<<<< HEAD
   Clock period: 45.768ns (frequency: 21.849MHz)
   Total number of paths / destination ports: 11032 / 381
 -------------------------------------------------------------------------
 Delay:               12.815ns (Levels of Logic = 18)
-=======
-  Clock period: 37.168ns (frequency: 26.905MHz)
-  Total number of paths / destination ports: 7883 / 373
--------------------------------------------------------------------------
-Delay:               10.407ns (Levels of Logic = 16)
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
   Source:            fpga_inst/bfcpu/COUNTER_reg_0 (FF)
   Destination:       fpga_inst/bfcpu/COUNTER_reg_11 (FF)
   Source Clock:      SMCLK rising 3.6X
@@ -1033,19 +884,12 @@ Delay:               10.407ns (Levels of Logic = 16)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      FDCE:C->Q             2   0.720   1.216  fpga_inst/bfcpu/COUNTER_reg_0 (fpga_inst/bfcpu/COUNTER_reg_0)
-<<<<<<< HEAD
      LUT4_D:I0->O          4   0.551   1.256  fpga_inst/bfcpu/PROGRAM_COUNTER_dec_cmp_eq000012 (fpga_inst/bfcpu/PROGRAM_COUNTER_dec_cmp_eq000012)
      LUT3:I0->O            4   0.551   0.943  fpga_inst/bfcpu/PROGRAM_COUNTER_dec_cmp_eq000051 (fpga_inst/bfcpu/PROGRAM_COUNTER_dec_cmp_eq0000)
      LUT4:I3->O            2   0.551   0.945  fpga_inst/bfcpu/COUNTER_dec9 (fpga_inst/bfcpu/COUNTER_dec9)
      LUT3:I2->O           12   0.551   1.186  fpga_inst/bfcpu/COUNTER_dec24 (fpga_inst/bfcpu/COUNTER_dec)
      LUT3:I2->O            1   0.551   0.000  fpga_inst/bfcpu/Maddsub_COUNTER_reg_addsub0000_lut<0> (fpga_inst/bfcpu/Maddsub_COUNTER_reg_addsub0000_lut<0>)
      MUXCY:S->O            1   0.500   0.000  fpga_inst/bfcpu/Maddsub_COUNTER_reg_addsub0000_cy<0> (fpga_inst/bfcpu/Maddsub_COUNTER_reg_addsub0000_cy<0>)
-=======
-     LUT4_D:I0->O          3   0.551   1.246  fpga_inst/bfcpu/PROGRAM_COUNTER_dec_cmp_eq000012 (fpga_inst/bfcpu/PROGRAM_COUNTER_dec_cmp_eq000012)
-     LUT3_D:I0->O         17   0.551   1.413  fpga_inst/bfcpu/PROGRAM_COUNTER_dec_cmp_eq000051 (fpga_inst/bfcpu/PROGRAM_COUNTER_dec_cmp_eq0000)
-     LUT3:I2->O            1   0.551   0.801  fpga_inst/bfcpu/COUNTER_reg_mux0001 (fpga_inst/bfcpu/COUNTER_reg_mux0001)
-     MUXCY:CI->O           1   0.064   0.000  fpga_inst/bfcpu/Maddsub_COUNTER_reg_addsub0000_cy<0> (fpga_inst/bfcpu/Maddsub_COUNTER_reg_addsub0000_cy<0>)
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
      MUXCY:CI->O           1   0.064   0.000  fpga_inst/bfcpu/Maddsub_COUNTER_reg_addsub0000_cy<1> (fpga_inst/bfcpu/Maddsub_COUNTER_reg_addsub0000_cy<1>)
      MUXCY:CI->O           1   0.064   0.000  fpga_inst/bfcpu/Maddsub_COUNTER_reg_addsub0000_cy<2> (fpga_inst/bfcpu/Maddsub_COUNTER_reg_addsub0000_cy<2>)
      MUXCY:CI->O           1   0.064   0.000  fpga_inst/bfcpu/Maddsub_COUNTER_reg_addsub0000_cy<3> (fpga_inst/bfcpu/Maddsub_COUNTER_reg_addsub0000_cy<3>)
@@ -1060,36 +904,8 @@ Delay:               10.407ns (Levels of Logic = 16)
      LUT2:I1->O            1   0.551   0.000  fpga_inst/bfcpu/COUNTER_reg_mux0000<11>1 (fpga_inst/bfcpu/COUNTER_reg_mux0000<11>)
      FDCE:D                    0.203          fpga_inst/bfcpu/COUNTER_reg_11
     ----------------------------------------
-<<<<<<< HEAD
     Total                     12.815ns (6.273ns logic, 6.542ns route)
                                        (49.0% logic, 51.0% route)
-=======
-    Total                     10.407ns (4.735ns logic, 5.672ns route)
-                                       (45.5% logic, 54.5% route)
-
-=========================================================================
-Timing constraint: Default period analysis for Clock 'fpga_inst/bfcpu/act_state_FSM_FFd23'
-  Clock period: 4.011ns (frequency: 249.314MHz)
-  Total number of paths / destination ports: 1 / 1
--------------------------------------------------------------------------
-Delay:               4.011ns (Levels of Logic = 2)
-  Source:            fpga_inst/bfcpu/BREAK (LATCH)
-  Destination:       fpga_inst/bfcpu/BREAK (LATCH)
-  Source Clock:      fpga_inst/bfcpu/act_state_FSM_FFd23 falling
-  Destination Clock: fpga_inst/bfcpu/act_state_FSM_FFd23 falling
-
-  Data Path: fpga_inst/bfcpu/BREAK to fpga_inst/bfcpu/BREAK
-                                Gate     Net
-    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
-    ----------------------------------------  ------------
-     LD:G->Q               3   0.633   1.246  fpga_inst/bfcpu/BREAK (fpga_inst/bfcpu/BREAK)
-     LUT4:I0->O            1   0.551   0.827  fpga_inst/bfcpu/BREAK_mux00028 (fpga_inst/bfcpu/BREAK_mux00028)
-     LUT4:I3->O            1   0.551   0.000  fpga_inst/bfcpu/BREAK_mux000224 (fpga_inst/bfcpu/BREAK_mux0002)
-     LD:D                      0.203          fpga_inst/bfcpu/BREAK
-    ----------------------------------------
-    Total                      4.011ns (1.938ns logic, 2.073ns route)
-                                       (48.3% logic, 51.7% route)
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'SMCLK'
@@ -1104,17 +920,10 @@ Offset:              8.305ns (Levels of Logic = 4)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-<<<<<<< HEAD
      IOBUF:IO->O           3   0.821   1.102  P3M_0_IOBUF (N48)
      LUT2:I1->O           56   0.551   2.186  reset1 (reset)
      LUT4:I1->O            1   0.551   1.140  fpga_inst/cpu_en_and00008 (fpga_inst/cpu_en_and00008)
      LUT4:I0->O            1   0.551   0.801  fpga_inst/cpu_en_and000068 (fpga_inst/cpu_en_and0000)
-=======
-     IOBUF:IO->O           3   0.821   1.102  P3M_0_IOBUF (N45)
-     LUT2:I1->O           56   0.551   2.186  reset1 (reset)
-     LUT4:I1->O            1   0.551   1.140  fpga_inst/cpu_en_and000010 (fpga_inst/cpu_en_and000010)
-     LUT4:I0->O            1   0.551   0.801  fpga_inst/cpu_en_and000071 (fpga_inst/cpu_en_and0000)
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
      FDE:CE                    0.602          fpga_inst/cpu_en
     ----------------------------------------
     Total                      8.305ns (3.076ns logic, 5.229ns route)
@@ -1122,7 +931,6 @@ Offset:              8.305ns (Levels of Logic = 4)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'SMCLK'
-<<<<<<< HEAD
   Total number of paths / destination ports: 250 / 16
 -------------------------------------------------------------------------
 Offset:              13.010ns (Levels of Logic = 5)
@@ -1143,39 +951,12 @@ Offset:              13.010ns (Levels of Logic = 5)
     ----------------------------------------
     Total                     13.010ns (8.377ns logic, 4.633ns route)
                                        (64.4% logic, 35.6% route)
-=======
-  Total number of paths / destination ports: 255 / 16
--------------------------------------------------------------------------
-Offset:              12.834ns (Levels of Logic = 5)
-  Source:            fpga_inst/lcd_u/init_cnt_2 (FF)
-  Destination:       LD<1> (PAD)
-  Source Clock:      SMCLK rising 3.6X
-
-  Data Path: fpga_inst/lcd_u/init_cnt_2 to LD<1>
-                                Gate     Net
-    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
-    ----------------------------------------  ------------
-     FDCE:C->Q            15   0.720   1.527  fpga_inst/lcd_u/init_cnt_2 (fpga_inst/lcd_u/init_cnt_2)
-     LUT2:I0->O            5   0.551   0.989  fpga_inst/lcd_u/Mrom_init_data1121 (N30)
-     LUT4:I2->O            1   0.551   1.140  fpga_inst/lcd_u/DISPLAY_DATA_mux0000<1>67 (fpga_inst/lcd_u/DISPLAY_DATA_mux0000<1>67)
-     LUT3:I0->O            1   0.551   0.000  fpga_inst/lcd_u/DISPLAY_DATA_mux0000<1>118_G (N187)
-     MUXF5:I1->O           1   0.360   0.801  fpga_inst/lcd_u/DISPLAY_DATA_mux0000<1>118 (LD_1_OBUFT)
-     OBUFT:I->O                5.644          LD_1_OBUFT (LD<1>)
-    ----------------------------------------
-    Total                     12.834ns (8.377ns logic, 4.457ns route)
-                                       (65.3% logic, 34.7% route)
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
 
 =========================================================================
 
 
-<<<<<<< HEAD
 Total REAL time to Xst completion: 11.00 secs
 Total CPU time to Xst completion: 10.81 secs
-=======
-Total REAL time to Xst completion: 40.00 secs
-Total CPU time to Xst completion: 40.09 secs
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
  
 --> 
 

@@ -1,29 +1,5 @@
 # FIT-BUT
 
-<<<<<<< HEAD
-# Filip Kocica (xkocic01[at]stud[dot]fit[dot]vutbr[dot]cz)
-
-Implementation of my school projects
-which may help some future students.
-
-Hope it helps some of you.
-
-1BIT:
-
- + IEL
- + IUS
- + IZP 1..4
- 
- + IJC 1&2
- + INC
- + IOS 1&2
- + ITY 1..5
- 
-2BIT:
-
- + IAL
- + IFJ
-=======
 # Filip Kočica < xkocic01@stud.fit.vutbr.cz >
 
 
@@ -65,6 +41,3 @@ Implementace mých školních projektů spolu s informací o bodovém ohodnocen�
  + INP P1 -- 10/10
  + INP P2 -- 23/23
  + ISS -- Nedělal
- 
- * Letní
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd

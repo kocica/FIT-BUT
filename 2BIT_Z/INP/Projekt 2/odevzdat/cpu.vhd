@@ -56,13 +56,8 @@ architecture behavioral of cpu is
 	-- States of final state machine
 	type FSM_STATE_t is (
 	S_INC_PTR, S_DEC_PTR, S_INC_VAL, S_DEC_VAL, S_INC_VAL_2, S_DEC_VAL_2, S_PRINT, S_READ, S_PRINT_2, S_READ_2,
-<<<<<<< HEAD
 	S_WHILE_S, S_WHILE_E, S_BREAK_S,S_WHILE_S_FETCH_0, S_BREAK_S_FETCH_0, S_WHILE_S_FETCH_1, S_BREAK_S_FETCH_1, S_WHILE_E_FETCH_0, S_WHILE_E_FETCH_1, S_WHILE_E2, S_WHILE_E3,
 	S_WHILE_S2, S_BREAK_S2, S_WHILE_S3, S_BREAK_S3, S_WHILE_E4, S_IDLE, S_DECODE, S_FETCH_0, S_FETCH_1, S_HALT, S_I_NOP
-=======
-	S_WHILE_S, S_WHILE_E, S_WHILE_S_FETCH_0, S_WHILE_S_FETCH_1, S_WHILE_E_FETCH_0, S_WHILE_E_FETCH_1, S_WHILE_E2, S_WHILE_E3,
-	S_WHILE_S2, S_WHILE_S3, S_WHILE_E4, S_IDLE, S_DECODE, S_FETCH_0, S_FETCH_1, S_HALT, S_I_NOP
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
 	);
 	
 	-- Detects break in while cycle
@@ -126,7 +121,6 @@ begin
 				
 			 -- Decode instr
 			when S_DECODE =>
-<<<<<<< HEAD
 				case instr is
 					when I_HALT =>
 						next_state <= S_HALT;
@@ -161,81 +155,6 @@ begin
 					when I_NOP =>
 						next_state <= S_I_NOP;
 				end case;
-=======
-				if (BREAK = '1') then
-					case instr is
-						when I_HALT =>
-							next_state <= S_HALT;
-
-						when I_INC_PTR =>
-							next_state <= S_INC_PTR;
-
-						when I_DEC_PTR =>
-							next_state <= S_DEC_PTR;
-							
-						when I_INC_VAL =>
-							next_state <= S_INC_VAL;
-							
-						when I_DEC_VAL =>
-							next_state <= S_DEC_VAL;
-							
-						when I_WHILE_S =>
-							next_state <= S_WHILE_S;
-							
-						when I_WHILE_E =>
-							BREAK <= '0';
-							next_state <= S_I_NOP;
-							
-						when I_BREAK =>
-							next_state <= S_I_NOP;
-							
-						when I_PRINT =>
-							next_state <= S_PRINT;
-
-						when I_READ =>
-							next_state <= S_READ;
-							
-						when I_NOP =>
-							next_state <= S_I_NOP;
-					end case;
-				else
-					case instr is
-						when I_HALT =>
-							next_state <= S_HALT;
-
-						when I_INC_PTR =>
-							next_state <= S_INC_PTR;
-
-						when I_DEC_PTR =>
-							next_state <= S_DEC_PTR;
-							
-						when I_INC_VAL =>
-							next_state <= S_INC_VAL;
-							
-						when I_DEC_VAL =>
-							next_state <= S_DEC_VAL;
-							
-						when I_WHILE_S =>
-							next_state <= S_WHILE_S;
-							
-						when I_WHILE_E =>
-							next_state <= S_WHILE_E;
-							
-						when I_BREAK =>
-							BREAK <= '1';
-							next_state <= S_I_NOP;
-							
-						when I_PRINT =>
-							next_state <= S_PRINT;
-
-						when I_READ =>
-							next_state <= S_READ;
-							
-						when I_NOP =>
-							next_state <= S_I_NOP;
-					end case;
-				end if;
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
 			
 			-- HALT
 			when S_HALT =>
@@ -392,7 +311,6 @@ begin
 				PROGRAM_COUNTER_dec <= '0';
 				PROGRAM_COUNTER_inc <= '1'; -- increment program counter
 			
-<<<<<<< HEAD
 			--BREAK
 			when S_BREAK_S =>
 				PROGRAM_COUNTER_dec <= '0';
@@ -427,8 +345,6 @@ begin
 				
 				PROGRAM_COUNTER_dec <= '0';
 				PROGRAM_COUNTER_inc <= '1'; -- increment program counter
-=======
->>>>>>> 0edca61d4c1ce6bb094a29517f691220cbc347cd
 			
 			--END WHILE			
 			when S_WHILE_E =>				
