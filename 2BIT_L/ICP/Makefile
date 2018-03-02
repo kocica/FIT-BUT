@@ -7,7 +7,7 @@
 ###############################################################
 
 ################## Build constants ##############
-BIN_NAME   = BlockEditor
+BIN_NAME   = blockeditor
 
 DOC        =
 README     = README.txt
