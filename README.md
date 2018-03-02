@@ -37,7 +37,18 @@ Implementace mých školních projektů spolu s informací o bodovém ohodnocen�
  + IAL P1 -- 8/10
  + IAL P2 -- 10/10
  + IFJ Kompilátor -- 15/15 + 5 prémiových; 5 za dokumentaci
- + IP1 Technická zpráva -- -/100
+ + IP1 Technická zpráva -- 85/100
  + INP P1 -- 10/10
  + INP P2 -- 23/23
  + ISS -- Nedělal
+
+* Letní
+
+ + IPP P1 -- parse.php --
+ + IPP P2 -- interpret.py --
+ + IPP P3 -- test.php --
+ + IPK P1 -- Client-Server - sbírání dat o uživatelích --
+ + IPK P2 --
+ + IDS
+ + ICP
+ + IP2

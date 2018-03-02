@@ -35,7 +35,7 @@ $(BIN_NAME): $(OBJS)
 	$(CXX) $(CFLAGS) -c $< -o $@
 
 ################## Pack/Clean ##################
-	
+
 .PHONY: clean
 
 doxygen:
