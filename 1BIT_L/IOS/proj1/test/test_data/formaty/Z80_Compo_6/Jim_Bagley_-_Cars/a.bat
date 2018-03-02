@@ -1,1 +1,0 @@
-sjasmplus test.asm

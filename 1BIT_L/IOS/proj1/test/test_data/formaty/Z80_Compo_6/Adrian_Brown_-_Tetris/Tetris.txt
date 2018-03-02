@@ -1,4 +1,0 @@
-Controls 
-O/P - Left and Right
-I - Rotate
-U - Drop
