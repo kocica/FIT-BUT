@@ -1,2 +1,8 @@
+# Temporary files
 *~
+
+# Object files
 *.o
+
+# Binary file
+blockeditor

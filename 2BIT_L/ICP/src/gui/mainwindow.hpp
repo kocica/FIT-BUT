@@ -4,8 +4,6 @@
 #include <QMainWindow>
 #include <QPushButton>
 
-#include "block.hpp"
-
 namespace Ui {
 class MainWindow;
 }
