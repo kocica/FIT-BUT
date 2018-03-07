@@ -1,7 +1,6 @@
 /**
  *
  * @file    base64.hpp
- * @author	Filip Kocica <xkocic01@stud.fit.vutbr.cz>
  * @date    28/2/2018
  *
  * IPK project 1

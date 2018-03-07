@@ -68,7 +68,7 @@ public:
 	{
 		int c;
 
-		while ((c = getopt (argc, argv, "l:n:f:h:p:")) != -1)
+		while ((c = getopt (argc, argv, "n:f:h:p:l::")) != -1)
 		switch(c)
 		{
 			case 'n':
@@ -98,7 +98,10 @@ public:
 					exit(E_BAD_PARAMS);
 				}
 				this->flags |= l_flag;
-				this->login = std::string{optarg}; // TODO: Optional login
+				if (optarg)
+				{
+					this->login = std::string{optarg}; // TODO: Optional login
+				}
 				break;
 
 			case 'h':
@@ -108,7 +111,10 @@ public:
 					exit(E_BAD_PARAMS);
 				}
 				this->flags |= h_flag;
-				this->host = std::string{optarg};
+				if (optarg)
+				{
+					this->host = std::string{optarg};
+				}
 				break;
 			
 			case 'p':
@@ -137,7 +143,7 @@ public:
 				exit(E_BAD_PARAMS);
 		}
 		
-		if ((flags | p_flag) == 0 || (flags | h_flag) == 0)
+		if ((flags & p_flag) == 0 || (flags & h_flag) == 0)
 		{
 			std::cerr << "CLIENT: Define port and host." << std::endl;
 			exit(E_BAD_PARAMS);
@@ -167,6 +173,11 @@ public:
 		
 		for (int index = optind; index < argc; index++)
 		{
+			if (index == (argc - 1) && (flags & l_flag) && this->login == "")
+			{
+				login = std::string{argv[index]};
+				break;
+			}
 			std::cerr << "CLIENT: Unknown argument." << std::endl;
 			exit(E_BAD_PARAMS);
 		}

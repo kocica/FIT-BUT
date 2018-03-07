@@ -262,7 +262,7 @@ class CLexer
 	public static function FSM($fileCont)
 	{
 		// Check .IPPcode18 header
-		if (!(substr($fileCont, 0, 10) === '.IPPcode18'))
+		if (!(strtolower(substr($fileCont, 0, 10)) === '.ippcode18'))
 		{
 			throw new CRuntimeErrEx("Lexical error -- Missing header.", 21);
 		}
@@ -280,12 +280,12 @@ class CLexer
 		{
 			return $token_buffer;
 		}
-		else if(!($fileCont[11] === "\n"))
+		else if(!($fileCont[10] === "\n"))
 		{
 			throw new CRuntimeErrEx("Lexical error -- Missing header.", 21);
 		}
 		
-		for($i = 12; $i < $len; $i++)
+		for($i = 11; $i < $len; $i++)
 		{
 			$c = $fileCont[$i];
 			while (ctype_space($c))
@@ -408,7 +408,7 @@ class CLexer
 							$c = $fileCont[$i];
 						}
 						
-						if ($c === '#')
+						if ($c === '#' OR $c === "\n")
 						{
 							$i--;
 						}
@@ -450,7 +450,7 @@ class CLexer
 							}
 							$c = $fileCont[$i];
 						}
-						if ($c === '#')
+						if ($c === '#' OR $c === "\n")
 						{
 							$i--;
 						}
@@ -489,7 +489,7 @@ class CParser
 	{
 		if (!($first === $second))
 		{
-			throw new CRuntimeErrEx("Syntax error.", 21);
+			throw new CRuntimeErrEx("Syntax error.1", 21);
 		}
 	}
 	
@@ -682,7 +682,7 @@ class CParser
 				case CTokenType::T_POPS:
 					if(!(self::variableCheck($tokens, $index, $XMLbuffer, 1)))
 					{
-						throw new CRuntimeErrEx("Syntax error.", 21);
+						throw new CRuntimeErrEx("Syntax error.2", 21);
 					}
 					$index += 3;
 					break;
@@ -694,7 +694,7 @@ class CParser
 				case CTokenType::T_CALL:
 					if(!(self::labelCheck($tokens, $index, $XMLbuffer, 1)))
 					{
-						throw new CRuntimeErrEx("Syntax error.", 21);
+						throw new CRuntimeErrEx("Syntax error.3", 21);
 					}
 					$index++;
 					break;
@@ -706,7 +706,7 @@ class CParser
 				case CTokenType::T_DPRINT:
 					if(!(self::symbolCheck($tokens, $index, $XMLbuffer, 1)))
 					{
-						throw new CRuntimeErrEx("Syntax error.", 21);
+						throw new CRuntimeErrEx("Syntax error.4", 21);
 					}
 					$index += 3;
 					break;
@@ -717,14 +717,15 @@ class CParser
 				case CTokenType::T_INT2CHAR:
 				case CTokenType::T_STRLEN:
 				case CTokenType::T_TYPE:
+				case CTokenType::T_NOT:
 					if(!(self::variableCheck($tokens, $index, $XMLbuffer, 1)))
 					{
-						throw new CRuntimeErrEx("Syntax error.", 21);
+						throw new CRuntimeErrEx("Syntax error.5", 21);
 					}
 					$index += 3;
 					if(!(self::symbolCheck($tokens, $index, $XMLbuffer, 2)))
 					{
-						throw new CRuntimeErrEx("Syntax error.", 21);
+						throw new CRuntimeErrEx("Syntax error.6", 21);
 					}
 					$index += 3;
 					break;
@@ -734,12 +735,12 @@ class CParser
 				case CTokenType::T_READ:
 					if(!(self::variableCheck($tokens, $index, $XMLbuffer, 1)))
 					{
-						throw new CRuntimeErrEx("Syntax error.", 21);
+						throw new CRuntimeErrEx("Syntax error.7", 21);
 					}
 					$index += 3;
 					if(!(self::typeCheck($tokens, $index, $XMLbuffer, 2)))
 					{
-						throw new CRuntimeErrEx("Syntax error.", 21);
+						throw new CRuntimeErrEx("Syntax error.8", 21);
 					}
 					$index++;
 					break;
@@ -755,24 +756,24 @@ class CParser
 				case CTokenType::T_EQ:
 				case CTokenType::T_AND:
 				case CTokenType::T_OR:
-				case CTokenType::T_NOT:
 				case CTokenType::T_STRI2INT:
 				case CTokenType::T_CONCAT:
 				case CTokenType::T_GETCHAR:
 				case CTokenType::T_SETCHAR:
 					if(!(self::variableCheck($tokens, $index, $XMLbuffer, 1)))
 					{
-						throw new CRuntimeErrEx("Syntax error.", 21);
+						throw new CRuntimeErrEx("Syntax error.9", 21);
 					}
 					$index += 3;
 					if(!(self::symbolCheck($tokens, $index, $XMLbuffer, 2)))
 					{
-						throw new CRuntimeErrEx("Syntax error.", 21);
+						throw new CRuntimeErrEx("Syntax error.10", 21);
 					}
 					$index += 3;
 					if(!(self::symbolCheck($tokens, $index, $XMLbuffer, 3)))
 					{
-						throw new CRuntimeErrEx("Syntax error.", 21);
+						
+						throw new CRuntimeErrEx("Syntax error.11", 21);
 					}
 					$index += 3;
 					break;
@@ -783,23 +784,23 @@ class CParser
 				case CTokenType::T_JUMPIFNEQ:
 					if(!(self::labelCheck($tokens, $index, $XMLbuffer, 1)))
 					{
-						throw new CRuntimeErrEx("Syntax error.", 21);
+						throw new CRuntimeErrEx("Syntax error.12", 21);
 					}
 					$index++;
 					if(!(self::symbolCheck($tokens, $index, $XMLbuffer, 2)))
 					{
-						throw new CRuntimeErrEx("Syntax error.", 21);
+						throw new CRuntimeErrEx("Syntax error.13", 21);
 					}
 					$index += 3;
 					if(!(self::symbolCheck($tokens, $index, $XMLbuffer, 3)))
 					{
-						throw new CRuntimeErrEx("Syntax error.", 21);
+						throw new CRuntimeErrEx("Syntax error.14", 21);
 					}
 					$index += 3;
 					break;
 					
 				default:
-					throw new CRuntimeErrEx("Syntax error.", 21);
+					throw new CRuntimeErrEx("Syntax error.15", 21);
 			}
 			xmlwriter_end_element($XMLbuffer); // End of instruction element
 			
@@ -825,3 +826,4 @@ function display_help()
 	echo "(viz sekce 6), zkontroluje lexikální a syntaktickou\n";
 	echo "správnost kódu a vypíše na standardní výstup XML reprezentaci programu.\n\n";
 }
+?>
