@@ -44,11 +44,12 @@ Implementace mých školních projektů spolu s informací o bodovém ohodnocen�
 
 * Letní
 
- + IPP P1 -- parse.php --
+ + IPP P1 -- parse.php -- 6/6
  + IPP P2 -- interpret.py --
  + IPP P3 -- test.php --
- + IPK P1 -- Client-Server - sbírání dat o uživatelích --
- + IPK P2 --
- + IDS
+ + IPK P1 -- Client-Server - sbírání dat o uživatelích -- 20/20
+ + IPK P2 -- Bandwidth measurment -- /20
+ + IDS ERD -- 4/5
+ + IDS sql skript --
  + ICP
  + IP2
