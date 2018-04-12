@@ -1,3 +1,18 @@
+/**
+ *
+ * ! Running this application with corelist (bcs 0. core handles ints)
+ *       -l 1-7
+ * 
+ * ! seqn, ts and pkt len should be saved in little endian
+ */
+
+#define RTE_MAX_LCORE 16
+#define RTE_CACHE_LINE_SIZE 64
+#define RTE_MEMPOOL_CACHE_MAX_SIZE 512
+#define RTE_PKTMBUF_HEADROOM 128
+#define RTE_ETHDEV_QUEUE_STAT_CNTRS 16
+#define RTE_MAX_QUEUES_PER_PORT 1024
+
 #include <signal.h>
 #include <getopt.h>
 #include <rte_eal.h>
@@ -16,22 +31,26 @@
 #include <limits.h>
 
 #define RX_DESC_PER_QUEUE 	1024
-#define TX_DESC_PER_QUEUE	1024
-#define MAX_PKTS_BURST 		32
-#define REORDER_BUFFER_SIZE 	1024
-#define MBUF_PER_POOL 		65535
-#define MBUF_POOL_CACHE_SIZE 	250
-#define RING_SIZE 		16384
-#define NXP_MIN_PORTS 		1  	/* TODO: 4 */
+#define TX_DESC_PER_QUEUE 	1024
+#define MAX_PKTS_BURST 		1024
+#define REORDER_BUFFER_SIZE 	32768
+#define MBUF_PER_POOL 		1024
+#define MBUF_POOL_CACHE_SIZE 	256
+#define RING_SIZE 		32768
 #define NXP_MAX_PORTS 		4
-#define NXP_MIN_LCORES 		2 	/* TODO: 5 */
-#define PCAP_MAX_PCKTS 		50 	/* TODO: MAX_BYTES ? */
+#define NXP_MIN_PORTS 		1 // 4
+#define NXP_MIN_LCORES 		2 // 5
 
 volatile uint8_t quit_signal, free_mem, transport;
+
+uint64_t max_pkts_burst = MAX_PKTS_BURST;
+uint8_t verbose;
 
 struct timeval start;
 
 static struct rte_mempool *mbuf_pool;
+
+pcap_dumper_t *pcap_file_p;
 
 static struct rte_eth_conf port_conf_default = {
         .rxmode = {
@@ -83,39 +102,7 @@ struct rte_reorder_buffer {
 	int is_initialized;
 } __rte_cache_aligned;
 
-static void
-reorder_to_ready(struct rte_reorder_buffer *b) {
-	struct cir_buffer *order_buf = &b->order_buf,
-			*ready_buf = &b->ready_buf;
 
-	while (((order_buf->head + 1) & order_buf->mask) != order_buf->tail &&
-			((ready_buf->head + 1) & ready_buf->mask) != ready_buf->tail) {
-
-		/* if we are blocked waiting on a packet, skip it */
-		if (order_buf->entries[order_buf->head] == NULL) {
-			order_buf->head = (order_buf->head + 1) & order_buf->mask;
-		}
-
-		/* Move all ready entries that fit to the ready_buf */
-		while (order_buf->entries[order_buf->head] != NULL) {
-			ready_buf->entries[ready_buf->head] =
-					order_buf->entries[order_buf->head];
-
-			order_buf->entries[order_buf->head] = NULL;
-
-			order_buf->head = (order_buf->head + 1) & order_buf->mask;
-
-			if (((ready_buf->head + 1) & ready_buf->mask) == ready_buf->tail)
-				break;
-
-			ready_buf->head = (ready_buf->head + 1) & ready_buf->mask;
-		}
-	}
-
-	order_buf->head = order_buf->tail = 0;
-
-	//b->min_seqn = ???;
-}
 
 static inline void
 pktmbuf_free_bulk(struct rte_mbuf *mbuf_table[], unsigned n)
@@ -242,35 +229,40 @@ static int
 rx_thread(void *args)
 {
         const uint8_t 		nb_ports = rte_eth_dev_count();
-	uint32_t 		out_pckt_counter = 0, pkt_len, pkts_len = 0,
+	uint32_t 		out_pckt_counter = 0, pkts_len = 0,
 				ipdata_offset, data_len, pad_len = 0, *seqn, *ts;
-        uint16_t 		i, ret = 0, nb_rx_pkts, port_id;
-        struct rte_mbuf 	*pkts[MAX_PKTS_BURST], *m, *out_pkts[MAX_PKTS_BURST * 128];
+        uint16_t 		i, ret = 0, nb_rx_pkts, port_id, *pkt_len;
+        struct rte_mbuf 	*pkts[max_pkts_burst], *m, *out_pkts[max_pkts_burst * 128];
 	struct ipv4_hdr 	*ip_hdr;
 	struct ether_hdr 	*eth_hdr;
 	struct rx_thread_args 	*rx_args = (struct rx_thread_args *)args;
 
-	// TODO: Remove
+	/* TODO: Remove (spirent seqn) */
 	uint32_t 		spirent_seqn = 0;
+
 
         printf("%s() started on lcore %u\n", __func__, rte_lcore_id());
 
         while (!quit_signal && !free_mem) {
 		/* receive packets */
-		nb_rx_pkts = rte_eth_rx_burst(rx_args->port, 0, pkts, MAX_PKTS_BURST);
+		nb_rx_pkts = rte_eth_rx_burst(rx_args->port, 0, pkts, max_pkts_burst);
 		/* no pckts, skip */
+
 		if (nb_rx_pkts == 0) {
 				continue;
 		}
+
+		if (verbose) printf("Received %u packets from port %u\n", nb_rx_pkts, rx_args->port);
+
 		/* add recvd pckts to counter */
-		rx_args->stats->rx_pkts += nb_rx_pkts;
+		__sync_fetch_and_add(&rx_args->stats->rx_pkts, nb_rx_pkts);
 
 		/* for each pckt */
 		for(int i = 0; i < nb_rx_pkts; ++i)
 		{
 			m = pkts[i];
 
-			rx_args->stats->rx_bytes += rte_pktmbuf_data_len(m);
+			__sync_fetch_and_add(&rx_args->stats->rx_bytes, rte_pktmbuf_data_len(m));
 
 			/* Package packet */
 			if (rte_pktmbuf_data_len(m) > 0) {
@@ -279,63 +271,95 @@ rx_thread(void *args)
 				ipdata_offset = sizeof(struct ether_hdr);
 
 				/* get ipv4 hdr */
-				ip_hdr = (struct ipv4_hdr *)(rte_pktmbuf_mtod(m, char *) + ipdata_offset);
-				ipdata_offset += (ip_hdr->version_ihl & IPV4_HDR_IHL_MASK) * IPV4_IHL_MULTIPLIER;
+				//ip_hdr = (struct ipv4_hdr *)(rte_pktmbuf_mtod(m, char *) + ipdata_offset);
+				//ipdata_offset += (ip_hdr->version_ihl & IPV4_HDR_IHL_MASK) * IPV4_IHL_MULTIPLIER;
 
 				/* len of data in pckt (without header) */
 				data_len = rte_pktmbuf_data_len(m) - ipdata_offset;
+
+				if (verbose) printf("Data len: %u\n", data_len);
 
 				/* iterate over pckts in package pckt */
 				while (pkts_len < data_len)
 				{
 					/* first 32 bits are seqn number */
 					seqn = (uint32_t *)(rte_pktmbuf_mtod(m, char *) + ipdata_offset + pkts_len);
+					*seqn = rte_cpu_to_be_32(*seqn);
+
+					if (verbose) printf("seqn: %u\n", *seqn);
 
 					/* next 32 bits are timestamp */
 					ts = (uint32_t *)(rte_pktmbuf_mtod(m, char *) + ipdata_offset + pkts_len + sizeof(uint32_t));
-					/* behind these is pckt which seqn and timestamp belongs to */
-					ip_hdr = (struct ipv4_hdr *)(rte_pktmbuf_mtod(m, char *) + ipdata_offset + pkts_len + sizeof(struct ether_hdr) + (2*sizeof(uint32_t)));
+					*ts = rte_cpu_to_be_32(*ts);
+
+					if (verbose) printf("ts: %u\n", *ts);
+
+					/* next 16 bits are length of pckt */
+					pkt_len = (uint16_t *)(rte_pktmbuf_mtod(m, char *)  + ipdata_offset + pkts_len + sizeof(uint32_t) + sizeof(uint32_t));
+
+					*pkt_len = rte_cpu_to_be_16(*pkt_len);
+
+					if (verbose) printf("pkt_len: %u\n", *pkt_len);
+
+					/* behind these are pckt data which seqn, timestamp and length belongs to */
+					//ip_hdr = (struct ipv4_hdr *)(rte_pktmbuf_mtod(m, char *) + ipdata_offset + pkts_len + sizeof(struct ether_hdr) + (2*sizeof(uint32_t)));
 
 					/* allocate new mbuf in mbuf pool */
 					out_pkts[out_pckt_counter] = rte_pktmbuf_alloc(mbuf_pool);
-					if (out_pkts[out_pckt_counter] == NULL || *seqn == 452) {
+					
+					if (out_pkts[out_pckt_counter] == NULL ||
+					rte_mempool_ops_get_count(mbuf_pool) == 0) {
 						/* ran out of memory, tell other threads to stop */
+						printf("ran out of memory for mbufs\n");
+						/*if (free_mem) {
+							printf("rx_thread on core %u finished\n", rte_lcore_id());
+							return 0;
+						}*/
+
 						free_mem = 1;
-						/* tell transport thread to transport mbufs */
-						transport = 1;
+						
 						/* enqueue already allocated mbufs */
 						ret = rte_ring_enqueue_burst(rx_args->ring_out,
 							(void *)out_pkts, out_pckt_counter, NULL);
-						rx_args->stats->enqueue_pkts += ret;
+						__sync_fetch_and_add(&rx_args->stats->enqueue_pkts, ret);
+						/* if any mbufs failed to enqueue, free them */
 						if (unlikely(ret < out_pckt_counter)) {
-								rx_args->stats->enqueue_failed_pkts += (out_pckt_counter-ret);
-								pktmbuf_free_bulk(&out_pkts[ret], out_pckt_counter - ret);
+							__sync_fetch_and_add(&rx_args->stats->enqueue_failed_pkts, (out_pckt_counter-ret));
+							pktmbuf_free_bulk(&out_pkts[ret], out_pckt_counter - ret);
 						}
+
+						/* tell transport thread to transport mbufs */
+						transport = 1;
+
 						/* finish */
+						printf("rx_thread on core %u finished 2\n", rte_lcore_id());
 						return 0;
 					}
 
-					pkt_len = rte_bswap16(ip_hdr->total_length) + sizeof(struct ether_hdr);
+					/* get pckt len - endian swap */
+					//pkt_len = rte_bswap16(ip_hdr->total_length) + sizeof(struct ether_hdr);
 
-					/* TODO: Remove (outgoing pckts) */
-					if (pkt_len < 60)
-						pkt_len = 60;
+					/* TODO: Remove (outgoing pckts -- padding) */
+					//if (*pkt_len < 60)
+						//*pkt_len = 60;
 
 					/* copy pckt data to mbuf data segments(s) */
+					if (verbose) printf("Copying to mbuf\n");
 					rte_memcpy((void*)(rte_pktmbuf_mtod(out_pkts[out_pckt_counter], char*)),
-							(void *)(rte_pktmbuf_mtod(m, char *) + ipdata_offset + pkts_len + (2*sizeof(uint32_t))),
-							pkt_len);
+							(void *)(rte_pktmbuf_mtod(m, char *) + ipdata_offset + pkts_len + sizeof(uint16_t) + (2*sizeof(uint32_t))),
+							*pkt_len);
 
 					/* add aditional info to mbuf eg. seqn number, ts */
+					/* set offset bcs of RTE_PKTMBUF_HEADROOM is 128 */
 					out_pkts[out_pckt_counter]->data_off = 128;
 					out_pkts[out_pckt_counter]->seqn = spirent_seqn++; //*seqn;
-					out_pkts[out_pckt_counter]->data_len = pkt_len;
+					out_pkts[out_pckt_counter]->data_len = *pkt_len;
 					out_pkts[out_pckt_counter]->timestamp = *ts;
 
 					/* move to the next packet OR end of package packet */
-					pkts_len += pkt_len + (2*sizeof(uint32_t));
-
+					pkts_len += *pkt_len + sizeof(uint16_t) + (2*sizeof(uint32_t));
 					out_pckt_counter++;
+					if (verbose) printf("Moving to next pkt\n");
 				}
 
 				pkts_len = 0;
@@ -358,165 +382,229 @@ rx_thread(void *args)
 				(void *)out_pkts, out_pckt_counter, NULL);
 
 		/* did any mbufs fail to enqueue ? */
-		rx_args->stats->enqueue_pkts += ret;
+		__sync_fetch_and_add(&rx_args->stats->enqueue_pkts, ret);
 		if (unlikely(ret < out_pckt_counter)) {
-				rx_args->stats->enqueue_failed_pkts += (out_pckt_counter-ret);
+				__sync_fetch_and_add(&rx_args->stats->enqueue_failed_pkts, (out_pckt_counter-ret));
 				pktmbuf_free_bulk(&out_pkts[ret], out_pckt_counter - ret);
 		}
 
 		out_pckt_counter = 0;
         }
+	printf("rx_thread on core %u finished\n", rte_lcore_id());
         return 0;
+}
+
+
+static void
+transport_buffer(struct transport_thread_args *args)
+{
+	struct rte_mbuf 	*mbuf, *rombufs[max_pkts_burst];
+	unsigned		dret;
+	struct pcap_pkthdr 	pcap_hdr;
+	u_char 			*packet;
+
+	/* drain max_pkts_burst of reordered mbufs for writing to PCAP */
+	dret = rte_reorder_drain(args->buffer, rombufs, max_pkts_burst);
+	while (dret != 0) {
+		for (int j = 0; j < dret; j++) {
+			mbuf = rombufs[j];
+			__sync_fetch_and_add(&args->stats->saved_bytes, rte_pktmbuf_data_len(mbuf));
+			/* add additional info about pckt & save to pcap */
+			pcap_hdr.caplen = rte_pktmbuf_data_len(mbuf);
+			pcap_hdr.len = rte_pktmbuf_data_len(mbuf);
+
+			pcap_hdr.ts.tv_sec = mbuf->timestamp;
+			pcap_hdr.ts.tv_usec = 0;
+			packet = rte_pktmbuf_mtod(mbuf, u_char*);
+			pcap_dump((u_char *)pcap_file_p, &pcap_hdr, packet);
+			__sync_fetch_and_add(&args->stats->saved_pckts, 1);
+
+			/* free mbuf */
+			rte_pktmbuf_free(mbuf);
+		}
+		dret = rte_reorder_drain(args->buffer, rombufs, max_pkts_burst);
+	}
+}
+
+static int
+reorder_insert(struct rte_reorder_buffer *b, struct rte_mbuf *mbuf)
+{
+	struct cir_buffer *order_buf = &b->order_buf;
+	uint32_t offset;
+
+	offset = mbuf->seqn - b->min_seqn;
+
+	if (verbose) printf("Reorder insert to offset %u\n", offset);
+
+	if (offset < (b->order_buf.size-1)) {
+		order_buf->entries[offset] = mbuf;
+	}
+	else {
+		rte_errno = ERANGE;
+		return -1;
+	}
+
+	return 0;
+}
+
+static void
+reorder_to_ready(struct rte_reorder_buffer *b) {
+	struct cir_buffer *order_buf = &b->order_buf,
+			*ready_buf = &b->ready_buf;
+
+	if (verbose) printf("Reorder to ready\n");
+
+	while (((order_buf->head + 1) & order_buf->mask) != order_buf->tail &&
+			((ready_buf->head + 1) & ready_buf->mask) != ready_buf->tail) {
+		/* if we are blocked waiting on a packet, skip it */
+		if (order_buf->entries[order_buf->head] == NULL) {
+			order_buf->head = (order_buf->head + 1) & order_buf->mask;
+		}
+
+		/* Move all ready entries that fit to the ready_buf */
+		while (order_buf->entries[order_buf->head] != NULL) {
+			ready_buf->entries[ready_buf->head] =
+					order_buf->entries[order_buf->head];
+
+			order_buf->entries[order_buf->head] = NULL;
+
+			order_buf->head = (order_buf->head + 1) & order_buf->mask;
+
+			if (((ready_buf->head + 1) & ready_buf->mask) == ready_buf->tail)
+				break;
+			ready_buf->head = (ready_buf->head + 1) & ready_buf->mask;
+		}
+	}
+
+	order_buf->head = order_buf->tail = 0;
 }
 
 static int
 transport_thread(struct transport_thread_args *args)
 {
-	pcap_dumper_t 		*pcap_file_p;
-	pcap_t 			*pd;
-	struct pcap_pkthdr 	pcap_hdr;
-	u_char 			*packet;
-	char 			*pcap_file_name = "nxpOut.pcap";
-
         uint8_t 		outp;
-        unsigned 		sent, i, dret;
+        unsigned 		sent, i;
 	uint64_t 		nb_dq_mbufs;
         int 			ret;
-	struct 			rte_mbuf *mbuf, *mbufs[MAX_PKTS_BURST],
-				*rombufs[MAX_PKTS_BURST] = {NULL};
+	struct rte_mbuf 	*mbufs[max_pkts_burst];
 
         printf("%s() started on lcore %u\n", __func__, rte_lcore_id());
 
         while (!quit_signal) {
                 /* deque the mbufs from rx_to_transport ring */
                 nb_dq_mbufs = rte_ring_dequeue_burst(args->ring_in,
-                                (void *)mbufs, MAX_PKTS_BURST, NULL);
+                                (void *)mbufs, max_pkts_burst, NULL);
 
 		/* didnt enqueue single packet -> skip */
-                if (unlikely(nb_dq_mbufs == 0))
+                if (unlikely(nb_dq_mbufs == 0)) {
+			if (transport) goto EXPORT;
                         continue;
+		}
+
+		if (verbose) printf("Dqd %lu mbufs from ring\n", nb_dq_mbufs);
+
 
 		/* add amount of dequeued pckts to counter */
-                args->stats->dequeue_pkts += nb_dq_mbufs;
+		__sync_fetch_and_add(&args->stats->dequeue_pkts, nb_dq_mbufs);
 
 		/* for each dequed mbuf */
                 for (i = 0; i < nb_dq_mbufs; i++) {
 
 			/* ran out of the space for mbufs - transport them to pcap */
 			if (transport) {
-				for (int k = 0; k < args->stats->dequeue_pkts; k++) {
+				for (int k = i; k < nb_dq_mbufs; k++) {
 					/* store mbuf to reorder insert */
-					ret = rte_reorder_insert(args->buffer, mbufs[k]);
-					if (ret == -1 && ENOSPC)
-						printf("Reorder: ENOSPC\n");
-					else if (ret == -1 && ERANGE)
-						printf("Reorder: ERANGE\n");
-				}
+					ret = reorder_insert(args->buffer, mbufs[k]);
+					if (ret == -1) {
+						if (rte_errno == ENOSPC)
+							printf("Reorder: ENOSPE1\n");
+						else
+							printf("Reorder: ERANGE1\n");
+						/* move mbufs from reorder buffer to ready buffer */
+						reorder_to_ready(args->buffer);
 
+						/* export mbufs to pcap file */
+						transport_buffer(args);
+
+						/* actualize min_seqn */
+						args->buffer->min_seqn = mbufs[k]->seqn-100;
+
+						/* insert mbuf which failed to insert */
+						reorder_insert(args->buffer, mbufs[k]);
+					}
+				}
+EXPORT:
 				/* dequeue mbufs which stucked in rx_to_transmit ring */
 				do {
                 			nb_dq_mbufs = rte_ring_dequeue_burst(args->ring_in,
-                                		(void *)mbufs, MAX_PKTS_BURST, NULL);
+                                		(void *)mbufs, max_pkts_burst, NULL);
 					/* add amount of dequeued pckts to counter */
-                			args->stats->dequeue_pkts += nb_dq_mbufs;
+					__sync_fetch_and_add(&args->stats->dequeue_pkts, nb_dq_mbufs);
 					for (int k = 0; k < nb_dq_mbufs; k++) {
 						/* store mbuf to reorder insert */
-						ret = rte_reorder_insert(args->buffer, mbufs[k]);
-						if (ret == -1 && ENOSPC)
-							printf("Reorder: ENOSPC\n");
-						else if (ret == -1 && ERANGE)
-							printf("Reorder: ERANGE\n");
+						ret = reorder_insert(args->buffer, mbufs[k]);
+						if (ret == -1) {
+							if (rte_errno == ENOSPC)
+								printf("Reorder: ENOSPC2\n");
+							else
+								printf("Reorder: ERANGE2\n");
+							/* move mbufs from reorder buffer to ready buffer */
+							reorder_to_ready(args->buffer);
+
+							/* export mbufs to pcap file */
+							transport_buffer(args);
+
+
+							/* actualize min_seqn */
+							args->buffer->min_seqn = mbufs[k]->seqn-100;
+
+							/* insert mbuf which failed to insert */
+							reorder_insert(args->buffer, mbufs[k]);
+						}
 					}
 				} while (nb_dq_mbufs > 0);
 
 				/* move mbufs from reorder buffer to ready buffer */
 				reorder_to_ready(args->buffer);
 
-				/* Open pcap file */
-				pd = pcap_open_dead(DLT_EN10MB, 65535);
-				pcap_file_p = pcap_dump_open(pd, pcap_file_name);
-				if (pcap_file_p == NULL) {
-					rte_exit(EXIT_FAILURE, "PCAP -- pcap_dump_open failed\n");
-				}
-				printf("Opened pcap file %s\n", pcap_file_name);
-
-				/*
-				 * drain MAX_PKTS_BURST of reordered
-				 * mbufs for writing to PCAP
-				 */
-				dret = rte_reorder_drain(args->buffer, rombufs, MAX_PKTS_BURST);
-				while (dret != 0) {
-					for (int j = 0; j < dret; j++) {
-						mbuf = rombufs[j];
-						args->stats->saved_bytes += rte_pktmbuf_data_len(mbuf);
-						/* add additional info about pckt & save to pcap */
-						pcap_hdr.caplen = rte_pktmbuf_data_len(mbuf);
-						pcap_hdr.len = rte_pktmbuf_data_len(mbuf);
-						pcap_hdr.ts.tv_sec = mbuf->timestamp;
-						pcap_hdr.ts.tv_usec = 0;
-						packet = rte_pktmbuf_mtod(mbuf, u_char*);
-						pcap_dump((u_char *)pcap_file_p, &pcap_hdr, packet);
-						args->stats->saved_pckts++;
-						/* free mbuf */
-						rte_pktmbuf_free(mbuf);
-					}
-					dret = rte_reorder_drain(args->buffer, rombufs, MAX_PKTS_BURST);
-				}
-
-				/* Close pcap file */
-				pcap_close(pd);
-				pcap_dump_close(pcap_file_p);
+				/* export mbufs to pcap file */
+				transport_buffer(args);
 
 				/* finish thread */
+				printf("transport_thread on core %u finished\n", rte_lcore_id());
 				return 0;
                         }
 			else  {
 				/* store mbuf to reorder insert */
-				ret = rte_reorder_insert(args->buffer, mbufs[i]);
-				if (ret == -1 && ENOSPC)
-					printf("Reorder: ENOSPC\n");
-				else if (ret == -1 && ERANGE)
-					printf("Reorder: ERANGE\n");
+				ret = reorder_insert(args->buffer, mbufs[i]);
+				if (ret == -1) {
+					if (rte_errno == ENOSPC)
+						printf("Reorder: ENOSPC3\n");
+					else
+						printf("Reorder: ERANGE3\n");
+					/* move mbufs from reorder buffer to ready buffer */
+					reorder_to_ready(args->buffer);
+
+					/* export mbufs to pcap file */
+					transport_buffer(args);
+					
+					/* actualize min_seqn */
+					args->buffer->min_seqn = mbufs[i]->seqn-100;
+
+					/* insert mbuf which failed to insert */
+					reorder_insert(args->buffer, mbufs[i]);
+				}
 			}
                 }
         }
 
-	/* move last mbufs from reorder buffer to ready buffer */
+	/* move mbufs from reorder buffer to ready buffer */
 	reorder_to_ready(args->buffer);
-	
-	/* open pcap file and save pckts into */
-	pd = pcap_open_dead(DLT_EN10MB, 65535);
-	pcap_file_p = pcap_dump_open(pd, pcap_file_name);
-	if (pcap_file_p == NULL) {
-		rte_exit(EXIT_FAILURE, "PCAP -- pcap_dump_open failed\n");
 
-	}
+	/* export mbufs to pcap file */
+	transport_buffer(args);
 
-	printf("Opened pcap file %s\n", pcap_file_name);
-
-	dret = rte_reorder_drain(args->buffer, rombufs, MAX_PKTS_BURST);
-	while (dret != 0) {
-		for (i = 0; i < dret; i++) {
-			mbuf = rombufs[i];
-			args->stats->saved_bytes += rte_pktmbuf_data_len(mbuf);
-			/* add additional info about pckt & save to pcap */
-			pcap_hdr.caplen = rte_pktmbuf_data_len(mbuf);
-			pcap_hdr.len = rte_pktmbuf_data_len(mbuf);
-			pcap_hdr.ts.tv_sec = mbuf->timestamp;
-			pcap_hdr.ts.tv_usec = 0;
-			packet = rte_pktmbuf_mtod(mbuf, u_char*);
-			pcap_dump((u_char *)pcap_file_p, &pcap_hdr, packet);
-			args->stats->saved_pckts++;
-			/* free mbuf */
-			rte_pktmbuf_free(mbuf);
-		}
-		dret = rte_reorder_drain(args->buffer, rombufs, MAX_PKTS_BURST);
-	}
-
-	/* close pcap */
-	pcap_close(pd);
-	pcap_dump_close(pcap_file_p);
-
+	printf("transport_thread on core %u finished\n", rte_lcore_id());
         return 0;
 }
 
@@ -529,6 +617,8 @@ main(int argc, char **argv)
         struct 			transport_thread_args transport_args = {NULL, NULL};
 	struct 			rx_thread_args rx_args[NXP_MAX_PORTS];
         struct 			rte_ring *rx_to_transport;
+	pcap_t 			*pd;
+	char 			*pcap_file_name = "nxpOut.pcap";
 
         /* catch ctrl-c so we can print stats on exit */
         signal(SIGINT, int_handler);
@@ -537,6 +627,64 @@ main(int argc, char **argv)
         ret = rte_eal_init(argc, argv);
         if (ret < 0)
                 return -1;
+
+	argc -= ret;
+	argv += ret;
+
+	/* Parse args */
+	int opt;
+	uint64_t reorder_size = REORDER_BUFFER_SIZE;
+	uint64_t ring_size = RING_SIZE;
+	uint64_t mbufs_per_pool = MBUF_PER_POOL;
+	uint64_t mbuf_pool_size = RTE_MBUF_DEFAULT_BUF_SIZE;
+	uint64_t mbuf_cache_size = MBUF_POOL_CACHE_SIZE;
+	//max_pkts_burst global
+	while ((opt = getopt(argc, argv, "hvr:i:m:s:c:p:")) != EOF) {
+		switch (opt) {
+		case 'r':
+			reorder_size = atoi(optarg);
+			break;
+		case 'i':
+			ring_size = atoi(optarg);
+			break;
+		case 'm':
+			mbufs_per_pool = atoi(optarg);
+			break;
+		case 's':
+			mbuf_pool_size = atoi(optarg);
+			break;
+		case 'c':
+			mbuf_cache_size = atoi(optarg);
+			break;
+		case 'p':
+			max_pkts_burst = atoi(optarg);
+			break;
+		case 'v':
+			verbose = 1;
+			break;
+		case 'h':
+		default:
+			puts("Usage:");
+			puts(" -h      Prints this help");
+			puts(" -v      Verbose mod");
+			puts(" -r      Reorder buffer size");
+			puts(" -i      Ring size");
+			puts(" -m      Mbufs per pool");
+			puts(" -s      Mbuf pool size");
+			puts(" -c      Mbuf cache size");
+			puts(" -p      Max pckts burst");
+			return -1;
+		}
+	}
+
+	if (verbose) {
+		printf("Reorder size             : %lu\n", reorder_size);
+		printf("Ring size                : %lu\n", ring_size);
+		printf("Mbufs per pool (2^n-1)   : %lu\n", mbufs_per_pool);
+		printf("Mbuf data buffer size    : %lu\n", mbuf_pool_size);
+		printf("Mbuf cache size          : %lu\n", mbuf_cache_size);	
+		printf("Max pckts burst          : %lu\n", max_pkts_burst);
+	}
 
         /* Check if we have enought cores */
         if (rte_lcore_count() < NXP_MIN_LCORES)
@@ -552,9 +700,17 @@ main(int argc, char **argv)
                 rte_exit(EXIT_FAILURE, "Error: %d ethernet ports expected\n",
 			NXP_MIN_PORTS);
 
+	/* Open pcap file */
+	pd = pcap_open_dead(DLT_EN10MB, 65535);
+	pcap_file_p = pcap_dump_open(pd, pcap_file_name);
+	if (pcap_file_p == NULL) {
+		rte_exit(EXIT_FAILURE, "PCAP -- pcap_dump_open failed\n");
+	}
+	printf("Opened pcap file %s\n", pcap_file_name);
+
 	/* Create mbuf pool */
-        mbuf_pool = rte_pktmbuf_pool_create("mbuf_pool", MBUF_PER_POOL,
-                        MBUF_POOL_CACHE_SIZE, 0, RTE_MBUF_DEFAULT_BUF_SIZE,
+        mbuf_pool = rte_pktmbuf_pool_create("mbuf_pool", mbufs_per_pool,
+                        mbuf_cache_size, 0, mbuf_pool_size,
                         rte_socket_id());
         if (mbuf_pool == NULL)
                 rte_exit(EXIT_FAILURE, "%s\n", rte_strerror(rte_errno));
@@ -575,7 +731,7 @@ main(int argc, char **argv)
         }
 
         /* Create ring for inter core communication */
-        rx_to_transport = rte_ring_create("rx_to_transport", RING_SIZE, rte_socket_id(),
+        rx_to_transport = rte_ring_create("rx_to_transport", ring_size, rte_socket_id(),
                         RING_F_SP_ENQ);
         if (rx_to_transport == NULL)
                 rte_exit(EXIT_FAILURE, "%s\n", rte_strerror(rte_errno));
@@ -586,7 +742,7 @@ main(int argc, char **argv)
 
 	/* Create reorder buffer */
 	transport_args.buffer = rte_reorder_create("PKT_RO", rte_socket_id(),
-						REORDER_BUFFER_SIZE);
+						reorder_size);
 	if (transport_args.buffer == NULL)
 				rte_exit(EXIT_FAILURE, "%s\n", rte_strerror(rte_errno));
 	transport_args.buffer->min_seqn = 0;
@@ -599,7 +755,8 @@ main(int argc, char **argv)
 	gettimeofday(&start, NULL);
 
 	/* Start rx_thread() for each port (4 for NXP) */
-	for (lcore_id = 0, port_id = 0; lcore_id < rte_lcore_count() && port_id < nb_ports; ++lcore_id) {
+	if (nb_ports > 4) nb_ports = 4;
+	for (lcore_id = 1, port_id = 0; lcore_id < rte_lcore_count() && port_id < nb_ports; ++lcore_id) {
 		if (lcore_id != master_lcore_id) {
 			rx_args[port_id].ring_out = rx_to_transport;
 			rx_args[port_id].port = port_id;
@@ -614,11 +771,16 @@ main(int argc, char **argv)
 	transport_args.stats = transport_stats;
         transport_thread(&transport_args);
 
+	printf("waiting for cores to finish\n");
 	/* Wait for lcores to finish */
         RTE_LCORE_FOREACH_SLAVE(lcore_id) {
                 if (rte_eal_wait_lcore(lcore_id) < 0)
                         return -1;
         }
+
+	/* close pcap */
+	pcap_close(pd);
+	pcap_dump_close(pcap_file_p);
 
         print_stats(rx_stats, transport_stats);
         return 0;
