@@ -1,0 +1,80 @@
+﻿Legenda:
+-------
+v = NEBO
+^ = A
+
+1)  kozina byl muz
+2)  kozina byl chod
+3)  vsichni chodove jsou cesi
+4)  lomiar byl vrchnost
+5)  vsichni chodove byli bud oddani lomikarovi nebo snim vedli spor
+6)  kazdy je oddany nekomu
+7)  lide nejsou oddani vrchnosti, kterou nenavidi
+8)  kozina nenavidi lomikara
+9)  vsichni muzi jsou lide
+10) kozina vedl spor s lomikarem
+
+
+prepsat do jazyka predikatove logiky
+====================================
+
+Pravidla:
+--------
+Oddani(kdo, komu)
+Spor(kdo, s kym)
+Nenavidi(kdo, koho)
+
+
+1)  Muz(kozina)
+2)  Chod(kozina)
+3)  ∀x(Chod(x) => Cech(x))
+4)  Vrchnost(lomikar)
+5)  ∀x(Chod(x) => (Oddani(x, lomikar) v Spor(x, lomikar)))
+6)  ∀x(Osoba(x) => ∃y(Osoba(y) => Oddani(x, y)))
+7)  ∀x(Osoba(x) => ∀y(Vrchnost(y) ^ Nenavidi(x, y)) => ¬Oddani(x, y))
+8)  Nenavidi(kozina, lomikara)
+9)  ∀(Muz(x) => Osoba(x))
+10) ¬Spor(kozina, lomikar)
+
+
+Odstranit kvantifikatory, implikace, muze zustat jen negace nebo nebo
+=====================================================================
+
+Pravidla:
+--------
+A => B <=> ¬AvB
+¬(A^B) <=> ¬Av¬B
+
+1)  Muz(kozina)
+2)  Chod(kozina)
+3)  ¬Chod(x) v Cech(x)
+4)  Vrchnost(lomikar)
+5)  ¬Chod(x) v Oddani(x, lomikar) v Spor(x, lomikar)
+6)  ¬Osoba(x) v ¬Osoba(f(x)) v Oddani(x, f(x))
+7)  ¬Osoba(x) v ¬Vrchnost(y) v ¬Nenavidi(x,y) v ¬Oddani(x,y)
+8)  Nenavidi(kozina, lomikara)
+9)  ¬Muz(x) v Osoba(x)
+10) ¬Spor(kozina, lomikar)
+
+11) 10+5  ¬Chod(kozina) v Oddani(kozina, lomikar)
+12) 11+2 Oddani(kozina, lomikar)
+13) 12+7 ¬Osoba(kozina) v ¬Vrchnost(lomikar) v ¬Nenavidi(kozina, lomikar)
+14) 13+9 ¬Vrchnost(lomikar) v ¬Nenavidi(kozina, lomikar) v ¬Muz(kozina)
+15) 14+4 ¬Nenavidi(kozina, lomikar) v ¬Muz(kozina)
+16) 15+8 ¬Muz(kozina)
+17) 16+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

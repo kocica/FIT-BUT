@@ -17,7 +17,7 @@ README     = README.txt
 
 CC         = g++
 CFLAGS     = -std=c++11
-LDLIBS     = -pthread -static-libstdc++
+LDLIBS     = -pthread -static-libstdc++ -lm
 
 ################## Source names ##################
 TARGET_CPP = ipk-mtrip.cpp

@@ -1,5 +1,3 @@
-Všechno potřebné je v pdf.
-
 Omezení
 =======
 

@@ -3,10 +3,11 @@
 # Filip Kočica < xkocic01@stud.fit.vutbr.cz >
 
 
-Implementace mých školních projektů spolu s informací o bodovém ohodnocení.
-
+Seznam mých školních projektů spolu s informací o bodovém ohodnocení.
+=====================================================================
 
 1BIT:
+-----
 
 * Zimní
 
@@ -31,6 +32,7 @@ Implementace mých školních projektů spolu s informací o bodovém ohodnocen�
  + ITY P5 -- 15/15
  
 2BIT:
+-----
 
 * Zimní
 
@@ -40,16 +42,25 @@ Implementace mých školních projektů spolu s informací o bodovém ohodnocen�
  + IP1 Technická zpráva -- 85/100
  + INP P1 -- 10/10
  + INP P2 -- 23/23
- + ISS -- Nedělal
+ + ISS -- Nedělal (nepovinný)
 
 * Letní
 
  + IPP P1 -- parse.php -- 6/6
- + IPP P2 -- interpret.py --
- + IPP P3 -- test.php --
+ + IPP P2 -- interpret.py a test.php -- 11/14
  + IPK P1 -- Client-Server - sbírání dat o uživatelích -- 20/20
- + IPK P2 -- Bandwidth measurment -- /20
- + IDS ERD -- 4/5
- + IDS sql skript --
- + ICP
- + IP2
+ + IPK P2 -- Bandwidth measurment -- 16/20
+ + IDS Datový model (ERD), model případů užití a obhajoba modelů -- 4/5
+ + IDS SQL skript pro vytvoření základních objektů schématu databáze -- 5/5
+ + IDS SQL skript s několika dotazy SELECT -- 5/5
+ + IDS Poslední SQL skript, dokumentace a finální obhajoba projektu -- 15/19
+ + IZG Vykreslovací řetězec a programování shaderů -- 11/18
+ + ICP Blokový editor --
+ + IP2 Technická zpráva --
+
+3BIT:
+-----
+
+* Zimní
+
+* Letní

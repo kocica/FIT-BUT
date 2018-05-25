@@ -21,6 +21,7 @@
 #include <chrono>
 #include <unordered_map>
 #include <thread>
+#include <cmath>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -434,15 +435,15 @@ public:
 
 	void runMeter()
 	{
-		const int 					numberOfMeasurments = 10;
+		const int 					numberOfMeasurments = 100;
 		double 						time = args.getTime();
 		char 						*buffer = static_cast<char *>(calloc(args.getSize(), 1));
 		struct timeval 				tv, tvalBefore, tvalAfter, act_tv;
-		unsigned int 				loopLen = (time*1000)/numberOfMeasurments;
+		unsigned int 				loopLen = (time*1000000L)/numberOfMeasurments;
 		unsigned int 				sleepDuration = loopLen/numberOfMeasurments;
-		unsigned int 				decreaseSleepDuration = sleepDuration/numberOfMeasurments;
+		unsigned int 				decreaseSleepDuration = sleepDuration/(numberOfMeasurments/10);
 		int 						nb_rx_bytes = 0;
-		uint64_t					sent = 0;
+		uint64_t					sent = 0, recvdTmp;
 		double 						avgSpeed = .0, minSpeed = DBL_MAX,
 									maxSpeed = DBL_MIN, actSpeed = .0, variance = .0, t = .0, diff;
 		uint32_t 					avgSpeedCounter = 0;
@@ -450,7 +451,9 @@ public:
 
 
 		for (int i = 0; i < numberOfMeasurments; i++)
-		{
+		{	
+			// Start new measurment
+			sent = recvd = 0;
 			gettimeofday (&tvalBefore, NULL);
 			do
 			{
@@ -466,27 +469,42 @@ public:
 				}
 				sent++;
 
-				// Good night, process
-				usleep(sleepDuration*1000L);
+				// sleep
+				usleep(sleepDuration);
 				gettimeofday (&tvalAfter, NULL);
 			} while ((((tvalAfter.tv_sec - tvalBefore.tv_sec)*1000000L
-           		+tvalAfter.tv_usec) - tvalBefore.tv_usec) < (loopLen*1000L));
+           		+tvalAfter.tv_usec) - tvalBefore.tv_usec) < (loopLen));
+			recvdTmp = recvd;
 
-#ifdef DEBUG
-			std::cout << "Sleep duration in ms: " << sleepDuration << std::endl;
+			std::cout << "Sleep duration in us: " << sleepDuration << std::endl;
 			std::cout << "Sent:                 " << sent << std::endl;
-			std::cout << "Recv:                 " << recvd << std::endl;
-#endif
+			std::cout << "Recv:                 " << recvdTmp << std::endl;
 
           	// Calculate the speed
-			if (recvd >= sent)
+			if (recvdTmp >= (sent>10?sent-10:sent))
 			{
-				actSpeed = (((1000.0/sleepDuration)*sent*args.getSize())/125000.0);
+				if (sleepDuration > 0)
+				{
+					sleepDuration -= decreaseSleepDuration;
+				}
+				std::cout << "Speed up -> decrease sleep duration" << std::endl;
 			}
 			else
 			{
-				actSpeed = (((1000.0/sleepDuration)*recvd*args.getSize())/125000.0);
+				sleepDuration += decreaseSleepDuration;
+				std::cout << "Slow down -> increase sleep duration" << std::endl;
 			}
+
+			if (recvdTmp == 0)
+			{
+				std::cout << std::endl;
+				continue;
+			}
+
+			std::cout << std::endl;
+
+			//            PER SECOND                              IN MEGABITS
+			actSpeed = (((1000000.0/loopLen)*sent*args.getSize())/125000.0);
 
 			// Standard deviation
 			// Inspired by:
@@ -503,8 +521,9 @@ public:
           		t = avgSpeed;
           	}
 
+          	avgSpeedCounter++;
+
 			// Actualize avg/min/max speeds
-			avgSpeedCounter++;
 			if (actSpeed > maxSpeed)
 			{
 				maxSpeed = actSpeed;
@@ -514,16 +533,6 @@ public:
 				minSpeed = actSpeed;
 			}
 			avgSpeed += actSpeed;
-
-			if (sleepDuration > 0)
-			{
-				sleepDuration -= decreaseSleepDuration;
-			}
-			
-			// Start new measurment
-			sent = recvd = 0;
-
-			gettimeofday (&tvalAfter, NULL);
 		}
 
 		std::cout << "=============================================" << std::endl;
@@ -534,9 +543,9 @@ public:
 		std::cout.precision(10);
 		std::cout << "Max speed:            " << maxSpeed << " Mb/s" << std::endl;
 		std::cout.precision(10);
-		std::cout << "Standard deviation:   " << sqrt(variance/(avgSpeedCounter-1)) << std::endl;
+		std::cout << "STDEV    :            " << std::sqrt(variance/(avgSpeedCounter-1)) << std::endl;
 		std::cout.precision(10);
- 		std::cout << "RTT:                  " << (sumTime/noTimes)*1000 << " ms" << std::endl;
+ 		std::cout << "RTT      :            " << (sumTime/noTimes)*1000 << " ms" << std::endl;
  		std::cout << "=============================================" << std::endl;
 
 		end = true;
@@ -583,7 +592,7 @@ int main (int argc, char *argv[])
 
 	if (args.getType() == T_METER)
 	{
-		if (args.getSize() < (sizeof(struct timeval) + sizeof(uint64_t)))
+		if (args.getSize() < (sizeof(struct timeval)))
 		{
 			std::cerr << "METER: - s <size_of_pkt> Minimal size is " << sizeof(struct timeval) << " Bytes. (For timestamp)" << std::endl;
 			exit(E_BAD_PARAMS);
