@@ -55,8 +55,8 @@ Seznam mých školních projektů spolu s informací o bodovém ohodnocení.
  + IDS SQL skript s několika dotazy SELECT -- 5/5
  + IDS Poslední SQL skript, dokumentace a finální obhajoba projektu -- 15/19
  + IZG Vykreslovací řetězec a programování shaderů -- 11/18
- + ICP Blokový editor --
- + IP2 Technická zpráva --
+ + ICP Blokový editor -- 75
+ + IP2 Technická zpráva -- 90
 
 3BIT:
 -----
