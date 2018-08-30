@@ -3,7 +3,7 @@
 # Filip Kočica < xkocic01@stud.fit.vutbr.cz >
 
 
-Seznam mých školních projektů spolu s informací o bodovém ohodnocení.
+Seznam mých školních projektů s bodovým hodnocením.
 =====================================================================
 
 1BIT:
