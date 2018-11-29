@@ -1,0 +1,66 @@
+Zahájení:  ~25.09.2018
+Ukončení:  ~09.11.2018
+Autor:     Filip Kocica <xkocic01@stud.fit.vutbr.cz>
+Soubor:    README
+Omezení:   Žádná -- Program je plně funkční (testováno na serverech merlin i eva)
+Závisloti: OpenSSL (>= 1.0.2) a libxml2 (>= 2.9.1)
+Jazyk:     Kód je psán v EN, stejně tak ze zvyku i chybové hlášky vypisované
+           na standardní chybový výstup, naopak výstup programu je psán
+           stejně jako v příkladech v zadání v CZ. Za nekonzistenci se omlouvám.
+
+-------------------------------------------------------------------------------
+ - Implementace umožňuje zadat URL i feedfile zároveň a zpracuje všechny zadané
+zdroje. Podporuje také zadání certfile certaddr zároveň. Nepodporuje však
+zadání stejného argumentu vícekrát. Po (zadání přepínače -h | chybnému vstupu)
+se zobrazí nápověda.
+
+ - Program prochází zadané URL a pro každou z nich provádí připojení pomocí
+SSL, odeslání HTTP požadavku pro soubor s novinkami a čeká na odpověď.
+
+ - Poté odpověď (XML soubor ve formátu ATOM/RSS) zpracuje pomocí libxml2
+a výsledek (v závislosti na vstupních parametrech) vypíše na standartní výstup.
+
+ - V případě chyby (výjímky) zjistí závažnost problému a buď pokračuje
+dalším URL (pokud existuje) nebo skončí.
+
+ - V rámci URL je možné zapsat číslo portu (eg. "https://foo.com:443/bar.php")
+
+ - Pokud při `make test` není binární soubor 'feedreader' nalezen, je provedena
+kompilace (make) a až poté jsou provedeny testy.
+
+ - Program zanechává malé množství neuvolněné paměti alokovanou knihovnou
+OpenSSL, kterou se mi bohužel nepodařilo nijak uvolnit (ani free all), viz:
+
+    https://github.com/civetweb/civetweb/issues/263
+
+ - Aplikace je robustní a v případě, že se vyskytne element z jiné verze RSS,
+např. <dc:creator> v RSS 2.0, tak je zpracován a vypsán na výstup.
+
+-------------------------------------------------------------------------------
+Použití:
+ feedreader <URL | -f <feedfile>> [-c <certfile>] [-C <certaddr>] [-T] [-a] [-u]
+
+Příklady (merlin.fit.vutbr.cz):
+ feedreader https://www.theregister.co.uk/headlines.atom -c /etc/ssl/certs/ca-bundle.crt
+ feedreader https://www.theregister.co.uk:443/headlines.atom
+ feedreader https://www.theregister.co.uk/headlines.atom -u -a -T
+
+Feedfile:
+ feedreader -f Feedfile
+
+URL i Feedfile:
+ feedreader https://www.theregister.co.uk/headlines.atom -f Feedfile
+
+-------------------------------------------------------------------------------
+Seznam odevzdaných souborů:
+
+--> xkocic01
+   --> manual.pdf
+   --> Makefile
+   --> Arguments.h, Feed.h, FeedreaderException.h, SSL.h, Utils.h, XMLManager.h
+   --> Arguments.cpp, Feed.cpp, SSL.cpp, Utils.cpp, XMLManager.cpp
+   --> test
+      --> feedfile
+      --> testing_script.sh
+      --> ProjResults
+      --> RefResults

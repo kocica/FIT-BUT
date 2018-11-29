@@ -1,0 +1,12 @@
+# === Feed file for testing ===
+
+# FIT
+http://www.fit.vutbr.cz/news/news-rss.php
+
+
+#Wikipedia
+https://en.wikipedia.org/w/api.php?hidebots=1&days=7&limit=50&hidewikidata=1&action=feedrecentchanges&feedformat=atom
+
+#xkcd
+https://xkcd.com/atom.xml
+https://what-if.xkcd.com/feed.atom
