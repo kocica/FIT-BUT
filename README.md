@@ -1,4 +1,4 @@
-# FIT-BUT
+# FIT_VUT
 
 # Filip Kočica < xkocic01@stud.fit.vutbr.cz >
 
