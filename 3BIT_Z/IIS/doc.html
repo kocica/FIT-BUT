@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="cz"> 
+<html><head>
+	<meta charset="ISO-8859-2"/>
+    <title>Projekt IIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<h1>Správa ZOO</h1> <!-- Nahradte názvem svého zadání -->
+
+<dl>
+	<dt>Autoři</dt>
+	<dd>Filip Kočica <!-- Nahra?te skute?ným jménem a e-mailem autora a popisem ?innosti -->
+	    <a href="mailto:xkocic01@stud.fit.vutbr.cz">xkocic01@stud.fit.vutbr.cz</a> -
+		Backend + DB
+	</dd>
+	<dd>Igor Ignác <!-- Nahra?te skute?ným jménem a e-mailem autora a popisem ?innosti -->
+	    <a href="mailto:xignac00@stud.fit.vutbr.cz">xignac00@stud.fit.vutbr.cz</a> - 
+		Frontend + DB
+	</dd>
+	<dt>URL aplikace</dt>
+	<dd><a href="http://www.stud.fit.vutbr.cz/~xkocic01/IIS">http://www.stud.fit.vutbr.cz/~xkocic01/IIS</a></dd>
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<table>
+<tbody><tr><th>Login</th><th>Heslo</th><th>Role</th><th>Funkce</th></tr>
+<tr><td>admin</td><td>admin123</td><td>Vedoucí ZOO</td><td>Přidávání, zobrazování a editace záznamů všech druhů. Správa účtu a všech uživatelů.</td></tr>
+<tr><td>osetrovatelA</td><td>osetrovatel123</td><td>Ošetřovatel</td><td>Přidávání a zobrazování záznamů všech druhů. Správa účtu.</td></tr>
+<tr><td>osetrovatelB</td><td>osetrovatel123</td><td>Ošetřovatel</td><td>Přidávání a zobrazování záznamů všech druhů. Správa účtu.</td></tr>
+</tbody></table>
+
+<h2>Implementace</h2>
+<p>
+Většina souborů implementuje jednotlivé případy užití (mimo showError.php, db.php apod.)
+<table><tbody>
+<tr><th>Zdrojový soubor</th><th>Implementuje:</th></tr>
+<tr><td>addAnimal.php</td><td>Přidání záznamu zvířete</td></tr>
+<tr><td>addRace.php</td><td>Přidání záznamu rasy zvířete</td></tr>
+<tr><td>addCoop.php</td><td>Přidání záznamu výběhu</td></tr>
+<tr><td>addKeeping.php</td><td>Přidání záznamu čištění</td></tr>
+<tr><td>addFeeding.php</td><td>Přidání záznamu krmení</td></tr>
+<tr><td>modifyUsers.php</td><td>Správa uživatelů</td></tr>
+<tr><td>personal.php</td><td>Správa vlastního účtu</td></tr>
+<tr><td>listAnimals.php</td><td>Zobrazení (a úprava/mazáni) záznamů zvířat</td></tr>
+<tr><td>listRaces.php</td><td>Zobrazení (a úprava/mazáni) záznamů ras zvířat</td></tr>
+<tr><td>listCoops.php</td><td>Zobrazení (a úprava/mazáni) záznamů výběhů</td></tr>
+<tr><td>listKeeping.php</td><td>Zobrazení (a úprava/mazáni) záznamů čištění</td></tr>
+<tr><td>listFeeding.php</td><td>Zobrazení (a úprava/mazáni) záznamů krmení</td></tr>
+<tr><td>db.php</td><td>Připojení k databázi</td></tr>
+<tr><td>index.php</td><td>Hlavní stránka</td></tr>
+<tr><td>menu.php</td><td>Menu po přihlášení do systému</td></tr>
+<tr><td>popMenu.php</td><td>Vyskakovací menu při volbě v menu</td></tr>
+<tr><td>register.php</td><td>Formulář pro registraci</td></tr>
+<tr><td>loginBoss.php</td><td>Přihlášení Vedoucího</td></tr>
+<tr><td>loginKeeper.php</td><td>Přihlášení Ošetřovatele</td></tr>
+<tr><td>showError.php</td><td>Zobrazení chyby</td></tr>
+<tr><td>logTimeoutDisconnect.php</td><td>Stránka zobrazená po vypršení doby sezení</td></tr>
+<tr><td>isInSession.php</td><td>Funkce zjistí zda je proměnná v session a pokud ano vrátí ji</td></tr>
+</tbody></table>
+</p>
+
+<h2>Instalace</h2>
+<ul>
+<li>Při vývoji byly použity pouze technologie PHP, HTML, CSS, SQL a JS -- bez jakéhokoli frameworku</li>
+<li>Pro běh stránek je postačující verze PHP i MySQL běžící na školním serveru Eva</li>
+<li>Databáze je inicializována pomocí skriptu db.sql v adresáři db/ a postačí tento skript importovat v phpMyAdmin</li>
+<li>Archiv je nutno rozbalit do cílové složky (např. na serveru Eva ~/WWW/IIS) a nastavit práva (dle čísla 13 FAQ: https://www.fit.vutbr.cz/CVT/faq/)</li>
+<li>Pozn.: Pro usnadnění jsme pro jistotu přidali do složky scripts/ skript, jež po spuštění nastaví práva na soubory a složky na serveru Eva</li>
+</ul>
+
+<h2>Změny oproti IUS/IDS</h2>
+<ul>
+	<li>Místo rodných čísel jsme jako primární klíče ošetřovatelů/vedoucích použili (unikátní) loginy</li>
+	<li>Výběh má maximálně 3 zvířata místo N</li>
+	<li>Přidali jsme tabulku rasa zvířete</li>
+</ul>
+
+<h2>Známé problémy</h2>
+<ul>
+	<li>Kvalita PHP kódu :-(</li>
+	<li>Vzhled IS (použili jsme pouze CSS bez FW)</li>
+	<li>Mix CZ/SK v IS</li>
+	<li>Zvíře A může být rodičem zvířete B a zároveň B rodičem A</li>
+</ul>	
+
+<h2>Diagram případů užití</h2>
+
+ <img src="doc/IIS.jpg" alt="Use-case diagram"> 
+
+</body></html>

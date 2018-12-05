@@ -1,0 +1,598 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+  background: url("http://cheripoint.co.za/wp-content/uploads/2016/11/web-designer-pune-background.jpg") no-repeat center center fixed;
+  background-color: color rgba(0,0,0,0.5);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+header {
+  background-color: green;
+  padding:20px;
+  height: 80px;
+  font-size: 8px;
+  color: white;
+}
+
+nav {
+    float: left;
+    width: 30%;
+    height: 400px;
+    background: transparent;
+    padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    font-size: 3px;
+}
+
+article {
+    float: left;
+    padding: 20px;
+    width: 70%;
+    height: 400px;
+    background-color: rgba(35, 136, 210, 0.3);
+}
+
+article h1  {
+  font-family: serif;
+  color: #1a6887;
+}
+article h2  {
+  font-family: Georgia;
+}
+
+/* Clear floats after the columns */
+section:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+footer {
+  background-color: grey;
+  font-size: 20px;
+  padding: 10px;
+  height: 455px;
+  text-align: center;
+  color: white;
+}
+
+hr  {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+  background-color: green;
+}
+.downside {
+  background-color: white;
+  font-size: 20px;
+  padding: 10px;
+  height: 200px;
+  text-align: left;
+  color: white;
+}
+.downside h1  {
+  font-size: 20px;
+  color: black;
+}
+
+.downside h5  {
+  font-size: 12px;
+  color: red;
+}
+
+.downsideinfo {
+  background-color: transparent;
+  padding: 10px;
+  height: 5%;
+  text-align: left;
+  bottom: 0;
+}
+.downsideinfo h1  {
+  font-size: 8px;
+  color: black;
+}
+
+/*  Styles after succ login */
+headerlogged {
+  background-color: green;
+  padding:20px;
+  height: 50px;
+  font-size: 8px;
+  color: white;
+}
+#element1 {
+  float: left;
+  font-size: 15px;
+  font-weight: bold;
+}
+#element2 {
+  float: right;
+  font-size: 12px;
+}
+#element3 {
+  float: right;
+  vertical-align: top;
+}
+#logname  {
+  font-size: 15px;
+}
+
+menu  {
+  float: left;
+  width: 15%;
+  height: 500px;
+  background: transparent;
+  /*padding: 20px;*/
+}
+
+movingmenu  {
+  float: left;
+  left:6px;
+  position: fixed;
+  width: 15%;
+  height: auto;
+  background: #16a085;
+  border-radius: 4px;
+  padding: 20px;
+  border-width: thick;
+}
+movingmenu h1 {
+  text-align: center;
+  font-size: 20px;
+  color: white;
+}
+
+* {
+  font-family: 'Lato', Calibri, Arial, sans-serif;
+  text-align: left;
+}
+
+articlelogged {
+    float: left;
+    padding: 20px;
+    width: 85%;
+    height: auto;
+    background-color: transparent;
+}
+#profileArticle {
+  background-color: transparent;
+}
+
+sectionlogged:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+footerlogged {
+  background-color: grey;
+  font-size: 20px;
+  padding: 10px;
+  height: 100px;
+  text-align: center;
+  color: white;
+}
+
+#personal {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+articlelogged ul  {
+  list-style-type: none;
+  padding: 0;
+  font-size: 15px;
+}
+
+@media (max-width: 600px) {
+    nav, article {
+        width: 100%;
+        height: auto;
+    }
+}
+
+body {
+    /*background-color: red;
+    background-image: url("../images/background.jpg");
+    */
+}
+.backgroundContainer  {
+  position: relative;
+}
+.backgroundContainer:before  {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+}
+.content  {
+  position: relative;
+  min-height: 100%;
+  z-index: 2;
+}
+
+.resize_fit_center {
+    opacity: 0.6;
+    width:100%;
+    height: 1000px;
+    vertical-align: middle;
+}
+
+/* Filtering button */
+.filterButton{
+  color: #494949 !important;
+  text-transform: uppercase;
+  background: #32CD32;
+  padding: 14px 28px;
+  text-align: center;
+  border-radius: 6px;
+  display: inline-block;
+  }
+
+.filterButton:hover {
+  color: #ffffff !important;
+  background: #0066ff;
+  border-color: #0066ff !important;
+  transition: all 0.4s ease 0s;
+}
+
+/* Button for change in personal information of users*/
+.changeButton{
+  color: #494949 !important;
+  text-transform: uppercase;
+  background: #32CD32;
+  padding: 14px 28px;
+  text-align: center;
+  border-radius: 6px;
+  display: inline-block;
+  }
+
+.changeButton:hover {
+  color: #ffffff !important;
+  background: #f6b93b;
+  border-color: #f6b93b !important;
+  transition: all 0.4s ease 0s;
+}
+
+/*  Login button  */
+.loginBtn {
+    border-radius: 20px !important;
+    width: 300px !important;
+    border-width: 0!important;
+}
+/* Button for logging out */
+.logoutButton{
+  color: #494949 !important;
+  text-transform: uppercase;
+  background: #32CD32;
+  padding: 12px 24px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.logoutButton:hover {
+  color: #ffffff !important;
+  background: #EC1212;
+  border-color: #f6b93b !important;
+  transition: all 0.4s ease 0s;
+}
+
+.button_cont {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+/* Login buttons, basic style created */
+.loginButtons{
+	color: rgba(255,255,255,1);
+  background-color: rgb(50,205,50);
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+  width: 380px;
+  height: 60px;
+  text-align: left;
+  font-size: 22px;
+	border: 1px solid rgba(255,255,255,0.5);
+	position: relative;
+}
+.loginButtons a{
+	color: rgba(51,51,51,1);
+	text-decoration: none;
+	display: block;
+}
+.loginButtons span{
+	z-index: 2;
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+.loginButtons::before{
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0%;
+	height: 100%;
+	z-index: 1;
+	opacity: 0;
+	background-color: rgba(255,255,255,0.5);
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+
+}
+.loginButtons:hover::before{
+	opacity: 1;
+	width: 100%;
+}
+
+/* The Modal (background) */
+.modal-content {
+    /*visibility: hidden;*/
+    position: fixed;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 40%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: animatetop;
+    animation-duration: 0.5s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-25%; opacity:0}
+    to {top:50%; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-25%; opacity:0}
+    to {top:50%; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.modal {
+  opacity: 0.0; /*  default so window wont slide on fast reload of page */
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+fieldset
+{
+  border:2px solid #008B8B;
+  -moz-border-radius:8px;
+  -webkit-border-radius:8px;
+  border-radius:8px;
+  background-color: #20B2AA;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.record {
+  border:2px solid  #008080;
+  background-color: #008B8B;
+  -moz-border-radius:8px;
+  -webkit-border-radius:8px;
+  border-radius:8px;
+  padding: 5px;
+  margin: 10px;
+  width: auto;
+  display:inline-block; /* if we want records underneath comment this line */
+  font-weight: bold;
+}
+
+.record td {
+  width: auto;
+}
+
+.modal-body {
+  padding: 2px 16px;
+  margin:auto;
+  text-align: center;
+}
+
+.modal-footer {
+    padding: 2px 16px;
+    color: white;
+}
+
+/*  Menu box */
+.container {
+    position: relative;
+    margin-top: 5px;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+.textmenu {
+  background:none;
+  border:none;
+  opacity: 1;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  font-size: 20px;
+}
+.textmenu:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.container:hover .image {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+/*  Width of inputs in modify user  */
+.setWidth {
+  width: 180px;
+}
+/*  Successfull insertion */
+
+/*@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');*/
+
+.success-msg {
+  color: #270;
+  background-color: #DFF2BF;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 3px 3px 3px 3px;
+  z-index: 3;
+  opacity: 0;
+  animation: opacityOn 5s normal forwards;
+}
+
+.error-msg {
+  color: rgb(255, 255, 255);
+  background-color:#DC143C;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 3px 3px 3px 3px;
+  z-index: 3;
+  opacity: 0;
+  animation: opacityOn 5s normal forwards;
+}
+
+@keyframes opacityOn {
+  0% {
+       opacity: 0;
+   }
+   50%{
+     opacity: 1;
+   }
+   100% {
+       opacity: 0;
+   }
+}
+
+/*  Selects & table inputs */
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:700,300);
+
+.input-class {
+  outline: 0;
+  margin: 10px;
+  font-weight: 700;
+  font-size: 1.4em;
+  padding: 10px;
+  border-width: 2px;
+  border-color: rgba(247, 247, 247, .3);
+  border-style: solid;
+  background: url('transparent');
+  font-family: "Roboto", arial, sans-serif;
+  width: auto;
+  min-width: 300px;
+}
+
+.input-class:focus  {
+  background: white;
+  transition: all 0.3s ease;
+  color: #222;
+}
+
+.selector-class {
+  -webkit-appearance: none;  /*Removes default chrome and safari style*/
+  -moz-appearance: none; /* Removes Default Firefox style*/
+
+  background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right;
+  background-position: right 5px center;
+
+  width: 300px;
+}
+
+.login-class  {
+  border-color: white !important;
+  background-color: #DCDCDC !important;
+  border-radius: 20px !important;
+
+}
+.register-class {
+  border-color: black !important;
+  border-radius: 5px;
+}
+#cmbMake  {
+  height: 50px;
+  border-width: 0px !important;
+  font-size: 24px;
+  font-weight: bold;
+  color: #808080 !important;
+}
+label {
+  font-family: Georgia;
+  font-size: 15px;
+  font-weight: 200;
+  color: #808080;
+}
+
+.input-class input::-webkit-input-placeholder {
+		color: #FEFEFE;
+		opacity: 1;
+}
+
+.input-class input:focus::-webkit-input-placeholder {
+		color: #111;
+		opacity: .5;
+		transition: all 0.3s ease;
+}
+
+@media only screen and (min-width: 768px) {}
