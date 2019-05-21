@@ -62,5 +62,11 @@ Seznam mých školních projektů s bodovým hodnocením.
 -----
 
 * Zimní
-
+ + IIS - Informační systém ZOO -- 25/30
+ + IMP - ARM-FITkit3: Měření vzdálenosti ultrazvukovým senzorem -- 8/14
+ + IMS - Celulární systém -- 20/20
+ + ISA - Čtečka novinek ve formátu Atom s podporou TLS -- 20/20
+ + ITU - Aplikace pro podporu mentálních schopností seniorů -- 38/55
+ + ITT - Detekce dopravních značek v obraze a videu -- 95/100
+ 
 * Letní
