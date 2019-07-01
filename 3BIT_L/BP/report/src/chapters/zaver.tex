@@ -1,0 +1,9 @@
+Práce měla za úkol použít moderní architekturu konvoluční neuronové sítě pro detekci dopravních značek za účelem získání dobrých výsledků detekce v~kombinaci s~co možná nejkratší dobou zpracování. Dále bylo cílem vytvořit generátor syntetických datových sad a~provést porovnání modelů trénovaných na reálných a~syntetických datech a~zjistit, zda jsou syntetická data pro podobné účely vhodná.
+
+Nejlepším výsledkem získaným při trénování modelu na reálných datech bylo $\textbf{63.4}\,\%$ mAP. Použití syntetických dat přineslo podstatně lepší úspěšnost detekce $\textbf{82.3}\,\%$ mAP. Oběma modelům trvá vyhodnocení jednoho snímků v~průměru $\textbf{40.4}\,\mathrm{ms}$ na průměrně výkonném grafickém čipu Nvidia GeForce 840M. Při testování na sdíleném clusteru s~nadprůměrně výkonným grafickým čipem Nvidia GTX 1080 Ti byla výsledná doba v~průměru $\textbf{3.9}\,\mathrm{ms}$ a~na CPU Intel i5 bylo dosaženo průměrné rychlosti $\textbf{1263}\,\mathrm{ms}$.
+
+Přínosem této práce je skutečnost, že ačkoli syntetická data nejsou pro trénování konvolučních sítí lepší než reálná, lze pomocí nich dosáhnout kvalitních výsledků bez nutnosti anotace tisíce snímků. Dále bylo potvrzeno, že YOLO nedosahuje nejlepších výsledků detekce (zejména má problém s malými objekty), ale zato dosahuje velmi vysoké rychlosti zpracování snímků, což ze systému dělá zaslouženého konkurenta \emph{state of the art} metod.
+
+Zúčastnil jsem se s touto prací 5. ročníku studentské konference Excel@FIT. Práce byla oceněna odbornou komisí za \uv{inovativní práci s daty a pečlivou analýzu vedoucí ke zlepšení detektoru značek}.
+
+V~budoucnu by bylo možné rozšířit generátor datových sad o~3D analýzu pozadí a~dopravních značek. Dále doplnění dalších efektů za účelem dosažení vyšší realističnosti syntetické datové sady a~hlubší analýzu trénování konvolučních sítí na syntetická data.

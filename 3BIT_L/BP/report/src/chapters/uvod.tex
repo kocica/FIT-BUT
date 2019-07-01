@@ -1,0 +1,21 @@
+Asistenční systémy pro řidiče a~autonomní vozidla se v~posledních letech dočkaly velké pozornosti. Stojí zejména na správné interpretaci okolního prostředí, kam mj. spadá problematika detekce dopravního značení. Ta má stále prostor pro zlepšení. S~nárůstem výpočetního výkonu velmi vzrostlo použití hlubokých neuronových sítí pro různé úlohy, zejména pak pro zpracování obrazu, kde se konvoluční sítě staly standardem pro velkou část úloh. Proto je vhodné pokusit se řešit problém detekce značek pomocí této metody.
+
+%--------------------------------------------------------
+
+Nevýhodou drtivé většiny metod používajících konvoluční sítě k~detekci objektů a~zároveň dosahujících dobrých výsledků jsou vysoké nároky na výpočetní výkon (což znesnadňuje jejich použití v~přenosných či vestavěných zařízeních) a~dlouhá doba zpracování jednoho snímku -- oba zmíněné systémy však musí dokázat pracovat v~reálném čase v~kombinaci s~velmi dobrou úspěšností detekce.
+I~když se detekce značek může zdát jako jednoduchá, existuje velké množství faktorů, které tuto úlohu znesnadňují (různé světelné podmínky, částečné překrytí, malá velikost, nízká kvalita, atd.). Proto je potřeba dostatečně velká datová sada, obsahující co největší množství i~těchto negativních faktorů. Proces anotace velkého počtu snímků je ovšem velmi náročný na čas (mj. může vzniknout chybná anotace).
+Ideálním řešením by tedy byl úspěšný systém, který by dokázal pracovat v~reálném čase na zařízení s~omezeným výpočetním výkonem a~byl by schopen se naučit dostatek informací i~ze syntetických dat.
+
+%--------------------------------------------------------
+
+Za účelem dosažení zpracování v~reálném čase na běžně dostupných grafických čipech se zachováním dobré úspěšnosti byl pro práci vybrán systém Tiny YOLO třetí verze v~kombinaci s~neuronovou sítí Darknet.
+Generování datových sad pro trénování neuronových sítí je aktuálně velmi diskutovaným tématem a~lze využít více způsobů v~závislosti na typu generovaných dat. Z~důvodu, že je systém YOLO trénovaný na plných snímcích a~dopravní značky nabývají poměrně jednoduchých tvarů, byl využit způsob umisťování dopravních značek do plných snímků z~prostředí městské zástavby.
+
+%--------------------------------------------------------
+
+Cílem tohoto dokumentu je jednak podat čtenáři krátký přehled o~možnostech řešení problematiky detekce dopravního značení, dále pak popsat způsob řešení dané problematiky v~rámci této práce a~nakonec vyhodnotit dosažené výsledky.
+Struktura dokumentu je tedy následující.
+Kapitola \ref{detekceZnacek} se zabývá popisem dopravního značení, metod detekce značek používaných v~minulosti, metrik používaných k~vyhodnocení úspěšnosti detekce objektů a~nakonec porovnáním existujících řešení.
+Kapitola \ref{detekceKonv} je zaměřena na popis moderních technik detekce objektů založených na konvolučních neuronových sítích.
+V~kapitole \ref{navrhDetektoru} je popsán návrh řešení, což zahrnuje výběr metody, datových sad a~návrh generátoru syntetických dat.
+Implementací a~testováním zvolené metody se zabývá kapitola \ref{implementaceDetektoru} a~nakonec dosažené výsledky a~jejich zhodnocení lze najít v~kapitole \ref{vyhodnoceniDetektoru}.

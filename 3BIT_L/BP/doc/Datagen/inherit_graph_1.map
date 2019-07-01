@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classDatasetGenerator__t.html" title="Base class providing generating of images and its annotation. " alt="" coords="5,31,141,57"/>
+<area shape="rect" id="node2" href="$classDatasetGeneratorCropped__t.html" title="Class providing generating of images and its annotation using cropped TS&#39;s. " alt="" coords="199,5,385,32"/>
+<area shape="rect" id="node3" href="$classDatasetGeneratorTransparent__t.html" title="Class providing generating of images and its annotation using transparent TS&#39;s. " alt="" coords="189,56,395,83"/>
+</map>
