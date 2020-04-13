@@ -7,10 +7,6 @@
 	</a>
 </div>
 
-<h2 align="center">
-	Brno University of Technology<br>Faculty of Information Technology
-</h2>
-
 # Filip Kočica < xkocic01@stud.fit.vutbr.cz >
 
 
@@ -81,3 +77,5 @@ Zimní
  + ITT - Detekce dopravních značek v obraze a videu -- 95/100
  
 Letní
+
+ + BP - Excel@FIT winner, A.
