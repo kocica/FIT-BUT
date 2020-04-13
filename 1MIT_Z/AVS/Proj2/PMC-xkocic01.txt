@@ -1,0 +1,110 @@
+Architektury Výpočetních Systémů (AVS 2019)
+Projekt č. 2 (PMC)
+Login: xkocic01
+
+Úloha 1: Paralelizace původního řešení
+===============================================================================
+
+1) Kterou ze smyček (viz zadání) je vhodnější paralelizovat a co způsobuje 
+   neefektivitu paralelizaci té druhé?
+   - Výhodnější je paralelizovat první ze smyček ve funkci `marchCubes`.
+   - Neefektivitu při paralelizaci druhé smyčky způsobuje tzv. "overhead"
+     paralelizace neboli režie nad získaným výkonem. Tzn. že výpočty v druhé
+     smyčce jsou tak jednoduché, že se kvůli nim nevyplatí paralelizovat.
+
+2) Jaké plánování (rozdělení práce mezi vlákna) jste zvolili a proč? 
+   Jaký vliv má velikost "chunk" při dynamickém plánování (8, 16, 32, 64)?
+   - Zvolil jsem plánování typu "guided", protože oproti dynamickému plnánování
+     umožňuje změnu velikosti chunku v závislosti na množství zbývající práce
+     a počtu vláken a tudíž by tento typ plánování měl efektivněji využívat
+     (z pohledu rozložení zátěže) procesor a tedy být nejefektivnější.
+   - +------------------------------------------------------------------------+
+     |                       dragon_vrip_res1.pts (-g 64)                     |
+     +------------------------------------------------------------------------+
+     | Guided       :            ~168264 (ms)                                 |
+     | Dynamic (8)  :            ~168268 (ms)                                 |
+     | Dynamic (16) :            ~168281 (ms)                                 |
+     | Dynamic (32) :            ~168327 (ms)                                 |
+     | Dynamic (64) :            ~168343 (ms)                                 |
+     +------------------------------------------------------------------------+
+   - Z tabulky a dalších měření vyplývá, že na velikosti chunku v tomto případě
+     nezáleží, protože se dosahuje téměř stejných výsledků i na poměrně velkém
+     modelu draka.
+
+3) Jakým způsobem zajišťujete ukládání trojúhelníků z několika vláken současně?
+   - Pomocí kritické sekce `pragma omp critical`, do které v daný moment může
+     vstoupit pouze jedno vlákno, což sice může způsobit čekání dalších vláken,
+     ale zajistí potřebnou konzistenci dat.
+   - Dále se pro podobné účely používá pragrma `atomic write/update`, ale nelze
+     ji v tomto případě aplikovat na volání funkce (přesněji metody `push_back`).
+
+Úloha 2: Paralelní průchod stromem
+===============================================================================
+
+1) Stručně popište použití OpenMP tasků ve vašem řešení.
+   - Ve funkci `marchCubes` se provede spuštění paralelních vláken, první z daných
+     vláken zavolá rekurzivní funkci `marchCubesRec`, která vytvoří 8 tasků
+     pro každou část krychle a ukládá výsledek na vyhrazený index kontejneru.
+   - Počet tasků tak tedy exponenciálně roste (pokud nebereme v potaz "ořezávání").
+   - Protože proměné v tasku jsou defaultně privátní a naším cílem je měnit obsah
+     některých proměnných, byly deklarovány jako `shared`.
+   - Tasky jsou generovány až do nejnižsí úrovně, protože z testování níže vyplývá,
+     že je sice trochu efektivnější, ale to minimálně a tedy to nemá velký
+     vliv na výkon.
+
+2) Jakým způsobem jste realizovali sesbírání celkového počtu trojúhelníků?
+   - Pro ukládání má každé vlákno své vlastní místo v paměti (resp. položku pole),
+     což zajístí konzistenci dat bez nutnosti synchronizace či využití atomických
+     operací. Suma je obalena v pragmě `omp taskwait`, aby se počkalo na dokončení
+     všech osmi tasků.
+
+3) Jaký vliv má na vaše řešení tzv. "cut-off"? Je vhodné vytvářet nový 
+   task pro každou krychli na nejnižší úrovni?
+   - Neprohledávání zbytečných krychlí přináší znatelné zrychlení zpracování,
+     protože se provádí znatelně méně volání funkce `buildCube` a tedy se také
+     generuje podstatně méně tasků, a to za cenu výpočtu poměrně jednoduché
+     nerovnice - tzn. v případě, že by v modelu nebyl téměř zádný volný prostor
+     by sice trochu narostla doba výpočtu, ale ve většině případů bude v modelu
+     poměrně dost volného prostoru a tedy se výpočet nerovnice značně vyplatí.
+   - +------------------------------------------------------------------------+
+     |                      dragon_vrip_res1.pts (-g 128)                     |
+     +------------------------------------------------------------------------+
+     | Generování tasků v poslední úrovni            :      ~245858 (ms)      |
+     | Negenerování tasků v poslední úrovni          :      ~245932 (ms)      |
+     +------------------------------------------------------------------------+
+   - Omezení generování tasků za pomoci dovětků:
+     `firstprivate(gridSize) final(gridSize <= N)`, kde N je velikost hrany
+     od které se již nebudou generovat tasky.
+   - Z naměřené tabulky plyne, že výsledky jsou téměř shodné a to nejspíše proto,
+     že získaný výkon pomocí tasků je ztracen kvůli režii jejich vytvoření.
+
+4) Jakým způsobem zajišťujete ukládání trojúhelníků z několika vláken současně?
+   - Obdobně jako ve verzi loop, tedy kritická sekce `pragma omp critical`.
+
+Úloha 2: Grafy škálování obou řešení
+===============================================================================
+
+1) Stručně zhodnoťte efektivitu vytvořených řešení (na základě grafů škálování).
+   - Pro zvyšující se velikost mřížky je efektivnější verze se stromem, protože
+     je schopna vynechat výpočet prázdných míst (tedy bez isosurface) v modelu.
+     Naopak je ale `octree` verze zpomalena režií tasků, kdy procesor místo
+     výpočtu spravuje tasky, tudíž rozdíl není až tak markantní jak by se dalo
+     čekat.
+   - Na malých velikostech mřížky je efektivnější verze loop, protože se
+     nestráví tolik času výpočtem prázdných krychlí, zatímco verze octree
+     je zpomalena režijí tásků. S rostoucí velikostí mřížky však loop stráví
+     více a více času výpočtem prázdných prostorů, které však verze octree
+     přeskočí a tudíž i přes přidanou režii bude efektivnější.
+
+2) V jakém případě (v závislosti na počtu bodů ve vstupním souboru a velikosti 
+   mřížky) bude vaše řešení 1. úlohy neefektivní? (pokud takový případ existuje)
+   - Neefektivní bude vůči verzi octree zejména v případě velkého prázdného
+     prostoru či velmi husté mřížky, který bude loop rozgenerovávat/procházet,
+     zatímco octree nikoli.
+   - Další neefektivitu se mi nepodařilo najít.
+
+3) Je (nebo není) stromový algoritmus efektivnější z pohledu slabého škálování 
+   vzhledem ke vstupu?
+   - Ano, lze vidět že při malém počtu vláken je podstatně rychlejší než verze
+     loop, která je po celou dobu (libovolný počet vláken) víceméně konstantní
+     a verze octree se k ní postupně blíží s rostoucím počtem vláken. 
