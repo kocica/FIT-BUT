@@ -7,10 +7,6 @@
 	</a>
 </div>
 
-<h2 align="center">
-	Brno University of Technology<br>Faculty of Information Technology
-</h2>
-
 # Filip Kočica < xkocic01@stud.fit.vutbr.cz >
 
 
@@ -73,6 +69,7 @@ Letní
 -----
 
 Zimní
+
  + IIS - Informační systém ZOO -- 25/30
  + IMP - ARM-FITkit3: Měření vzdálenosti ultrazvukovým senzorem -- 8/14
  + IMS - Celulární systém -- 20/20
@@ -81,3 +78,22 @@ Zimní
  + ITT - Detekce dopravních značek v obraze a videu -- 95/100
  
 Letní
+
+ + BP - Excel@FIT winner, A.
+
+1MIT:
+-----
+
+Zimní
+
+ + AVS - Projekt č.1: Optimalizace sekvenčního kodu (vektorizace) -- 10/10
+ + AVS - Projekt č.2: Paralelizace s OpenMP -- 15/15
+ + MSP - Statistika a pravděpodobnost -- 10/10
+ + TIN - První DÚ -- 4.7/5
+ + TIN - Druhý DÚ -- 3.7/5
+ + TIN - Třetí DÚ -- 4.5/5
+ + UPA - Projekt -- 20/20
+
+Letní
+
+ + PRL - Projekt 1 - Paralelizace odd-even sort pomocí OpenMPI -- 7.5/10
