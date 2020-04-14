@@ -1,0 +1,75 @@
+-------------------------------------------------------------------------------
+-- @author Filip Kocica (xkocic01@stud.fit.vutbr.cz)
+-- @date 2/22/2020
+-- @brief FLP project - simplify-bkg
+-- @file README
+-------------------------------------------------------------------------------
+
+Program pro odstraneni zbytecnych symbolu z bezkontextove gramatiky
+(dale jen BKG) je strukturovan do sesti modulu zajistujici jednotlive
+funkcionality potrebne pro zjednoduseni BKG.
+
+-------------------------------------------------------------------------------
+
+Modul simplify-bkg: Vstupni bod programu, vola procedury z ostatnich
+                    modulu, popsanych nize a vraci 0 v pripade uspechu,
+                    ci 1 v pripade neuspechu, spolu s chybovou hlaskou
+                    vytisknutou na standardni chybovy vystup.
+
+-------------------------------------------------------------------------------
+
+Modul Types: Tento modul deklaruje zakladni typy pro zjednoduseni prace
+             s BKG (at uz strukturovane, jako jsou pravidla, gramatika, atd.,
+             tak aliasy pro terminaly a neterminaly ci jejich kombinaci).
+
+-------------------------------------------------------------------------------
+
+Modul Parsers: Obsahuje procedury pro zpracovani vstupu (kontrola
+               spravnosti a ulozeni voleb uzivatele do datove struktury)
+               a pro zpracovani BKG pomoci modulu Text.ParserCombinators.ReadP,
+               pomoci preddefinovanych funkci sepBy1, many1 a vhodnych
+               predikatu.
+
+-------------------------------------------------------------------------------
+
+Modul Printers: Slouzi pro tisk BKG na standardni vystup v pozadovanem
+                formatu (tedy prvni neterminaly oddelene carkou,
+                pote terminaly, pocatecni neterminal a mnozinu pravidel
+                kde levou a pravou stranu oddeluje "->").
+                Pozn.: Terminaly i neterminaly jsou pred vypsanim serazeny.
+
+-------------------------------------------------------------------------------
+
+ Modul Checks: Provadi kontrolu BKG, a to: Kontrola duplicity terminalu,
+               neterminalu i pravidel, velikosti pocatecnich znaku terminalu
+               a neterminalu, zda-li se skladaji leve strany pravidel pouze
+               z neterminalu a prave z terminalu, neterminalu ci pouze epsylon,
+               a nakonec pocatecni neterminal nalezi do mnoziny neterminalu.
+
+-------------------------------------------------------------------------------
+
+Modul Algorithms: Obsahuje implementace algoritmu 4.1 a 4.2 studijniho textu
+                  TIN. Oba algoritmy obsahuji pomocnou funkci pro vypocet
+                  mnoziny N_i v pripade 4.1 a V_i v pripade 4.2,
+                  ktera rekurzivne vola sama sebe.
+                  Na zacatku se rekurzivni funkce pro vypocet mnozin volaji
+                  s maximalnim moznym mnozstvim iteraci, tedy napr. podle pozn.
+                  4.3 studijniho textu je to n+1, kde n je pocet neterminalu.
+                  Az se dojde po zarazku tohoto pocitadla, coz je 1,
+                  tak se zacne pocitat mnozina. Ta se vrati v ramci gramatiky
+                  o uroven vys. Pokud jsou mnoziny shodne, nastavi se parametr
+                  "stop" na True, a dalsi vypocty uz se neprovadi, pouze se
+                  vypocetna mnozina propaguje zpet (nahoru - tzn. "vybublava").
+
+-------------------------------------------------------------------------------
+
+Zdroje:
+
+- Pri implementaci jsem cerpal zejmena z:
+    - Studijni text TIN, prednasky FLP.
+    - http://hackage.haskell.org/package/base-4.12.0.0/docs/Text-ParserCombinators-ReadP.html
+    - https://codereview.stackexchange.com/a/70463/176373
+    - https://www.youtube.com/watch?v=02_H3LjqMr8
+
+- Pouzil jsem testy pripravene mym kamaradem doplnene o nekolik vlastnich:
+    - https://gitlab.com/Vondracek/flp-simplify-bkg-tests
