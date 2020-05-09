@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Withdraw</title>
+        <!--Scripts for clientside behavior-->
+        <script src="/static/public/js/jquery-3.5.0.min.js" defer></script>
+        <script src="/static/public/js/generated/withdraw.js" defer></script>
+        <script src="/static/public/js/generated/selectAccount.js" defer></script>
+        <link rel="stylesheet" type="text/css" href="/static/styles.css" media="screen" />
+    </head>
+    <body>
+        <form id="submitHelperForm" action="/api/withdraw" method="POST">
+            <div class="FieldDescr"><b>Account:</b></div>
+            <div class="FieldInput"><input type="text" name="accountId" id="accountIdInput" list="accountList" oninput="onBankIdentifierInputChange()"/></div><br>
+            <div class="FieldDescr"><b>Amount:</b></div>
+            <div class="FieldInput"><input type="text" name="amount" id="amountInput"/></div><br>
+        </form>
+        <div id="Submit"><button class="buttonOk" onclick="onWithdrawSubmit()"><b>Withdraw</b></button></div>
+        <datalist id="accountList"></datalist>
+
+        <form action="/static/html/employee/menu.html">
+            <div id="Submit"><input type="submit" class="buttonMenu" value="Back to menu" /></div>
+        </form>
+
+        <script>
+            var cookies = document.cookie.split('; ')
+            if(cookies.some(pair => pair == 'withdrawalFailed=true'))
+            {
+                document.body.innerHTML = '<p style="color: red">Withdrawal failed. Enter positive amount lower than account balance.</p>'+document.body.innerHTML
+                document.cookie = "withdrawalFailed=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+            }
+        </script>
+    </body>
+</html>

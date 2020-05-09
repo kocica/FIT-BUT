@@ -1,0 +1,543 @@
+====================================================
+-------------dataset reid, model 1------------------
+successfuly recognized:  449
+total:  1000
+successful rate: 44.9%
+error rate [%] (character/license plate): 10.34/55.1
+Time per image: 0.011397482 
+this calculation takes 13.08843800000001
+-------------dataset reid, model 2------------------
+successfuly recognized:  945
+total:  1000
+successful rate: 94.5%
+error rate [%] (character/license plate): 1.07/5.5
+Time per image: 0.008817925 
+this calculation takes 9.730170999999999
+-------------dataset reid, model 3------------------
+successfuly recognized:  973
+total:  1000
+successful rate: 97.3%
+error rate [%] (character/license plate): 0.73/2.7
+Time per image: 0.008442446 
+this calculation takes 9.338890000000006
+-------------dataset reid, model 4------------------
+successfuly recognized:  970
+total:  1000
+successful rate: 97.0%
+error rate [%] (character/license plate): 0.78/3.0
+Time per image: 0.008450703 
+this calculation takes 9.486764999999991
+-------------dataset reid, model 5------------------
+successfuly recognized:  972
+total:  1000
+successful rate: 97.2%
+error rate [%] (character/license plate): 0.66/2.8
+Time per image: 0.008379167 
+this calculation takes 9.263052000000002
+-------------dataset reid, model 6------------------
+successfuly recognized:  981
+total:  1000
+successful rate: 98.1%
+error rate [%] (character/license plate): 0.57/1.9
+Time per image: 0.008332317 
+this calculation takes 9.24090000000001
+-------------dataset reid, model 7------------------
+successfuly recognized:  986
+total:  1000
+successful rate: 98.6%
+error rate [%] (character/license plate): 0.47/1.4
+Time per image: 0.008639221 
+this calculation takes 9.520838999999995
+-------------dataset reid, model 8------------------
+successfuly recognized:  986
+total:  1000
+successful rate: 98.6%
+error rate [%] (character/license plate): 0.39/1.4
+Time per image: 0.008519425 
+this calculation takes 9.416001999999992
+-------------dataset reid, model 9------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.39/1.2
+Time per image: 0.008484463 
+this calculation takes 9.374201
+-------------dataset reid, model 10------------------
+successfuly recognized:  983
+total:  1000
+successful rate: 98.3%
+error rate [%] (character/license plate): 0.38/1.7
+Time per image: 0.008516436 
+this calculation takes 9.402559999999994
+-------------dataset reid, model 11------------------
+successfuly recognized:  986
+total:  1000
+successful rate: 98.6%
+error rate [%] (character/license plate): 0.49/1.4
+Time per image: 0.008725186 
+this calculation takes 9.616572999999988
+-------------dataset reid, model 12------------------
+successfuly recognized:  986
+total:  1000
+successful rate: 98.6%
+error rate [%] (character/license plate): 0.43/1.4
+Time per image: 0.008294217 
+this calculation takes 9.19066699999999
+-------------dataset reid, model 13------------------
+successfuly recognized:  982
+total:  1000
+successful rate: 98.2%
+error rate [%] (character/license plate): 0.45/1.8
+Time per image: 0.008395022 
+this calculation takes 9.295736000000005
+-------------dataset reid, model 14------------------
+successfuly recognized:  981
+total:  1000
+successful rate: 98.1%
+error rate [%] (character/license plate): 0.51/1.9
+Time per image: 0.008719411 
+this calculation takes 9.811069000000003
+-------------dataset reid, model 15------------------
+successfuly recognized:  986
+total:  1000
+successful rate: 98.6%
+error rate [%] (character/license plate): 0.33/1.4
+Time per image: 0.008551222 
+this calculation takes 9.442990999999978
+-------------dataset reid, model 16------------------
+successfuly recognized:  986
+total:  1000
+successful rate: 98.6%
+error rate [%] (character/license plate): 0.45/1.4
+Time per image: 0.008678412 
+this calculation takes 9.566883000000018
+-------------dataset reid, model 17------------------
+successfuly recognized:  987
+total:  1000
+successful rate: 98.7%
+error rate [%] (character/license plate): 0.47/1.3
+Time per image: 0.008592838 
+this calculation takes 9.491167999999988
+-------------dataset reid, model 18------------------
+successfuly recognized:  981
+total:  1000
+successful rate: 98.1%
+error rate [%] (character/license plate): 0.51/1.9
+Time per image: 0.008567028 
+this calculation takes 9.469667999999984
+-------------dataset reid, model 19------------------
+successfuly recognized:  987
+total:  1000
+successful rate: 98.7%
+error rate [%] (character/license plate): 0.47/1.3
+Time per image: 0.00870893 
+this calculation takes 9.617773
+-------------dataset reid, model 20------------------
+successfuly recognized:  985
+total:  1000
+successful rate: 98.5%
+error rate [%] (character/license plate): 0.47/1.5
+Time per image: 0.008671968 
+this calculation takes 9.81545699999998
+-------------dataset reid, model 21------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.46/1.2
+Time per image: 0.008469904 
+this calculation takes 9.35213299999998
+-------------dataset reid, model 22------------------
+successfuly recognized:  984
+total:  1000
+successful rate: 98.4%
+error rate [%] (character/license plate): 0.38/1.6
+Time per image: 0.008531609 
+this calculation takes 9.416440000000023
+-------------dataset reid, model 23------------------
+successfuly recognized:  987
+total:  1000
+successful rate: 98.7%
+error rate [%] (character/license plate): 0.35/1.3
+Time per image: 0.00821964 
+this calculation takes 9.105682000000002
+-------------dataset reid, model 24------------------
+successfuly recognized:  984
+total:  1000
+successful rate: 98.4%
+error rate [%] (character/license plate): 0.46/1.6
+Time per image: 0.00841077 
+this calculation takes 9.323247000000038
+-------------dataset reid, model 25------------------
+successfuly recognized:  974
+total:  1000
+successful rate: 97.4%
+error rate [%] (character/license plate): 0.46/2.6
+Time per image: 0.008566177 
+this calculation takes 9.461287000000027
+-------------dataset reid, model 26------------------
+successfuly recognized:  990
+total:  1000
+successful rate: 99.0%
+error rate [%] (character/license plate): 0.4/1.0
+Time per image: 0.008677298 
+this calculation takes 9.548334000000011
+-------------dataset reid, model 27------------------
+successfuly recognized:  986
+total:  1000
+successful rate: 98.6%
+error rate [%] (character/license plate): 0.38/1.4
+Time per image: 0.008794582 
+this calculation takes 9.974785999999995
+-------------dataset reid, model 28------------------
+successfuly recognized:  991
+total:  1000
+successful rate: 99.1%
+error rate [%] (character/license plate): 0.39/0.9
+Time per image: 0.008648035 
+this calculation takes 9.550750999999991
+-------------dataset reid, model 29------------------
+successfuly recognized:  987
+total:  1000
+successful rate: 98.7%
+error rate [%] (character/license plate): 0.36/1.3
+Time per image: 0.008574936 
+this calculation takes 9.467758000000003
+-------------dataset reid, model 30------------------
+successfuly recognized:  986
+total:  1000
+successful rate: 98.6%
+error rate [%] (character/license plate): 0.41/1.4
+Time per image: 0.008793186 
+this calculation takes 9.701914999999985
+-------------dataset reid, model 31------------------
+successfuly recognized:  986
+total:  1000
+successful rate: 98.6%
+error rate [%] (character/license plate): 0.47/1.4
+Time per image: 0.008762395 
+this calculation takes 9.659177
+-------------dataset reid, model 32------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.41/1.2
+Time per image: 0.009544355 
+this calculation takes 10.453136000000029
+-------------dataset reid, model 33------------------
+successfuly recognized:  990
+total:  1000
+successful rate: 99.0%
+error rate [%] (character/license plate): 0.39/1.0
+Time per image: 0.009754129 
+this calculation takes 10.685697000000005
+-------------dataset reid, model 34------------------
+successfuly recognized:  983
+total:  1000
+successful rate: 98.3%
+error rate [%] (character/license plate): 0.51/1.7
+Time per image: 0.008434331 
+this calculation takes 9.328328999999997
+-------------dataset reid, model 35------------------
+successfuly recognized:  989
+total:  1000
+successful rate: 98.9%
+error rate [%] (character/license plate): 0.33/1.1
+Time per image: 0.008710618 
+this calculation takes 9.937882000000002
+-------------dataset reid, model 36------------------
+successfuly recognized:  986
+total:  1000
+successful rate: 98.6%
+error rate [%] (character/license plate): 0.43/1.4
+Time per image: 0.008581632 
+this calculation takes 9.498446999999999
+-------------dataset reid, model 37------------------
+successfuly recognized:  987
+total:  1000
+successful rate: 98.7%
+error rate [%] (character/license plate): 0.46/1.3
+Time per image: 0.008891499 
+this calculation takes 9.80586999999997
+-------------dataset reid, model 38------------------
+successfuly recognized:  986
+total:  1000
+successful rate: 98.6%
+error rate [%] (character/license plate): 0.38/1.4
+Time per image: 0.008779709 
+this calculation takes 9.663268999999957
+-------------dataset reid, model 39------------------
+successfuly recognized:  987
+total:  1000
+successful rate: 98.7%
+error rate [%] (character/license plate): 0.36/1.3
+Time per image: 0.008544561 
+this calculation takes 9.43948499999999
+-------------dataset reid, model 40------------------
+successfuly recognized:  990
+total:  1000
+successful rate: 99.0%
+error rate [%] (character/license plate): 0.38/1.0
+Time per image: 0.00888058 
+this calculation takes 9.776189999999986
+-------------dataset reid, model 41------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.44/1.2
+Time per image: 0.008564432 
+this calculation takes 9.464279000000033
+-------------dataset reid, model 42------------------
+successfuly recognized:  984
+total:  1000
+successful rate: 98.4%
+error rate [%] (character/license plate): 0.4/1.6
+Time per image: 0.008632462 
+this calculation takes 9.512455999999986
+-------------dataset reid, model 43------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.4/1.2
+Time per image: 0.008950961 
+this calculation takes 9.841069000000005
+-------------dataset reid, model 44------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.49/1.2
+Time per image: 0.008829324 
+this calculation takes 10.09125499999999
+-------------dataset reid, model 45------------------
+successfuly recognized:  987
+total:  1000
+successful rate: 98.7%
+error rate [%] (character/license plate): 0.3/1.3
+Time per image: 0.008713013 
+this calculation takes 9.619866000000002
+-------------dataset reid, model 46------------------
+successfuly recognized:  987
+total:  1000
+successful rate: 98.7%
+error rate [%] (character/license plate): 0.35/1.3
+Time per image: 0.009055384 
+this calculation takes 9.958292000000029
+-------------dataset reid, model 47------------------
+successfuly recognized:  989
+total:  1000
+successful rate: 98.9%
+error rate [%] (character/license plate): 0.38/1.1
+Time per image: 0.008769005 
+this calculation takes 9.665288000000032
+-------------dataset reid, model 48------------------
+successfuly recognized:  989
+total:  1000
+successful rate: 98.9%
+error rate [%] (character/license plate): 0.36/1.1
+Time per image: 0.008765031 
+this calculation takes 9.683025999999927
+-------------dataset reid, model 49------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.4/1.2
+Time per image: 0.008548602 
+this calculation takes 9.456225000000018
+-------------dataset reid, model 50------------------
+successfuly recognized:  989
+total:  1000
+successful rate: 98.9%
+error rate [%] (character/license plate): 0.33/1.1
+Time per image: 0.00884089 
+this calculation takes 9.730196999999976
+-------------dataset reid, model 51------------------
+successfuly recognized:  986
+total:  1000
+successful rate: 98.6%
+error rate [%] (character/license plate): 0.47/1.4
+Time per image: 0.008677298 
+this calculation takes 9.58137099999999
+-------------dataset reid, model 52------------------
+successfuly recognized:  991
+total:  1000
+successful rate: 99.1%
+error rate [%] (character/license plate): 0.3/0.9
+Time per image: 0.008461076 
+this calculation takes 9.368368000000032
+-------------dataset reid, model 53------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.45/1.2
+Time per image: 0.008722971 
+this calculation takes 9.617124999999987
+-------------dataset reid, model 54------------------
+successfuly recognized:  990
+total:  1000
+successful rate: 99.0%
+error rate [%] (character/license plate): 0.36/1.0
+Time per image: 0.008691557 
+this calculation takes 10.012630999999942
+-------------dataset reid, model 55------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.36/1.2
+Time per image: 0.008814567 
+this calculation takes 9.704180000000065
+-------------dataset reid, model 56------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.38/1.2
+Time per image: 0.008614191 
+this calculation takes 9.517885000000092
+-------------dataset reid, model 57------------------
+successfuly recognized:  992
+total:  1000
+successful rate: 99.2%
+error rate [%] (character/license plate): 0.33/0.8
+Time per image: 0.008998044 
+this calculation takes 9.904843000000028
+-------------dataset reid, model 58------------------
+successfuly recognized:  992
+total:  1000
+successful rate: 99.2%
+error rate [%] (character/license plate): 0.39/0.8
+Time per image: 0.00860227 
+this calculation takes 9.517333000000008
+-------------dataset reid, model 59------------------
+successfuly recognized:  990
+total:  1000
+successful rate: 99.0%
+error rate [%] (character/license plate): 0.43/1.0
+Time per image: 0.008729953 
+this calculation takes 9.625537000000008
+-------------dataset reid, model 60------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.35/1.2
+Time per image: 0.008515108 
+this calculation takes 9.408136000000013
+-------------dataset reid, model 61------------------
+successfuly recognized:  990
+total:  1000
+successful rate: 99.0%
+error rate [%] (character/license plate): 0.33/1.0
+Time per image: 0.008480865 
+this calculation takes 9.384573000000046
+-------------dataset reid, model 62------------------
+successfuly recognized:  987
+total:  1000
+successful rate: 98.7%
+error rate [%] (character/license plate): 0.43/1.3
+Time per image: 0.008420179 
+this calculation takes 9.340348999999946
+-------------dataset reid, model 63------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.34/1.2
+Time per image: 0.009258847 
+this calculation takes 10.156155000000012
+-------------dataset reid, model 64------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.38/1.2
+Time per image: 0.009454579 
+this calculation takes 10.36892899999998
+-------------dataset reid, model 65------------------
+successfuly recognized:  987
+total:  1000
+successful rate: 98.7%
+error rate [%] (character/license plate): 0.33/1.3
+Time per image: 0.009066924 
+this calculation takes 9.979947000000038
+-------------dataset reid, model 66------------------
+successfuly recognized:  989
+total:  1000
+successful rate: 98.9%
+error rate [%] (character/license plate): 0.35/1.1
+Time per image: 0.008932193 
+this calculation takes 9.833174999999983
+-------------dataset reid, model 67------------------
+successfuly recognized:  989
+total:  1000
+successful rate: 98.9%
+error rate [%] (character/license plate): 0.33/1.1
+Time per image: 0.008988653 
+this calculation takes 9.90831199999991
+-------------dataset reid, model 68------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.44/1.2
+Time per image: 0.009017963 
+this calculation takes 9.908460999999988
+-------------dataset reid, model 69------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.41/1.2
+Time per image: 0.00881316 
+this calculation takes 9.704295000000002
+-------------dataset reid, model 70------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.3/1.2
+Time per image: 0.008772938 
+this calculation takes 9.688675999999987
+-------------dataset reid, model 71------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.39/1.2
+Time per image: 0.008533382 
+this calculation takes 9.43676999999991
+-------------dataset reid, model 72------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.35/1.2
+Time per image: 0.008726315 
+this calculation takes 9.65383600000007
+-------------dataset reid, model 73------------------
+successfuly recognized:  989
+total:  1000
+successful rate: 98.9%
+error rate [%] (character/license plate): 0.43/1.1
+Time per image: 0.008950244 
+this calculation takes 9.847897999999986
+-------------dataset reid, model 74------------------
+successfuly recognized:  989
+total:  1000
+successful rate: 98.9%
+error rate [%] (character/license plate): 0.43/1.1
+Time per image: 0.008669651 
+this calculation takes 9.579896000000076
+-------------dataset reid, model 75------------------
+successfuly recognized:  989
+total:  1000
+successful rate: 98.9%
+error rate [%] (character/license plate): 0.36/1.1
+Time per image: 0.008407891 
+this calculation takes 9.299938999999995
+-------------dataset reid, model 76------------------
+successfuly recognized:  988
+total:  1000
+successful rate: 98.8%
+error rate [%] (character/license plate): 0.31/1.2
+Time per image: 0.008958024 
+this calculation takes 9.82655699999998
+
+****************************************************
+best model index: 57
+-------------dataset reid, model 57------------------
+successfuly recognized:  992
+total:  1000
+successful rate: 99.2%
+error rate [%] (character/license plate): 0.33/0.8
+Time per image: 0.008674703 
+****************************************************

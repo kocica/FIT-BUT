@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create new client</title>
+        <!--Scripts for clientside behavior-->
+        <script src="/static/public/js/jquery-3.5.0.min.js" defer></script>
+        <script src="/static/public/js/generated/createClient.js" defer></script>
+        <link rel="stylesheet" type="text/css" href="/static/styles.css" media="screen" />
+    </head>
+    <body>
+        <div class="FieldDescr"><b>Client name:</b></div>
+        <div class="FieldInput"><input type="text" name="clientName" id="clientNameInput"/></div>
+        <span id="errorMsg" style="color: red"></span><br>
+        <div class="FieldDescr"><b>Client birthday:</b></div>
+        <div class="FieldInput"><input type="date" name="clientBday" id="clientBdayInput"/></div><br>
+        
+        <div id="Submit"><button class="buttonOk" onclick="onCreateClientSubmit()"><b>Create</b></button></div>
+
+        <form action="/static/html/employee/clientSelection.html">
+            <div id="Submit"><input class="buttonMenu" type="submit" value="Go Back" /></div>
+        </form>
+        
+         <script>
+			var cookies = document.cookie.split('; ')
+			if(cookies.some(pair => pair == 'cannotCreate=true'))
+			{
+				document.body.innerHTML = '<p style="color: red">Client cannot be created.</p>'+document.body.innerHTML
+				document.cookie = "cannotCreate=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+			}
+			else if(cookies.some(pair => pair == 'clientCreated=true'))
+			{
+				document.body.innerHTML = '<p style="color: green">Client succesfully added to the system.</p>'+document.body.innerHTML
+				document.cookie = "clientCreated=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+			}
+		</script>
+    </body>
+</html>

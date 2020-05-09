@@ -1,0 +1,4 @@
+interface RemoveAuthorizedPersonRequestData
+{
+    clientId: string
+}

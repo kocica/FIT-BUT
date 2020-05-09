@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Addition of new employee</title>
+		<!--Scripts for clientside behavior-->
+		<script src="/static/public/js/jquery-3.5.0.min.js" defer></script>
+		<script src="/static/public/js/generated/addEmployee.js" defer></script>
+		<link rel="stylesheet" type="text/css" href="/static/styles.css" media="screen" />
+	</head>
+	<body>
+		<div class="FieldDescr"><b>Employee login:</b></div>
+        <div class="FieldInput"><input type="text" id="employeeIdInput"/></div><br>
+        <span id="errorMsglogin" style="color: red"></span><br>
+        <div class="FieldDescr"><b>Employee password:</b></div>
+        <div class="FieldInput"><input type="password" id="employeePswInput"/></div><br>
+        <span id="errorMsg1" style="color: red"></span><br>
+        <div class="FieldDescr"><b>Re-enter employee password:</b></div>
+		<div class="FieldInput"><input type="password" id="employeePswInputRe"/></div>
+		<span id="errorMsg" style="color: red"></span><br>
+        <div class="FieldDescr"><b>Employee name:</b></div>
+        <div class="FieldInput"><input type="text" id="employeeNameInput"/></div><br>
+        <span id="errorMsgname" style="color: red"></span><br>
+        <div class="FieldDescr"><b>Employee birthday:</b></div>
+        <div class="FieldInput"><input type="date" id="employeeBdayInput"/></div><br>
+        <span id="errorMsgdate" style="color: red"></span><br>
+
+        <div id="Submit"><button class="buttonOk" onclick="createNewEmployee()"><b>Create</b></button></div>
+        <form action="/static/html/admin/index.html">
+            <div id="Submit"><input type="submit" class="buttonMenu" value="Back to menu" /></div>
+        </form>
+
+        <script>
+			var cookies = document.cookie.split('; ')
+			if(cookies.some(pair => pair == 'employeeExists=true'))
+			{
+				document.body.innerHTML = '<p style="color: red">Employee with given login already exists.</p>'+document.body.innerHTML
+				document.cookie = "employeeExists=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+			}
+			else if(cookies.some(pair => pair == 'employeeAdded=true'))
+			{
+				document.body.innerHTML = '<p style="color: green">Employee succesfully added to the system.</p>'+document.body.innerHTML
+				document.cookie = "employeeAdded=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+			}
+			var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+            if(dd<10){
+                    dd='0'+dd
+                } 
+                if(mm<10){
+                    mm='0'+mm
+                } 
+
+            today = yyyy+'-'+mm+'-'+dd;
+            document.getElementById("employeeBdayInput").setAttribute("max", today);
+		</script>
+	</body>
+</html>

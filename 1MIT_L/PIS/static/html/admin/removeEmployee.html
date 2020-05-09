@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Removal of existing employee</title>
+		<!--Scripts for clientside behavior-->
+		<script src="/static/public/js/jquery-3.5.0.min.js" defer></script>
+		<script src="/static/public/js/generated/removeEmployee.js" defer></script>
+		<script src="/static/public/js/generated/showEmployee.js" defer></script>
+		<link rel="stylesheet" type="text/css" href="/static/styles.css" media="screen" />
+	</head>
+	<body onload='showClientInfo2();'>
+
+		<table id="employeeTable">
+			<tr>
+				<th>Login</th>
+				<th>Account status</th>
+				<th>Operation</th>
+			</tr>
+		</table>
+		<form action="/static/html/admin/index.html">
+            <div id="Submit"><input type="submit" class="buttonMenu" value="Back to menu" /></div>
+		</form>
+		
+		<script>
+			var cookies = document.cookie.split('; ')
+			if(cookies.some(pair => pair == 'employeeDoesntExist=true'))
+			{
+				document.body.innerHTML = '<p style="color: red">Employee with given login does not exist.</p>'+document.body.innerHTML
+				document.cookie = "employeeDoesntExist=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+			}
+			else if(cookies.some(pair => pair == 'employeeRemoved=true'))
+			{
+				document.body.innerHTML = '<p style="color: green">Employee succesfully removed from the system.</p>'+document.body.innerHTML
+				document.cookie = "employeeRemoved=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+			}
+		</script>
+	</body>
+</html>

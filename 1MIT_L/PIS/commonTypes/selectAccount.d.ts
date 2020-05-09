@@ -1,0 +1,4 @@
+interface SelectAccountRequestData
+{
+	accountId: string
+}

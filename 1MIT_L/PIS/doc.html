@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-2"/>
+    <title>Projekt PIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
+     podle použitého editoru -->
+
+<!-- Nahraďte prosím názvem tématu -->
+<h1>Banka</h1>
+
+<!-- Editujte jména a maily autorů a jejich činnost -->
+<dl>
+	<dt>Autoři a rozdelení</dt>
+	<br>
+	<dd><b>33%</b> - Filip Kočica
+	    <a href="mailto:xkocic01@stud.fit.vutbr.cz">xkocic01@stud.fit.vutbr.cz</a> -
+		backend, frontend
+	</dd>
+	<dd><b>16%</b> - Tomáš Sadílek
+	    <a href="mailto:xsadil06@stud.fit.vutbr.cz">xsadil06@stud.fit.vutbr.cz</a> - 
+		testování, opravy a doplnění
+	</dd>
+	<dd><b>16%</b> - Ivana Stančíková
+	    <a href="mailto:xstanc03@stud.fit.vutbr.cz">xstanc03@stud.fit.vutbr.cz</a> - 
+		testování, opravy a doplnění
+	</dd>
+	<dd><b>33%</b> - Tomáš Ženčák
+	    <a href="mailto:xzenca00@stud.fit.vutbr.cz">xzenca00@stud.fit.vutbr.cz</a> - 
+		business logika
+	</dd>
+</dl>
+
+<!-- uživatelské účty -->
+<h2>Uživatelé systému pro testování</h2>
+<table>
+<tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>admin</td><td>adminPass</td><td>Administrátor</td></tr>
+<tr><td>emp1</td><td>emp1Pass</td><td>Zaměstnanec</td></tr>
+<tr><td>Josef</td><td>-</td><td>Zákazník</td></tr>
+</table>
+
+<h2>Postup instalace</h2>
+<p>Nainstalujte nvm podle instrukcí na: <a href="https://github.com/nvm-sh/nvm">github.com/nvm-sh/nvm</a> </p>
+
+<p>Potom:</p>
+
+<code>
+nvm install --lts <br>
+node --version #should be 'v12.16.1' <br>
+sudo su <br>
+apt install mysql-server <br>
+service mysql start <br>
+mysql <br> <br>
+
+CREATE USER 'pis'@localhost IDENTIFIED BY 'pispass'; <br>
+CREATE DATABASE pisproj; <br>
+GRANT ALL PRIVILEGES ON pisproj.* TO 'pis'@localhost; <br>
+exit <br> <br>
+
+exit
+</code>
+
+<p>Spouštět jako normální uživatel:</p>
+
+<code>
+tsc -p server <br>
+tsc -p client <br>
+node app/server/index.js <br>
+</code>
+
+<!-- vyžadované knihovny třetích stran i s verzemi, které byly použity pro testování -->
+<h2>Vyžadované knihovny</h2>
+
+</body>
+</html>

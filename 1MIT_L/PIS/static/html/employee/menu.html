@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Employee menu</title>
+        <script src="/static/public/js/jquery-3.5.0.min.js" defer></script>
+        <script src="/static/public/js/generated/getCurrentClient.js" defer></script>
+        <link rel="stylesheet" type="text/css" href="/static/styles.css" media="screen" />
+    </head>
+    <body onload='getCurrentClient();'>
+        <p><h1>Employee menu</h1></p>
+        <p><b>Current day/time is:</b> <output type="text" id="currentTime"></output></p>
+        <p><b>Current client is:</b> <output type="text" id="currentClient"></output></p>
+        <br><br>
+
+        <form action="/static/html/employee/showClient.html">
+            <input type="submit" class="buttonBlue" value="Show client" />
+        </form><br>
+
+        <form action="/static/html/employee/clientSelection.html">
+            <input type="submit" class="buttonBlue" value="Log-in another client" />
+        </form><br>
+
+        <br><br><br>
+
+        <form action="/static/html/employee/accountSelection.html">
+            <input type="submit" class="buttonBlue" value="Show bank account" />
+        </form><br>
+
+        <form action="/static/html/employee/createAccount.html">
+            <input type="submit" class="buttonBlue" value="Create new bank account" />
+        </form><br>
+
+        <br><br><br>
+
+        <form action="/static/html/employee/deposit.html">
+            <input type="submit" class="buttonBlue" value="Deposit" />
+        </form><br>
+
+        <form action="/static/html/employee/withdraw.html">
+            <input type="submit" class="buttonBlue" value="Withdraw" />
+        </form><br>
+
+        <form action="/static/html/employee/transfer.html">
+            <input type="submit" class="buttonBlue" value="Transfer" />
+        </form>
+
+        <br><br><br>
+
+        <form action="/api/logout" method="POST">
+            <input type="submit" class="buttonWarning" value="Logout" />
+        </form>
+    </body>
+</html>

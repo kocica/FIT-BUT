@@ -1,0 +1,4 @@
+interface AddAuthorizedPersonRequestData
+{
+    clientId: string
+}

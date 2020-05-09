@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Create new bank account</title>
+		<!--Scripts for clientside behavior-->
+		<link rel="stylesheet" type="text/css" href="/static/styles.css" media="screen" />
+		<script src="/static/public/js/jquery-3.5.0.min.js" defer></script>
+		<script src="/static/public/js/generated/commonFunctions.js" defer></script>
+	</head>
+	<body>
+		<div class="errorMsg"></div>
+		<div class="FieldDescr"><b>You're about to create a new account for the currently logged in client. Continue?</b></div>
+		<br>
+		<form action="/api/createAccount" method="POST">
+			<input type="submit" value="Yes" class="buttonOk"/>
+		</form>
+		<form action="/static/html/employee/menu.html">
+			<input type="submit" class="buttonWarning" value="No"/>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,24 @@
+<html>
+<head>
+	<title>Admin menu</title>
+	<link rel="stylesheet" type="text/css" href="/static/styles.css" media="screen" />
+</head>
+<body>
+	<p><h1>Admin menu</h1></p>
+	<br>
+
+	<form action="/static/html/admin/addEmployee.html">
+		<input type="submit" class="buttonBlue" value="Add employee" />
+	</form>
+
+	<form action="/static/html/admin/removeEmployee.html">
+		<input type="submit" class="buttonBlue" value="Remove employee" />
+	</form>
+
+	<br>
+
+	<form action="/api/logout" method="POST">
+		<input type="submit" class="buttonWarning" value="Logout" />
+	</form>
+</body>
+</html>

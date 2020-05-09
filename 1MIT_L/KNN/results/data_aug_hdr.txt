@@ -1,0 +1,571 @@
+====================================================
+-------------dataset hdr, model 1------------------
+successfuly recognized:  0
+total:  646
+successful rate: 0.0%
+error rate [%] (character/license plate): 71.09/100.0
+Time per image: 0.0693625588 
+this calculation takes 45.81750999999986
+-------------dataset hdr, model 2------------------
+successfuly recognized:  0
+total:  646
+successful rate: 0.0%
+error rate [%] (character/license plate): 70.07/100.0
+Time per image: 0.0687133204 
+this calculation takes 45.37986600000022
+-------------dataset hdr, model 3------------------
+successfuly recognized:  9
+total:  646
+successful rate: 1.39%
+error rate [%] (character/license plate): 40.33/98.61
+Time per image: 0.0688261378 
+this calculation takes 45.448179999999866
+-------------dataset hdr, model 4------------------
+successfuly recognized:  344
+total:  646
+successful rate: 53.25%
+error rate [%] (character/license plate): 11.9/46.75
+Time per image: 0.0788685248 
+this calculation takes 51.948249999999916
+-------------dataset hdr, model 5------------------
+successfuly recognized:  412
+total:  646
+successful rate: 63.78%
+error rate [%] (character/license plate): 8.65/36.22
+Time per image: 0.0701460526 
+this calculation takes 47.84651099999974
+-------------dataset hdr, model 6------------------
+successfuly recognized:  416
+total:  646
+successful rate: 64.4%
+error rate [%] (character/license plate): 8.42/35.6
+Time per image: 0.0680060867 
+this calculation takes 44.921404000000166
+-------------dataset hdr, model 7------------------
+successfuly recognized:  481
+total:  646
+successful rate: 74.46%
+error rate [%] (character/license plate): 6.58/25.54
+Time per image: 0.0673883344 
+this calculation takes 44.51564899999994
+-------------dataset hdr, model 8------------------
+successfuly recognized:  404
+total:  646
+successful rate: 62.54%
+error rate [%] (character/license plate): 9.19/37.46
+Time per image: 0.0671915929 
+this calculation takes 44.36081899999999
+-------------dataset hdr, model 9------------------
+successfuly recognized:  491
+total:  646
+successful rate: 76.01%
+error rate [%] (character/license plate): 6.5/23.99
+Time per image: 0.0676564087 
+this calculation takes 44.66345700000011
+-------------dataset hdr, model 10------------------
+successfuly recognized:  517
+total:  646
+successful rate: 80.03%
+error rate [%] (character/license plate): 5.19/19.97
+Time per image: 0.0674923963 
+this calculation takes 45.07341499999984
+-------------dataset hdr, model 11------------------
+successfuly recognized:  499
+total:  646
+successful rate: 77.24%
+error rate [%] (character/license plate): 5.46/22.76
+Time per image: 0.0675991254 
+this calculation takes 44.6415649999999
+-------------dataset hdr, model 12------------------
+successfuly recognized:  492
+total:  646
+successful rate: 76.16%
+error rate [%] (character/license plate): 5.53/23.84
+Time per image: 0.0678013019 
+this calculation takes 44.76878399999987
+-------------dataset hdr, model 13------------------
+successfuly recognized:  530
+total:  646
+successful rate: 82.04%
+error rate [%] (character/license plate): 5.42/17.96
+Time per image: 0.0682245944 
+this calculation takes 45.0470949999999
+-------------dataset hdr, model 14------------------
+successfuly recognized:  468
+total:  646
+successful rate: 72.45%
+error rate [%] (character/license plate): 7.02/27.55
+Time per image: 0.067750065 
+this calculation takes 44.73236300000008
+-------------dataset hdr, model 15------------------
+successfuly recognized:  421
+total:  646
+successful rate: 65.17%
+error rate [%] (character/license plate): 10.41/34.83
+Time per image: 0.0675273653 
+this calculation takes 44.59786600000007
+-------------dataset hdr, model 16------------------
+successfuly recognized:  515
+total:  646
+successful rate: 79.72%
+error rate [%] (character/license plate): 5.24/20.28
+Time per image: 0.067003661 
+this calculation takes 44.252387
+-------------dataset hdr, model 17------------------
+successfuly recognized:  534
+total:  646
+successful rate: 82.66%
+error rate [%] (character/license plate): 4.49/17.34
+Time per image: 0.0667764969 
+this calculation takes 44.111762
+-------------dataset hdr, model 18------------------
+successfuly recognized:  470
+total:  646
+successful rate: 72.76%
+error rate [%] (character/license plate): 7.66/27.24
+Time per image: 0.067535161 
+this calculation takes 44.614689
+-------------dataset hdr, model 19------------------
+successfuly recognized:  539
+total:  646
+successful rate: 83.44%
+error rate [%] (character/license plate): 4.66/16.56
+Time per image: 0.0672692307 
+this calculation takes 44.465732000000116
+-------------dataset hdr, model 20------------------
+successfuly recognized:  507
+total:  646
+successful rate: 78.48%
+error rate [%] (character/license plate): 5.79/21.52
+Time per image: 0.0674021625 
+this calculation takes 44.527192000000014
+-------------dataset hdr, model 21------------------
+successfuly recognized:  462
+total:  646
+successful rate: 71.52%
+error rate [%] (character/license plate): 7.6/28.48
+Time per image: 0.0664608142 
+this calculation takes 43.90247099999988
+-------------dataset hdr, model 22------------------
+successfuly recognized:  532
+total:  646
+successful rate: 82.35%
+error rate [%] (character/license plate): 4.62/17.65
+Time per image: 0.0679122957 
+this calculation takes 45.40249300000005
+-------------dataset hdr, model 23------------------
+successfuly recognized:  524
+total:  646
+successful rate: 81.11%
+error rate [%] (character/license plate): 4.57/18.89
+Time per image: 0.0687055944 
+this calculation takes 45.38979599999993
+-------------dataset hdr, model 24------------------
+successfuly recognized:  491
+total:  646
+successful rate: 76.01%
+error rate [%] (character/license plate): 6.13/23.99
+Time per image: 0.0674638344 
+this calculation takes 44.54644099999996
+-------------dataset hdr, model 25------------------
+successfuly recognized:  477
+total:  646
+successful rate: 73.84%
+error rate [%] (character/license plate): 6.85/26.16
+Time per image: 0.0678767461 
+this calculation takes 44.885147000000416
+-------------dataset hdr, model 26------------------
+successfuly recognized:  486
+total:  646
+successful rate: 75.23%
+error rate [%] (character/license plate): 6.66/24.77
+Time per image: 0.0673796006 
+this calculation takes 44.61349100000007
+-------------dataset hdr, model 27------------------
+successfuly recognized:  514
+total:  646
+successful rate: 79.57%
+error rate [%] (character/license plate): 5.34/20.43
+Time per image: 0.0673915387 
+this calculation takes 44.60477600000013
+-------------dataset hdr, model 28------------------
+successfuly recognized:  540
+total:  646
+successful rate: 83.59%
+error rate [%] (character/license plate): 4.51/16.41
+Time per image: 0.0675561223 
+this calculation takes 44.68255399999998
+-------------dataset hdr, model 29------------------
+successfuly recognized:  511
+total:  646
+successful rate: 79.1%
+error rate [%] (character/license plate): 5.75/20.9
+Time per image: 0.0680156656 
+this calculation takes 45.00610299999971
+-------------dataset hdr, model 30------------------
+successfuly recognized:  498
+total:  646
+successful rate: 77.09%
+error rate [%] (character/license plate): 5.61/22.91
+Time per image: 0.0671177771 
+this calculation takes 44.389528000000155
+-------------dataset hdr, model 31------------------
+successfuly recognized:  520
+total:  646
+successful rate: 80.5%
+error rate [%] (character/license plate): 4.9/19.5
+Time per image: 0.0678582616 
+this calculation takes 44.89568099999997
+-------------dataset hdr, model 32------------------
+successfuly recognized:  531
+total:  646
+successful rate: 82.2%
+error rate [%] (character/license plate): 4.55/17.8
+Time per image: 0.0675472043 
+this calculation takes 44.69693199999983
+-------------dataset hdr, model 33------------------
+successfuly recognized:  419
+total:  646
+successful rate: 64.86%
+error rate [%] (character/license plate): 11.4/35.14
+Time per image: 0.0773243762 
+this calculation takes 51.04730299999983
+-------------dataset hdr, model 34------------------
+successfuly recognized:  513
+total:  646
+successful rate: 79.41%
+error rate [%] (character/license plate): 5.21/20.59
+Time per image: 0.0702848947 
+this calculation takes 47.98669000000018
+-------------dataset hdr, model 35------------------
+successfuly recognized:  530
+total:  646
+successful rate: 82.04%
+error rate [%] (character/license plate): 4.93/17.96
+Time per image: 0.0683027926 
+this calculation takes 45.30730799999992
+-------------dataset hdr, model 36------------------
+successfuly recognized:  548
+total:  646
+successful rate: 84.83%
+error rate [%] (character/license plate): 4.39/15.17
+Time per image: 0.0680732399 
+this calculation takes 46.02536400000008
+-------------dataset hdr, model 37------------------
+successfuly recognized:  505
+total:  646
+successful rate: 78.17%
+error rate [%] (character/license plate): 5.59/21.83
+Time per image: 0.0676382229 
+this calculation takes 44.80111599999964
+-------------dataset hdr, model 38------------------
+successfuly recognized:  537
+total:  646
+successful rate: 83.13%
+error rate [%] (character/license plate): 4.64/16.87
+Time per image: 0.0675650542 
+this calculation takes 44.71902399999999
+-------------dataset hdr, model 39------------------
+successfuly recognized:  544
+total:  646
+successful rate: 84.21%
+error rate [%] (character/license plate): 4.49/15.79
+Time per image: 0.0678259551 
+this calculation takes 44.931526000000304
+-------------dataset hdr, model 40------------------
+successfuly recognized:  517
+total:  646
+successful rate: 80.03%
+error rate [%] (character/license plate): 5.26/19.97
+Time per image: 0.0698189706 
+this calculation takes 46.27913200000057
+-------------dataset hdr, model 41------------------
+successfuly recognized:  549
+total:  646
+successful rate: 84.98%
+error rate [%] (character/license plate): 4.28/15.02
+Time per image: 0.0677489907 
+this calculation takes 44.84474500000033
+-------------dataset hdr, model 42------------------
+successfuly recognized:  507
+total:  646
+successful rate: 78.48%
+error rate [%] (character/license plate): 5.28/21.52
+Time per image: 0.0676630728 
+this calculation takes 44.8304619999999
+-------------dataset hdr, model 43------------------
+successfuly recognized:  539
+total:  646
+successful rate: 83.44%
+error rate [%] (character/license plate): 4.37/16.56
+Time per image: 0.067990031 
+this calculation takes 45.0384610000001
+-------------dataset hdr, model 44------------------
+successfuly recognized:  529
+total:  646
+successful rate: 81.89%
+error rate [%] (character/license plate): 4.3/18.11
+Time per image: 0.0683472353 
+this calculation takes 45.226079999999456
+-------------dataset hdr, model 45------------------
+successfuly recognized:  544
+total:  646
+successful rate: 84.21%
+error rate [%] (character/license plate): 4.2/15.79
+Time per image: 0.0675645759 
+this calculation takes 44.68682499999977
+-------------dataset hdr, model 46------------------
+successfuly recognized:  549
+total:  646
+successful rate: 84.98%
+error rate [%] (character/license plate): 4.14/15.02
+Time per image: 0.0672505325 
+this calculation takes 44.49711600000046
+-------------dataset hdr, model 47------------------
+successfuly recognized:  532
+total:  646
+successful rate: 82.35%
+error rate [%] (character/license plate): 4.99/17.65
+Time per image: 0.0679928189 
+this calculation takes 44.98601900000085
+-------------dataset hdr, model 48------------------
+successfuly recognized:  497
+total:  646
+successful rate: 76.93%
+error rate [%] (character/license plate): 6.17/23.07
+Time per image: 0.0677314211 
+this calculation takes 44.81284700000015
+-------------dataset hdr, model 49------------------
+successfuly recognized:  501
+total:  646
+successful rate: 77.55%
+error rate [%] (character/license plate): 5.69/22.45
+Time per image: 0.067560243 
+this calculation takes 44.695644999999786
+-------------dataset hdr, model 50------------------
+successfuly recognized:  541
+total:  646
+successful rate: 83.75%
+error rate [%] (character/license plate): 4.3/16.25
+Time per image: 0.0687280789 
+this calculation takes 45.47492299999976
+-------------dataset hdr, model 51------------------
+successfuly recognized:  527
+total:  646
+successful rate: 81.58%
+error rate [%] (character/license plate): 5.03/18.42
+Time per image: 0.0681069938 
+this calculation takes 45.06412300000011
+-------------dataset hdr, model 52------------------
+successfuly recognized:  516
+total:  646
+successful rate: 79.88%
+error rate [%] (character/license plate): 5.19/20.12
+Time per image: 0.0691259303 
+this calculation takes 45.71309299999939
+-------------dataset hdr, model 53------------------
+successfuly recognized:  463
+total:  646
+successful rate: 71.67%
+error rate [%] (character/license plate): 7.43/28.33
+Time per image: 0.0686718251 
+this calculation takes 45.48904500000026
+-------------dataset hdr, model 54------------------
+successfuly recognized:  478
+total:  646
+successful rate: 73.99%
+error rate [%] (character/license plate): 6.37/26.01
+Time per image: 0.0683166037 
+this calculation takes 45.22154599999976
+-------------dataset hdr, model 55------------------
+successfuly recognized:  521
+total:  646
+successful rate: 80.65%
+error rate [%] (character/license plate): 5.26/19.35
+Time per image: 0.0681762368 
+this calculation takes 45.16880500000025
+-------------dataset hdr, model 56------------------
+successfuly recognized:  457
+total:  646
+successful rate: 70.74%
+error rate [%] (character/license plate): 6.89/29.26
+Time per image: 0.0679022786 
+this calculation takes 44.95778900000005
+-------------dataset hdr, model 57------------------
+successfuly recognized:  543
+total:  646
+successful rate: 84.06%
+error rate [%] (character/license plate): 4.53/15.94
+Time per image: 0.068400096 
+this calculation takes 45.322393999999804
+-------------dataset hdr, model 58------------------
+successfuly recognized:  522
+total:  646
+successful rate: 80.8%
+error rate [%] (character/license plate): 4.93/19.2
+Time per image: 0.0697822446 
+this calculation takes 46.19927900000039
+-------------dataset hdr, model 59------------------
+successfuly recognized:  501
+total:  646
+successful rate: 77.55%
+error rate [%] (character/license plate): 5.63/22.45
+Time per image: 0.0682314288 
+this calculation takes 45.184581000000435
+-------------dataset hdr, model 60------------------
+successfuly recognized:  546
+total:  646
+successful rate: 84.52%
+error rate [%] (character/license plate): 4.45/15.48
+Time per image: 0.0677679675 
+this calculation takes 44.88520499999959
+-------------dataset hdr, model 61------------------
+successfuly recognized:  540
+total:  646
+successful rate: 83.59%
+error rate [%] (character/license plate): 4.78/16.41
+Time per image: 0.0678448886 
+this calculation takes 44.89516900000035
+-------------dataset hdr, model 62------------------
+successfuly recognized:  519
+total:  646
+successful rate: 80.34%
+error rate [%] (character/license plate): 5.36/19.66
+Time per image: 0.0676953824 
+this calculation takes 44.82105199999933
+-------------dataset hdr, model 63------------------
+successfuly recognized:  538
+total:  646
+successful rate: 83.28%
+error rate [%] (character/license plate): 4.37/16.72
+Time per image: 0.0674679644 
+this calculation takes 44.62645900000007
+-------------dataset hdr, model 64------------------
+successfuly recognized:  457
+total:  646
+successful rate: 70.74%
+error rate [%] (character/license plate): 7.29/29.26
+Time per image: 0.0676454752 
+this calculation takes 44.797741999999744
+-------------dataset hdr, model 65------------------
+successfuly recognized:  542
+total:  646
+successful rate: 83.9%
+error rate [%] (character/license plate): 4.68/16.1
+Time per image: 0.0676939644 
+this calculation takes 44.80719700000009
+-------------dataset hdr, model 66------------------
+successfuly recognized:  546
+total:  646
+successful rate: 84.52%
+error rate [%] (character/license plate): 4.53/15.48
+Time per image: 0.0679193096 
+this calculation takes 45.74120700000003
+-------------dataset hdr, model 67------------------
+successfuly recognized:  502
+total:  646
+successful rate: 77.71%
+error rate [%] (character/license plate): 6.25/22.29
+Time per image: 0.0682265821 
+this calculation takes 45.16436299999987
+-------------dataset hdr, model 68------------------
+successfuly recognized:  544
+total:  646
+successful rate: 84.21%
+error rate [%] (character/license plate): 4.49/15.79
+Time per image: 0.068182531 
+this calculation takes 45.10307600000033
+-------------dataset hdr, model 69------------------
+successfuly recognized:  542
+total:  646
+successful rate: 83.9%
+error rate [%] (character/license plate): 4.93/16.1
+Time per image: 0.0688196672 
+this calculation takes 45.562684999999874
+-------------dataset hdr, model 70------------------
+successfuly recognized:  518
+total:  646
+successful rate: 80.19%
+error rate [%] (character/license plate): 5.17/19.81
+Time per image: 0.0686594489 
+this calculation takes 45.44225899999947
+-------------dataset hdr, model 71------------------
+successfuly recognized:  495
+total:  646
+successful rate: 76.63%
+error rate [%] (character/license plate): 5.94/23.37
+Time per image: 0.0678411796 
+this calculation takes 44.91026899999997
+-------------dataset hdr, model 72------------------
+successfuly recognized:  524
+total:  646
+successful rate: 81.11%
+error rate [%] (character/license plate): 4.99/18.89
+Time per image: 0.0680764551 
+this calculation takes 45.02512799999931
+-------------dataset hdr, model 73------------------
+successfuly recognized:  538
+total:  646
+successful rate: 83.28%
+error rate [%] (character/license plate): 4.84/16.72
+Time per image: 0.0680704768 
+this calculation takes 45.08603399999993
+-------------dataset hdr, model 74------------------
+successfuly recognized:  560
+total:  646
+successful rate: 86.69%
+error rate [%] (character/license plate): 3.83/13.31
+Time per image: 0.0682375759 
+this calculation takes 45.23598000000038
+-------------dataset hdr, model 75------------------
+successfuly recognized:  508
+total:  646
+successful rate: 78.64%
+error rate [%] (character/license plate): 6.35/21.36
+Time per image: 0.069077822 
+this calculation takes 45.77379000000019
+-------------dataset hdr, model 76------------------
+successfuly recognized:  512
+total:  646
+successful rate: 79.26%
+error rate [%] (character/license plate): 5.26/20.74
+Time per image: 0.0687306718 
+this calculation takes 45.51717000000008
+-------------dataset hdr, model 77------------------
+successfuly recognized:  543
+total:  646
+successful rate: 84.06%
+error rate [%] (character/license plate): 4.64/15.94
+Time per image: 0.0686143436 
+this calculation takes 45.34656199999972
+-------------dataset hdr, model 78------------------
+successfuly recognized:  555
+total:  646
+successful rate: 85.91%
+error rate [%] (character/license plate): 4.08/14.09
+Time per image: 0.0678499474 
+this calculation takes 44.901216000000204
+-------------dataset hdr, model 79------------------
+successfuly recognized:  538
+total:  646
+successful rate: 83.28%
+error rate [%] (character/license plate): 4.61/16.72
+Time per image: 0.0682162616 
+this calculation takes 45.164293000000725
+-------------dataset hdr, model 80------------------
+successfuly recognized:  517
+total:  646
+successful rate: 80.03%
+error rate [%] (character/license plate): 5.73/19.97
+Time per image: 0.0671649164 
+this calculation takes 44.45960299999933
+
+****************************************************
+best model index: 74
+-------------dataset hdr, model 74------------------
+successfuly recognized:  560
+total:  646
+successful rate: 86.69%
+error rate [%] (character/license plate): 3.83/13.31
+Time per image: 0.0681650929 
+****************************************************

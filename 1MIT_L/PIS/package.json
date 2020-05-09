@@ -1,0 +1,36 @@
+{
+  "name": "pis_projekt",
+  "version": "1.0.0",
+  "description": "PIS projekt",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tomeamis/PIS_projekt.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tomeamis/PIS_projekt/issues"
+  },
+  "homepage": "https://github.com/Tomeamis/PIS_projekt#readme",
+  "dependencies": {
+    "@hapi/cookie": "^11.0.1",
+    "@hapi/hapi": "^19.1.1",
+    "@hapi/inert": "^6.0.1",
+    "@types/bluebird": "^3.5.30",
+    "@types/hapi__cookie": "^10.1.0",
+    "@types/hapi__hapi": "^19.0.2",
+    "@types/hapi__inert": "^5.2.0",
+    "@types/jquery": "^3.3.34",
+    "@types/node": "^13.9.3",
+    "@types/validator": "^12.0.1",
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.5"
+  },
+  "devDependencies": {
+    "typescript": "^3.8"
+  }
+}

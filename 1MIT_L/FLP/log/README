@@ -1,0 +1,46 @@
+===============================================================
+Soubor: README
+Logický projekt: Program pro řešení rubikovi kostky
+Autor: Filip Kočica <xkocic01@stud.fit.vutbr.cz>
+Dne: 19.4.2020
+===============================================================
+
+Popis úlohy:
+---------------------------------------------------------------
+Úlohou programu je vypsat návod na složení kostky postupně krok
+po kroku. Jednotlivé kroky jsou odděleny prázdným řádkem.
+
+Popis implementace:
+---------------------------------------------------------------
+Problematika byla řešena za pomoci iterativního prohledávání
+stavového prostoru do hloubky. Stavový prostor se exponenciálně
+rozšiřuje s každým krokem (12^n kde `n` je počet tahů, protože
+s kostkou lze provést 12 různých tahů).
+
+Hledání řešení tedy spočívá v provádění možných rotací s kostkou
+a testování, zda-li tento tah vedl k řešení. Pokud ano, je na
+standardní výstup vypsán návod vedoucí k řešení, jinak (pokud
+ještě nebyla dosažena maximální hloubka hledání) se provádí
+rekurzivní volání reprezentující zanoření ve stavovém prostoru.
+
+Tento program neprovádí žádný způsob prořezávání (pruning)
+stavového prostoru a je proto poměrně pomalý.
+
+Testování:
+---------------------------------------------------------------
+Lze provést pomocí cílů `test` a `test_performance`.
+První z cílů pouze spouští program s jednotlivýmu vstupy z
+podadresáře `in`, obsahujícího testovací vstupy.
+Druhý cíl provádí měření výkonnosti programu nad těmito vstupy
+za pomocí unixové utility `time`.
+
+Dobu výpočtu na lokálním stroji lze vidět v následující tabulce:
+
++---------------+-------------+---------+
+| Jméno souboru | Počet kroků | Čas [s] |
++---------------+-------------+---------+
+| in/in0        | 0           | 0.047   |
+| in/in1        | 1           | 0.058   |
+| in/in6        | 6           | 1.634   |
+| in/in7        | 7           | 46.052  |
++---------------+-------------+---------+

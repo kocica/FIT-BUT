@@ -1,0 +1,16 @@
+Get info about machine
+from psutil import *
+print(cpu_count())
+!cat /proc/cpuinfo | grep 'model name'
+!nvidia-smi -L
+!nvidia-smi
+
+small and bigger model evaluation machines:
+runs on cpu only:
+cores: 2
+CPU - Intel(R) Xeon(R) CPU @ 2.20GHz
+
+biggest model evaluation machine:
+cores: 4 
+CPU - Intel(R) Xeon(R) CPU @ 2.30GHz
+GPU - Tesla K80
