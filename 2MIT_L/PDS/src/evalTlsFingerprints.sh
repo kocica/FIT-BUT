@@ -10,6 +10,11 @@ then
     exit 1
 fi
 
+TP=0
+FP=0
+TN=0
+FN=0
+
 #
 # Compare retrieved fingerprint to the database of finerprints and report matching fingerprint
 #
@@ -27,18 +32,22 @@ function compareToDatabase
         a=$(echo "$fingerprint" | awk -F';' '{printf "%s", $3}'  | tr -d '"')
         b=$(echo "$dbFingerprint" | awk -F';' '{printf "%s", $3}'  | tr -d '"')
 
-#       if [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $1}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $1}'  | tr -d '"') ]; then
-        if [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') ]; then
+        if [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $1}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $1}'  | tr -d '"') ] &&
+           [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') ]; then
             if [ "$a" = "$b" ]; then
                 echo "[${G}OK${N}]  True  positive: $a | $b"
+                TP=$(($TP+1))
             else
                 echo "[${R}NOK${N}] False positive: $a | $b"
+                FP=$(($FP+1))
             fi
         else
             if [ "$a" = "$b" ]; then
                 echo "[${R}NOK${N}] False negative: $a | $b"
+                FN=$(($FN+1))
             else
                 echo "[${G}OK${N}]  True  negative: $a | $b"
+                TN=$(($TN+1))
             fi
         fi
     done <<< $(tail -n +2 "$database") # Skip header
@@ -56,6 +65,11 @@ function main()
     do
         compareToDatabase $fingerprint $database
     done <<< $(tail -n +2 "$fingerprints") # Skip header
+
+    echo "True positives:  $TP"
+    echo "False positives: $FP"
+    echo "True negatives:  $TN"
+    echo "False negatives: $FN"
 }
 
 main $1 $2
