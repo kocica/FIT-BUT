@@ -29,8 +29,8 @@ function compareToDatabase
 
     while read -r dbFingerprint
     do
-        a=$(echo "$fingerprint" | awk -F';' '{printf "%s", $3}'  | tr -d '"')
-        b=$(echo "$dbFingerprint" | awk -F';' '{printf "%s", $3}'  | tr -d '"')
+        a=$(echo "$fingerprint" | awk -F';' '{printf "%s", $4}'  | tr -d '"')
+        b=$(echo "$dbFingerprint" | awk -F';' '{printf "%s", $4}'  | tr -d '"')
 
         if [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $1}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $1}'  | tr -d '"') ] &&
            [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') ]; then
