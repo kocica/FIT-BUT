@@ -286,7 +286,7 @@ void Block::display_result(double val)
     value_label->setStyleSheet("background-color: rgb(255,255,255);border-radius: 2px; border: 2px solid black;");
     value_label->setStyleSheet(
       "border-style: outset;"
-      "border-width: 2px;"
+      "-width: 2px;"
       "border-color: red;"
     );
     value_label->show();

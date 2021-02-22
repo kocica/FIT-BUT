@@ -1,0 +1,338 @@
+BIO - Test 1
+
+
+ - Z veverčích chlupů - Z chlupů už nelze prášek úplně dostat pryč, je nejlevnější, jeden druh prášku
+ - Magnetický - Je to nejčistší způsob, ale je potřeba speciální prášek
+ - Z uhlíkových vláken - Nanáší se rotačním pohybem a je nutné jemně, protože přitlačení může poškodit otisk (vlákno jsou dostatečně tvrdé vlákna)
+ - Z labutího peří - Extrémně drahý
+
+
+
+ - Obyčejný - Jsou jednobarevné
+ - Magnetický - Nanášen pomocí magnetického štětce protože je z magnetických materiálů
+ - Duální - Používá se na strukturovaný (nerovný) povrch, kombinované barvy
+ - Fluorescentní - Je viditelný pouze pod UV lampou a je obvykle zelený nebo oranžový
+ - Speciální - Směs barev pro konrétní povrch, např. na zbraně apod.
+
+
+
+ - Podle okolností, za jakých má být použit.
+    - Například v případě strukturovaných povrchů jako je mramor, by někde obyčekný
+      jednobarevný prášek šel vidět, a někde zase ne. Proto je vhodné využít alespoŇ
+      dvoubarevný.
+    - Na místě činu může být vhodný Fluorescentní, lze otisk zviditělnit ještě lépe
+      s pomocí UV lampy.
+    - Pokud je použit magnetický štětec, je nutno použít magnetický prášek.
+      Jiný nebude fungovat.
+    - Na speciální povrchy existují speciální prášky, jako jasou bankomaty či zbraně.
+
+
+
+ - Aplikace prášku na štěteček, oklepání, aplikace štětcem na otisk, zajištění na fólii.
+ - Černící fólie – přitlačení ruky na folii – aplikace inkoustu
+ - Daktyloskopický váleček – přejetí ruky – aplikace inkoustu
+ - Čisté daktyloskopování – navlhčení prstu/ruky pomocí chemikálie (prsty zůstanou „čisté“)
+                          - drahé
+
+
+
+ - Nepoužívá inkoust ale speciální chemikálii a papír. Prst se "navlhčí" do chemikálie
+   a otiskne se na tento speciální papír. Je to drahý způsob.
+
+
+
+ - 1) Fyzikální - Naprášení otisku pomocí štětce a prášku (všechny povrchy)
+ - 2) Fyzikálně-chemická – Kyanoakrylát (nebílé)
+ - 3) Chemická - Ninhydrin (papír)
+
+
+
+ - Obsahuje osobní údaje
+ - Obsahuje otisky prstů - všechny příška prstů rolovaně, všechny prsty mimo palce píchané,
+                           brříška palců píchané, dlaň - snímaná pomocí válce
+ - Snímání celé dlaně probíhá pomocí válce, obejmuní trubky pomocí celé dlaně
+
+
+
+ - ZKTeco - optický + lfd
+ - HID/Lumidigm - optický + lfd
+ - SecuGen - optický
+ - Jenetric - optický, rolované
+ - Fingerprints - kapacitní RF/e-field, 3D
+ - Dinolite - optický, mikroskop
+ - Eikon touch - kapacitní
+
+
+
+ - Rozlišení alespoň 250 dots per inch.
+ - Plocha alespoň 1x1 palců
+ - U daktyloskopického který by měl snímat 4-5 prstů to je 10x6 cm
+ - Hloubka 8bit / 3bit
+
+
+
+ - Obvyklý způsob automatizovaného zpracování prstů je založen na markantech.
+    - Vylepšení obrazu (preprocessing), pole orientací omap, filtry - gabor apod.
+    - Lokalizace a extrakce linií - vrcholů a pdolí
+    - Ztenčení - vrcholů a pdolí
+    - Detekce samotných markantů
+ - Dále se často používá (např. v mobilních telefonech kvuli málé ploše) - rozpoznání vzorů pomocí convnet
+
+
+
+ - Rozponání vzorů - Vylepšení obrazu a poslání do neuronové sítě, použití např.
+                     v mobilních telefonech kvuli málé ploše
+ - V případě dobré kvality vstupních snímků je lepší porovnání markantů,
+   v případě horší kvality pak neuronová síť
+ - Daktyloskopický postup - využívá se komparátor (lupa) a hledají se markanty,
+   označí se markanty které patří k sobě a využívá se
+   kontextová informace jako je vzájemná poloha markantů apod. - např. posování po liniích
+
+
+
+ - Falzifikát lze vytvořit takto:
+    - Na začátku je nutno získat vzorový otisk. Kooperativní
+      (vtlačením prstu do horkého vosku apod.), Nekooperativní (získání latentního otisku prstu)
+    - Zvýraznění
+    - Digitalizace (fotka, sken)
+    - Enhance otisku
+    A: Tvorba falzifikátu jako tisk (papír), razítko
+    B: Vytvořit formu (deska plošných spojů)
+
+
+
+- Detekce živosti pomocí tepu: Lze použít buď distanční laser, nebo polopropustné
+  zrcadlo a makroobjekty, kde se poté hledají drobné oběhové změny kde v prstu tepe krev.
+- TBS Snímač: Získává 3D (3) snímky, používá ledky a CMOS technologii
+
+
+
+- Z vlastní zkušenosti - učení neuronových sítí, popř. klasifikátoru
+- K ukázkám, pro publikaci a výuku
+- Pro hodnocení výkonu, bezpečnosti
+
+
+
+- Zaujalo zpracování otisků prstů - především z biologického hlediska - papilární linie, markanty, apod.
+- Z pohledu BIO mne zaujalo předevšim rozpoznání vzorů – využití neuronových sítí, se kterými rád pracuju.
+- Vždycky jsem chtěl vědět jak to funguje a teď když to vím, tak s tím můžu machrovat před holkama :)
+
+
+
+BIO - Test 2
+
+
+
+- Barvy - podle množství pigmentu (melaninu) a jeho rozmístění hnědá => zelená => modrá => šedá
+- Struktury - (větší entropie - tedy více informací) podle rozmístění svalů a cév vytváří se krypty,
+               rýhy, pupilární a řasové oblast, límečky
+
+
+
+- Nejsem si jist zda jsem pochopil otázku, ale jsou podmíněny genetickou výbavouv, kterou mu přinášejí
+            oba rodiče.
+- Geny rodičů se však mohou promíchat a spojit mnoha různými způsoby.
+            To, jaký vliv rodiče měli, se ukáže až ve chvíli, když se jedinec narodí.
+
+
+
+- Stačí oko vyfotit a vyrobit kontaktní čočku. Je však ale nutné mít čočku s texturou.
+- Oční skenery kontrolují především texturu, až poté (někdy) barvu. Pouhé zbarvení tedy nestačí.
+
+
+
+- Dva druhy:
+   A/ Viditelné - stačí dobré rozlišení, není třeba speciální vybavení (stačí fotoaparát apod.).
+                  Je nutné vyfotit tak, aby odraz světlení nepřekrýval některou z důležitých částí oka.
+   B/ Infračervené tedy IR - to se používá obvykle v praxi - melanin IR odráží a barva neovlivňuje snímání.
+                  Dále lepší vyniknutí strutkry oka a neoslňuje subjekt.
+
+
+
+- Duhovka je v radiálních souřadnicích a v různých úhlech podle různé amplitudy se vyskytuje různé
+             poškození. Existuje mapa (kde jaké poškození duhovky co znamená).
+- Iridologie není podpořena kvalitními studiemi a je považována za pseudovědu.
+- Lze vyčíst stav jater, hrdla, zad, a mnoha dalších částí těla v závislosti na pozici duhovky
+
+
+
+- <obrazek>
+- Limbus
+- Coliarní zónu
+- Pupilarní zónu
+- Iris
+- Pupil
+
+
+
+- Žlutá skvrna makula - největší koncentrace čípků, dopadá sem obraz při pohledu zpříma,
+            na obrázku tmavá skvrna, reálně však červená
+- Říká se jí žlutá protože se tak jeví u mrtvých
+
+
+
+
+- Rozložení: Tyčinky nahoře, čípky uprostřed, tyčinky dole (z frontálního pohledu uprostřed
+                            kruh s čípky obklopen kružnicí tyčinek)
+- Tyčinky slouží pro šedotónové vidění a čípky pro barevné
+- Zakryju jedno oko:
+    A/ Pokud si zastínim pravé oko, tak se levým dívam na žlutou tečku, přiblížím
+                a následně oddálím hlavu od obrazovky, křížek mizí a objevuje se.
+    B/ Zastíním levé oko, dívám se pravým na křížek, mizí žlutá tečka.
+
+
+
+- Podle samotné cévní struktury, se kterou se pracuje podobně jako s otiskem prstu.
+- Hledá se křížení žil
+
+
+
+
+- Změny v cévách - makulární degenerace, diabetická retinopatie = žluté fleky
+- Dstrofické - degenerativní změny - záník nervů, vrozené
+- Zápalové / nádorové
+- Úrazy oka - nejčastěji mechanické, zářením, ...
+- Exsudáty - světlé fleky = měkké, tvamé fleky = tvrdé
+- Hemoragie - krvácení - tmavé místa
+- Neovaskularizace - vzníkají nové žíly navíc
+
+
+
+
+- Na obličej člověka se promítné infra-červená mřížka
+- Dle deformace mřížky se určí 3d tvar
+- Pokud je třeba textura, snímá se dodatečně
+
+
+
+
+- Lze použít buď jeden přístup NEBO druhý, nikoli A ZÁROVEŇ, tzn se
+  bezpečnost vůbec nezvýší, jenom se uživateli poskytne více možností.
+
+
+
+- Pořízením snímku oblieje ve 2d a poté se na obličej vysílají paprsky světla
+- S tím, že se měří, za jakou dobu se vyslané paprsky vrátu
+- Podle toho lze spočíst vzdálenost, tj. hloubkocou mapu
+- levné avšak často nepřesné
+
+
+
+- Falzifikáty pomocí masky
+- Získá se snímek
+- Model se vytsikne na 3d tiskárně
+- Pak lze provést další úpravy - oči, pusa, ...
+- Odlét masku přímo pomocí vložení obličeje
+
+
+
+- Velmi mne zaujala sítnice lidského oka, ale opět zase spíše z biologického hlediska.
+- Zaujala mne také iridologie, i když to opravdu nejspíš nebude velmi přesné, ale mrzí mne,
+                že jsme si to nemohli zkusit na vlastní kůži.
+- Z hlediska předmětu BIO mne zaujalo fungování snímání obličeje SoftKinetic, připomělo mi to sonar.
+
+
+
+BIO - Test 3
+
+
+- Pro šablonu se obvykle využívá délka, šířka, výška prstů, případně zakřivení a anomálie
+- Snímání ruky probíha vzdáleně, pomocí přiložení ruky na distanční kolíky - zajištují optimální pozici
+
+
+
+- Rozlišovací schopnost není vysoká - zaleží na množství údajů v šabloně, nestálost během života,
+               kolikrát i vliv tepla a zimy, prstýnky, atd.
+- Čím více údajů (délka, šířka, šířka zápěstí či dlaně, ...) použijeme, a v čím vícě místech se měří,
+               tím přesnější - lepší výsledky jsou.
+
+
+
+A/ Statický - vzhled - bitmapa
+B/ Dynamické - proces tvorby podpisu - úhel, rychlos, přítlak, počet zvednutí pera, ...
+Dynamika zvyšuje zabezpečení podpisu.
+
+
+
+
+- Pokud je dostupná šablona tak lze natrénovat cizí podpis pro tvorbu falzifikátů.
+           Tuto možnost komerční řešení neposkytují.
+- Tvar není problém, ale spíše přítlak a čas... obecně dynamika
+
+
+
+
+<obrazek>
+- Kruh = x je sinus, y cosinus
+- Obdelnik = x obdelnikovy signal,
+             y invertovany obdelnikovy signal
+- Graf zobrazuje zmenu urcitych velicin v case,
+         např osu x a y, přítlak, apod.
+
+
+
+
+- Sv2tlo se používá téměř infračervené (NIR) - 760 až 1400 nm
+
+
+
+- Reflexivní snímání - měří se odražené světlo
+- Transmisivní snímání - měří světlo, které prošlo objektem
+
+
+
+
+- Materiál použitý pro vytvarování žilního řečiště - musí absorbovat NIR (tj např. částečky železa)
+
+
+
+Krev se pohybuje v cévách a její oběh je zajišťován srdcem, svalovou pumpou. Proudí do plic pro
+okysličení a pak je cirkulována tělem přes tepny. Tzn. pokud dokážeme rozlišit okysličenou
+a neokysličenou krev na základě vlnové délky, dokážeme tedy rozlišit i tepny a žíly.
+
+
+- Každý teplý předmět vyzařuje infračervené záření
+- Díky němu lze zjistit teplotu - je třeba zjistit emisivitu - míru vyzařování - u lidské kůže je to 0,98.
+- Sklo se chová pro IR jako zrcadlo
+- Snímat se dají i tepelné stopy - šlápoty
+- Musí být splněno: - být bez brýlí (odráží)
+                    - nejlépe nemít vousy
+                    - nebýt zpocený (mění teplotu)
+                    - neutrální teplota okolí, aby neovlivnila výsledek
+
+
+
+- Nevýhody: Na termogramu lze zjistit velké množství zdravotních informací člověka,
+                  jak fyzických tak psychický (stres, tep, nervozita, alkohol, infekce, ...)
+                  Problémy při snímání jako jsou brýle, okolní teplota apod.
+- Výhody: Funguje z části jako detekce živosti
+          Není ovlivněno okolním světlem
+
+
+
+- Oknu: Odráží
+- Zrcadlu: Odráží
+- Fasádě: Pujdou vidět např. tepelné trubky ve fasádě, lze kontrolovat i zateplení - jak moc uniká teplo
+- Klíče: Klíče "absorbovaly" teplo a tedy budou vyzařovat podstaně víc IR záření než normálně a jejich
+                termogram bude tedy "oranžový-červený", vůči dlouho nepoužitým klíčům
+
+
+
+
+Nejteplejší části obličeje: rty, líce, čelo, ...
+Nejstudenější části obličeje: Periferní části jako je nos, uši
+Zářivka: Záleží na nastavení emisivity zařízení, zhruba 59-75 °C
+Monitor: Záleží na nastavení emisivity zařízení, zhruba 24 °C
+
+
+
+Například nalézt nádor
+Špatný/správný tep či ktevní oběh
+
+
+
+
+Oslovilo mne zkoumání podpisu, zejména jeho dynamických vlastností jako je přítlak, čas apod.
+Velmi se mi líbil falzifikátor podpisu z excelu a chytré využití a naprogramování 3D tiskárny.
+Také by bylo velmi zajímavé tvořit pero pro získání údajů z podpise - kooperace různých senzorů
+ jako tenzometr pro přítlak apod.
