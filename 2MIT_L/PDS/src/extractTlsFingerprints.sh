@@ -6,7 +6,7 @@
 
 if [ $# -ne 1 ]
 then
-    echo "Invalid arguments. Usage: extractTlsFingerprints.sh <source_file>"
+    echo "Invalid arguments. Usage: extractTlsFingerprints.sh <path_to_data>"
     exit 1
 fi
 
@@ -59,11 +59,11 @@ function computeFingerprint()
     if [ "$c05" = "1" ]; then
         ja3="$(($c06)),$a,$b,$c,$c11"
         md5ja3=`echo -n $ja3 | md5sum | awk '{ print $1 }'`
-        echo "$ja3;$md5ja3"
+        echo "$md5ja3"
     else
         ja3s="$(($c06)),$c07,$b"
         md5ja3s=`echo -n $ja3s | md5sum | awk '{ print $1 }'`
-        echo "$ja3s;$md5ja3s"
+        echo "$md5ja3s"
     fi
 }
 
@@ -92,7 +92,7 @@ function lookupServerResponse()
 #
 # For each client hello lookup server hello response, compute their JA3/JA3S hashes and store them with SNI to the database
 #
-function main()
+function extractTlsFingerprints()
 {
     srcFile=$1
 
@@ -110,9 +110,15 @@ function main()
 
             sni=$(echo "$line" | awk -F';' '{printf "%s", $9}'  | tr -d '"')
 
-            echo "$sni;$md5ja3;$md5ja3s"
+            echo "$md5ja3;$md5ja3s;$sni;${srcFile##*/}"
         fi
-    done < "$srcFile"
+    done <<< $(tail -n +2 "$srcFile") # Skip header
 }
 
-main $1
+sourceDir=$1
+
+echo "JA3;JA3S;SNI;File"
+
+for filename in $sourceDir/*.csv; do
+    extractTlsFingerprints $filename
+done
