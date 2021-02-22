@@ -97,3 +97,10 @@ Zimní
 Letní
 
  + PRL - Projekt 1 - Paralelizace odd-even sort pomocí OpenMPI -- 7.5/10
+ + PRL - Projekt 2 - 10/10
+ + FLP - Projekt 1 - Fun - 12/12
+ + FLP - Projekt 2 - Log - 7/8
+ + KRY - Projekt 1 - One time Pad - 8/8
+ + KRY - Projekt 2 - RSA - 7/7
+ + PIS - Projekt 1 - 13/18
+ + KNN - Projekt 1 - License plate recognition - 71/76
