@@ -8,3 +8,5 @@ https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-valu
 
 jejich clanek - odstraneni renegotiation 65281
               - cely ten popis jak to delali + JA3+JA3S increased uniqueness - jsem pouzil taky
+
+porovnani JA3 / JA3S / JA3-JA3S / JA3-JA3S-SNI

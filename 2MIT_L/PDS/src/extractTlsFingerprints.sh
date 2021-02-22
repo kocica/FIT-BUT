@@ -4,9 +4,9 @@
 # 02/21/2021
 #
 
-if [ $# -ne 2 ]
+if [ $# -ne 3 ]
 then
-    echo "Invalid arguments. Usage: extractTlsFingerprints.sh <path_to_data> <path_to_whitelists>"
+    echo "Invalid arguments. Usage: extractTlsFingerprints.sh <path_to_data> <path_to_whitelists> <path_to_blacklist>"
     exit 1
 fi
 
@@ -116,9 +116,11 @@ function extractTlsFingerprints()
 {
     srcFile=$1
     whitelistsDir=$2
+    blacklist=$3
 
     declare -i i=0
     declare -a whitelistArr
+    declare -a blacklistArr
 
     whitelist=${srcFile##*/}
     whitelist=$(echo "$whitelist" | cut -f 1 -d '.')
@@ -128,6 +130,11 @@ function extractTlsFingerprints()
     do
         whitelistArr+=($keyword)
     done < $whitelist
+
+    while read -r keyword
+    do
+        blacklistArr+=($keyword)
+    done < $blacklist
 
     while read -r line
     do
@@ -141,6 +148,14 @@ function extractTlsFingerprints()
             do
                 if [[ $sni == *"$whitelistSni"* ]]; then
                     pass=true
+                    break
+                fi
+            done
+
+            for blacklistSni in "${blacklistArr[@]}"
+            do
+                if [[ $sni == *"$blacklistSni"* ]]; then
+                    pass=false
                     break
                 fi
             done
@@ -160,9 +175,10 @@ function extractTlsFingerprints()
 
 sourceDir=$1
 whitelistsDir=$2
+blacklist=$3
 
 echo "JA3;JA3S;SNI;File"
 
 for filename in $sourceDir/*.csv; do
-    extractTlsFingerprints $filename $whitelistsDir
+    extractTlsFingerprints $filename $whitelistsDir $blacklist
 done
