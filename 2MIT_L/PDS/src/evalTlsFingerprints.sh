@@ -33,7 +33,8 @@ function compareToDatabase
         b=$(echo "$dbFingerprint" | awk -F';' '{printf "%s", $4}'  | tr -d '"')
 
         if [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $1}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $1}'  | tr -d '"') ] &&
-           [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') ]; then
+           [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') ] &&
+           [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $3}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $3}'  | tr -d '"') ]; then
             if [ "$a" = "$b" ]; then
                 echo "[${G}OK${N}]  True  positive: $a | $b"
                 TP=$(($TP+1))
@@ -66,10 +67,24 @@ function main()
         compareToDatabase $fingerprint $database
     done <<< $(tail -n +2 "$fingerprints") # Skip header
 
-    echo "True positives:  $TP"
-    echo "False positives: $FP"
-    echo "True negatives:  $TN"
-    echo "False negatives: $FN"
+    echo
+    echo "                 Predicted"
+    echo "                 +-----------------+-----------------+"
+    echo "                 | Positive        | Negative        |"
+    echo "      +----------+-----------------+-----------------+"
+    printf "GT    | Positive | (TN) %10d | (FP) %10d |\n" $TN $FP
+    echo "      +----------+-----------------+-----------------+"
+    printf "      | Negative | (FN) %10d | (TP) %10d |\n" $FN $TP
+    echo "      +----------+-----------------+-----------------+"
+    echo
+
+    acc=$(echo "($TP + $TN) / ($TP + $TN + $FP + $FN)" | bc -l)
+    prc=$(echo "$TP / ($TP + $FP)" | bc -l)
+    rec=$(echo "$TP / ($TP + $FN)" | bc -l)
+
+    echo "Accuracy:        $acc"
+    echo "Precision:       $prc"
+    echo "Recall:          $rec"
 }
 
 main $1 $2

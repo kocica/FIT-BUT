@@ -10,3 +10,7 @@ jejich clanek - odstraneni renegotiation 65281
               - cely ten popis jak to delali + JA3+JA3S increased uniqueness - jsem pouzil taky
 
 porovnani JA3 / JA3S / JA3-JA3S / JA3-JA3S-SNI
+
+
+https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9
+https://blog.paperspace.com/deep-learning-metrics-precision-recall-accuracy/
