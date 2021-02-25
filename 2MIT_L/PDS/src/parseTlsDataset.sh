@@ -36,6 +36,7 @@ for filename in $sourceDir/*.pcapng; do
                                                    -e ssl.handshake.extensions_server_name \
                                                    -e ssl.handshake.extensions_supported_group \
                                                    -e ssl.handshake.extensions_ec_point_format \
-                                                   -R "ssl.handshake.type==1 or ssl.handshake.type==2" -2 \
+                                                   -e ssl.handshake.certificate \
+                                                   -R "ssl.handshake.type==1 or ssl.handshake.type==2 or ssl.handshake.certificate" -2 \
                                                    >> $target
 done

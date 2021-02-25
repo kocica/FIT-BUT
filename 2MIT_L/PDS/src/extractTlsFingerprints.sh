@@ -102,9 +102,31 @@ function lookupServerResponse()
            [ $(echo "$line" | awk -F';' '{printf "%s", $1}'  | tr -d '"') = $(echo "$clientHello" | awk -F';' '{printf "%s", $2}'  | tr -d '"') ] &&
            [ $(echo "$line" | awk -F';' '{printf "%s", $2}'  | tr -d '"') = $(echo "$clientHello" | awk -F';' '{printf "%s", $1}'  | tr -d '"') ] &&
            [ $(echo "$line" | awk -F';' '{printf "%s", $3}'  | tr -d '"') = $(echo "$clientHello" | awk -F';' '{printf "%s", $4}'  | tr -d '"') ] &&
-           [ $(echo "$line" | awk -F';' '{printf "%s", $4}'  | tr -d '"') = $(echo "$clientHello" | awk -F';' '{printf "%s", $3}'  | tr -d '"') ] &&
-           [ $(echo "$line" | awk -F';' '{printf "%s", $6}'  | tr -d '"') = $(echo "$clientHello" | awk -F';' '{printf "%s", $6}'  | tr -d '"') ]; then
+           [ $(echo "$line" | awk -F';' '{printf "%s", $4}'  | tr -d '"') = $(echo "$clientHello" | awk -F';' '{printf "%s", $3}'  | tr -d '"') ]; then
             echo $line
+            break
+        fi
+    done <<< $(tail -n +$(($skipLines+1)) "$srcFile")
+}
+
+#
+# Function which is able to find server certificate in captured traffic
+#
+function lookupServerCertificate()
+{
+    srcFile=$1
+    clientHello=$2
+    skipLines=$3
+
+    while IFS= read line
+    do
+        if [ ! -z "$(echo "$line" | awk -F';' '{printf "%s", $12}' | tr -d '"')" ] &&
+           [ $(echo "$line" | awk -F';' '{printf "%s", $1}'  | tr -d '"') = $(echo "$clientHello" | awk -F';' '{printf "%s", $2}'  | tr -d '"') ] &&
+           [ $(echo "$line" | awk -F';' '{printf "%s", $2}'  | tr -d '"') = $(echo "$clientHello" | awk -F';' '{printf "%s", $1}'  | tr -d '"') ] &&
+           [ $(echo "$line" | awk -F';' '{printf "%s", $3}'  | tr -d '"') = $(echo "$clientHello" | awk -F';' '{printf "%s", $4}'  | tr -d '"') ] &&
+           [ $(echo "$line" | awk -F';' '{printf "%s", $4}'  | tr -d '"') = $(echo "$clientHello" | awk -F';' '{printf "%s", $3}'  | tr -d '"') ]; then
+            echo $(echo "$line" | awk -F';' '{printf "%s", $12}' | tr -d '"')
+            break
         fi
     done <<< $(tail -n +$(($skipLines+1)) "$srcFile")
 }
@@ -163,11 +185,13 @@ function extractTlsFingerprints()
             if [ "$pass" = true ]; then
                 clientHello=$line
                 serverHello=$(lookupServerResponse $srcFile $clientHello $i)
+                serverCert=$(lookupServerCertificate $srcFile $clientHello $i)
 
                 md5ja3=$(computeFingerprint $clientHello)
                 md5ja3s=$(computeFingerprint $serverHello)
+                md5cert=`echo -n $serverCert | md5sum | awk '{ print $1 }'`
 
-                echo "$md5ja3;$md5ja3s;$sni;${srcFile##*/}"
+                echo "$md5ja3;$md5ja3s;$md5cert;$sni;${srcFile##*/}"
             fi
         fi
     done <<< $(tail -n +2 "$srcFile") # Skip header
@@ -177,7 +201,7 @@ sourceDir=$1
 whitelistsDir=$2
 blacklist=$3
 
-echo "JA3;JA3S;SNI;File"
+echo "JA3;JA3S;Cerificate;SNI;File"
 
 for filename in $sourceDir/*.csv; do
     extractTlsFingerprints $filename $whitelistsDir $blacklist

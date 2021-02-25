@@ -14,3 +14,9 @@ porovnani JA3 / JA3S / JA3-JA3S / JA3-JA3S-SNI
 
 https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9
 https://blog.paperspace.com/deep-learning-metrics-precision-recall-accuracy/
+
+
+
+Zkusit pridat cert do JA3S
+https://osqa-ask.wireshark.org/questions/41034/extract-certificate-info-with-tshark
+https://www.wireshark.org/docs/dfref/s/ssl.html
