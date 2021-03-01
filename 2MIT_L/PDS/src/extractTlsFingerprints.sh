@@ -4,9 +4,9 @@
 # 02/21/2021
 #
 
-if [ $# -ne 3 ]
+if [ $# -lt 3 ]
 then
-    echo "Invalid arguments. Usage: extractTlsFingerprints.sh <path_to_data> <path_to_whitelists> <path_to_blacklist>"
+    echo "Invalid arguments. Usage: extractTlsFingerprints.sh <path_to_data> <path_to_whitelists> <path_to_blacklist> [-t]"
     exit 1
 fi
 
@@ -139,6 +139,7 @@ function extractTlsFingerprints()
     srcFile=$1
     whitelistsDir=$2
     blacklist=$3
+    testingSet=$4
 
     declare -i i=0
     declare -a whitelistArr
@@ -182,27 +183,30 @@ function extractTlsFingerprints()
                 fi
             done
 
+            clientHello=$line
+            serverHello=$(lookupServerResponse $srcFile $clientHello $i)
+            serverCert=$(lookupServerCertificate $srcFile $clientHello $i)
+
+            md5ja3=$(computeFingerprint $clientHello)
+            md5ja3s=$(computeFingerprint $serverHello)
+            md5cert=`echo -n $serverCert | md5sum | awk '{ print $1 }'`
+
             if [ "$pass" = true ]; then
-                clientHello=$line
-                serverHello=$(lookupServerResponse $srcFile $clientHello $i)
-                serverCert=$(lookupServerCertificate $srcFile $clientHello $i)
-
-                md5ja3=$(computeFingerprint $clientHello)
-                md5ja3s=$(computeFingerprint $serverHello)
-                md5cert=`echo -n $serverCert | md5sum | awk '{ print $1 }'`
-
-                echo "$md5ja3;$md5ja3s;$md5cert;$sni;${srcFile##*/}"
+                echo "$md5ja3;$md5ja3s;$md5cert;$sni;$(echo "${srcFile##*/}" | cut -f 1 -d '.')"
+            else
+                [ "$testingSet" == "-t" ] && echo "$md5ja3;$md5ja3s;$md5cert;$sni;TRASH"
             fi
         fi
-    done <<< $(tail -n +2 "$srcFile") # Skip header
+    done < $srcFile # <<< $(tail -n +2 "$srcFile") # Skip header
 }
 
 sourceDir=$1
 whitelistsDir=$2
 blacklist=$3
+testingSet=$4
 
-echo "JA3;JA3S;Cerificate;SNI;File"
+echo "JA3;JA3S;Cerificate;SNI;Application"
 
 for filename in $sourceDir/*.csv; do
-    extractTlsFingerprints $filename $whitelistsDir $blacklist
+    extractTlsFingerprints $filename $whitelistsDir $blacklist $testingSet
 done

@@ -23,10 +23,13 @@ function compareToDatabase
     fingerprint=$1
     database=$2
     quiet=$3
+    confMatrix=$4
 
     R=`tput setaf 1`
     G=`tput setaf 2`
     N=`tput sgr0`
+
+    found=false
 
     while read -r dbFingerprint
     do
@@ -34,8 +37,8 @@ function compareToDatabase
         b=$(echo "$dbFingerprint" | awk -F';' '{printf "%s", $5}'  | tr -d '"')
 
         if [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $1}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $1}'  | tr -d '"') ] &&     # JA3
-          #[ $(echo "$fingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') ] &&     # JA3S
-           [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $3}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $3}'  | tr -d '"') ]; then  # Cert
+           [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') ]; then     # JA3S
+           #[ $(echo "$fingerprint" | awk -F';' '{printf "%s", $3}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $3}'  | tr -d '"') ]; then  # Cert
             if [ "$a" = "$b" ]; then
                 [ "$quiet" == "-q" ] || echo "[${G}OK${N}]  True  positive: $a | $b"
                 TP=$(($TP+1))
@@ -43,16 +46,24 @@ function compareToDatabase
                 [ "$quiet" == "-q" ] || echo "[${R}NOK${N}] False positive: $a | $b"
                 FP=$(($FP+1))
             fi
-        else
-            if [ "$a" = "$b" ]; then
-                [ "$quiet" == "-q" ] || echo "[${R}NOK${N}] False negative: $a | $b"
-                FN=$(($FN+1))
-            else
-                [ "$quiet" == "-q" ] || echo "[${G}OK${N}]  True  negative: $a | $b"
-                TN=$(($TN+1))
-            fi
+            confMatrix[$a,$b]=$((${confMatrix[$a,$b]} + 1))
+            found=true
+            break
         fi
     done <<< $(tail -n +2 "$database") # Skip header
+
+    if [ "$found" = false ]; then
+        if [ "$a" = "TRASH" ]; then
+            # We didn't find it in the DB and its trash (TN)
+            [ "$quiet" == "-q" ] || echo "[${G}OK${N}]  True  negative: $a | ---"
+            TN=$(($TN+1))
+        else
+            # We didn't find it in the DB but its NOT trash (FN)
+            [ "$quiet" == "-q" ] || echo "[${R}NOK${N}] False negative: $a | ---"
+            FN=$(($FN+1))
+        fi
+        confMatrix[$a,TRASH]=$((${confMatrix[$a,TRASH]} + 1))
+    fi
 }
 
 #
@@ -64,19 +75,49 @@ function main()
     database=$2
     quiet=$3
 
+    declare -a apps=("boltfood" "damejidlo" "discord" "pinterest" "reddit" "rossmanclub" "signal" "twitch" "zalando" "zonky" "TRASH")
+    declare -A confMatrix
+
+    for i in "${apps[@]}"
+    do
+        for j in "${apps[@]}"
+        do
+            confMatrix[$i,$j]=0
+        done
+    done
+
     while read -r fingerprint
     do
-        compareToDatabase $fingerprint $database $quiet
+        compareToDatabase $fingerprint $database $quiet $confMatrix $confMatrix
     done <<< $(tail -n +2 "$fingerprints") # Skip header
+
+    echo
+    printf "%12s" "Conf. matrix:"
+    for i in "${apps[@]}"
+    do
+        printf "%12s" $i
+    done
+    echo
+
+    for i in "${apps[@]}"
+    do
+        printf "%12s" $i
+        for j in "${apps[@]}"
+        do
+            printf "%12s" ${confMatrix[$i,$j]}
+        done
+        echo
+    done
+    echo
 
     echo
     echo "                 Predicted"
     echo "                 +-----------------+-----------------+"
-    echo "                 | Positive        | Negative        |"
+    echo "                 | Negative        | Positive        |"
     echo "      +----------+-----------------+-----------------+"
-    printf "GT    | Positive | (TN) %10d | (FP) %10d |\n" $TN $FP
+    printf "GT    | Negative | (TN) %10d | (FP) %10d |\n" $TN $FP
     echo "      +----------+-----------------+-----------------+"
-    printf "      | Negative | (FN) %10d | (TP) %10d |\n" $FN $TP
+    printf "      | Positive | (FN) %10d | (TP) %10d |\n" $FN $TP
     echo "      +----------+-----------------+-----------------+"
     echo
 
@@ -87,6 +128,7 @@ function main()
     echo "Accuracy:        $acc"
     echo "Precision:       $prc"
     echo "Recall:          $rec"
+    echo
 }
 
 main $1 $2 $3

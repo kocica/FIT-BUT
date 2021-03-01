@@ -16,13 +16,13 @@ targetDir=$2
 for filename in $sourceDir/*.pcapng; do
     # Remove path
     target=${filename##*/}
-    # Remove extension
-    target=$(echo "$target" | cut -f 1 -d '.')
-    # Create new path + filename
+    # Remove extension (and application counter, e.g. appname_1.pcapng => appname)
+    target=$(echo "$target" | cut -f 1 -d '_')
+    # Create new path + filename (e.g. appname.csv)
     target="$targetDir/$target.csv"
 
     # Create csv header
-    echo "Source IP;Destination IP;Source port;Destination port;Handshake type;Handshake version;Handshake ciphersuite;Handshake extensions;Handshake SNI;Handshake supported EC;Handshake EC type" > $target
+    # echo "Source IP;Destination IP;Source port;Destination port;Handshake type;Handshake version;Handshake ciphersuite;Handshake extensions;Handshake SNI;Handshake supported EC;Handshake EC type" > $target
 
     # Extract relevant TCP & TLS handshake data
     tshark -r $filename -T fields -E separator=";" -e ip.src \
