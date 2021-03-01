@@ -4,20 +4,21 @@
 # 02/21/2021
 #
 
-if [ $# -ne 2 ]
+if [ $# -ne 3 ]
 then
-    echo "Invalid arguments. Usage: parseTlsDataset.sh <path_to_dataset> <path_to_save>"
+    echo "Invalid arguments. Usage: parseTlsDataset.sh <path_to_dataset> <path_to_save> <delimeter>"
     exit 1
 fi
 
 sourceDir=$1
 targetDir=$2
+delimeter=$3
 
 for filename in $sourceDir/*.pcapng; do
     # Remove path
     target=${filename##*/}
     # Remove extension (and application counter, e.g. appname_1.pcapng => appname)
-    target=$(echo "$target" | cut -f 1 -d '_')
+    target=$(echo "$target" | cut -f 1 -d $delimeter)
     # Create new path + filename (e.g. appname.csv)
     target="$targetDir/$target.csv"
 

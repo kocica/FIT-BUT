@@ -88,7 +88,7 @@ function main()
 
     while read -r fingerprint
     do
-        compareToDatabase $fingerprint $database $quiet $confMatrix $confMatrix
+        compareToDatabase $fingerprint $database $quiet $confMatrix
     done <<< $(tail -n +2 "$fingerprints") # Skip header
 
     echo
