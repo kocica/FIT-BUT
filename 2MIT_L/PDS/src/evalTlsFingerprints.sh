@@ -37,8 +37,8 @@ function compareToDatabase
         b=$(echo "$dbFingerprint" | awk -F';' '{printf "%s", $5}'  | tr -d '"')
 
         if [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $1}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $1}'  | tr -d '"') ] &&     # JA3
-           [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') ]; then     # JA3S
-           #[ $(echo "$fingerprint" | awk -F';' '{printf "%s", $3}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $3}'  | tr -d '"') ]; then  # Cert
+           [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') ] &&     # JA3S
+           [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $4}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $4}'  | tr -d '"') ]; then  # Cert
             if [ "$a" = "$b" ]; then
                 [ "$quiet" == "-q" ] || echo "[${G}OK${N}]  True  positive: $a | $b"
                 TP=$(($TP+1))
@@ -53,16 +53,16 @@ function compareToDatabase
     done <<< $(tail -n +2 "$database") # Skip header
 
     if [ "$found" = false ]; then
-        if [ "$a" = "TRASH" ]; then
-            # We didn't find it in the DB and its trash (TN)
+        if [ "$a" = "UNKNOWN" ]; then
+            # We didn't find it in the DB and its unknown (TN)
             [ "$quiet" == "-q" ] || echo "[${G}OK${N}]  True  negative: $a | ---"
             TN=$(($TN+1))
         else
-            # We didn't find it in the DB but its NOT trash (FN)
+            # We didn't find it in the DB but its NOT unknown (FN)
             [ "$quiet" == "-q" ] || echo "[${R}NOK${N}] False negative: $a | ---"
             FN=$(($FN+1))
         fi
-        confMatrix[$a,TRASH]=$((${confMatrix[$a,TRASH]} + 1))
+        confMatrix[$a,UNKNOWN]=$((${confMatrix[$a,UNKNOWN]} + 1))
     fi
 }
 
@@ -75,7 +75,7 @@ function main()
     database=$2
     quiet=$3
 
-    declare -a apps=("boltfood" "damejidlo" "discord" "pinterest" "reddit" "rossmanclub" "signal" "twitch" "zalando" "zonky" "TRASH")
+    declare -a apps=("boltfood" "damejidlo" "discord" "pinterest" "reddit" "rossmanclub" "signal" "twitch" "zalando" "zonky" "UNKNOWN")
     declare -A confMatrix
 
     for i in "${apps[@]}"

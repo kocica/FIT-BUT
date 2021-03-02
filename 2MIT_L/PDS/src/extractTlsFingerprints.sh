@@ -6,7 +6,7 @@
 
 if [ $# -lt 3 ]
 then
-    echo "Invalid arguments. Usage: extractTlsFingerprints.sh <path_to_data> <path_to_whitelists> <path_to_blacklist> [-t]"
+    echo "Invalid arguments. Usage: extractTlsFingerprints.sh <path_to_data> <path_to_whitelists> <path_to_blacklist> [-u]"
     exit 1
 fi
 
@@ -194,7 +194,7 @@ function extractTlsFingerprints()
             if [ "$pass" = true ]; then
                 echo "$md5ja3;$md5ja3s;$md5cert;$sni;$(echo "${srcFile##*/}" | cut -f 1 -d '.')"
             else
-                [ "$testingSet" == "-t" ] && echo "$md5ja3;$md5ja3s;$md5cert;$sni;TRASH"
+                [ "$testingSet" == "-u" ] && echo "$md5ja3;$md5ja3s;$md5cert;$sni;UNKNOWN"
             fi
         fi
     done < $srcFile # <<< $(tail -n +2 "$srcFile") # Skip header
@@ -209,4 +209,5 @@ echo "JA3;JA3S;Cerificate;SNI;Application"
 
 for filename in $sourceDir/*.csv; do
     extractTlsFingerprints $filename $whitelistsDir $blacklist $testingSet
+    echo
 done
