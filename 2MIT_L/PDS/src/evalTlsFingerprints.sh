@@ -6,14 +6,9 @@
 
 if [ $# -lt 2 ]
 then
-    echo "Invalid arguments. Usage: evalTlsFingerprints.sh <path_to_fingerprints> <path_to_database> [-q]"
+    echo "Invalid arguments. Usage: evalTlsFingerprints.sh <path_to_fingerprints> <path_to_database>"
     exit 1
 fi
-
-TP=0
-FP=0
-TN=0
-FN=0
 
 #
 # Compare retrieved fingerprint to the database of finerprints and report matching fingerprint
@@ -21,46 +16,27 @@ FN=0
 function compareToDatabase
 {
     fingerprint=$1
-    database=$2
-    quiet=$3
-    confMatrix=$4
-
-    R=`tput setaf 1`
-    G=`tput setaf 2`
-    N=`tput sgr0`
+    declare -a database=("${!2}")
+    confMatrix=$3
 
     found=false
 
-    while read -r dbFingerprint
+    for dbFingerprint in "${database[@]}"
     do
-        a=$(echo "$fingerprint" | awk -F';' '{printf "%s", $5}'  | tr -d '"')
-        b=$(echo "$dbFingerprint" | awk -F';' '{printf "%s", $5}'  | tr -d '"')
-
-        if [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $1}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $1}'  | tr -d '"') ] &&     # JA3
-           [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $2}'  | tr -d '"') ] &&     # JA3S
-           [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $4}'  | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $4}'  | tr -d '"') ]; then  # Cert
-            if [ "$a" = "$b" ]; then
-                [ "$quiet" == "-q" ] || echo "[${G}OK${N}]  True  positive: $a | $b"
-                TP=$(($TP+1))
-            else
-                [ "$quiet" == "-q" ] || echo "[${R}NOK${N}] False positive: $a | $b"
-                FP=$(($FP+1))
-            fi
-            confMatrix[$a,$b]=$((${confMatrix[$a,$b]} + 1))
+        if [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $1}' | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $1}' | tr -d '"') ] &&        # JA3
+           [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $2}' | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $2}' | tr -d '"') ] &&        # JA3S
+           [ $(echo "$fingerprint" | awk -F';' '{printf "%s", $3}' | tr -d '"') = $(echo "$dbFingerprint" | awk -F';' '{printf "%s", $3}' | tr -d '"') ]; then     # Cert
+            a=$(echo "$fingerprint" | awk -F';' '{printf "%s", $5}' | tr -d '"')
+            b=$(echo "$dbFingerprint" | awk -F';' '{printf "%s", $5}' | tr -d '"')
+            confMatrix[$b,$a]=$((${confMatrix[$b,$a]} + 1))
             found=true
             break
         fi
-    done <<< $(tail -n +2 "$database") # Skip header
+    done
 
     if [ "$found" = false ]; then
-        if [ "$a" = "UNKNOWN" ]; then
-            [ "$quiet" == "-q" ] || echo "[${G}OK${N}]  True  negative: $a | ---"
-            TN=$(($TN+1))
-        else
-            [ "$quiet" == "-q" ] || echo "[${R}NOK${N}] False negative: $a | ---"
-            FN=$(($FN+1))
-        fi
-        confMatrix[$a,UNKNOWN]=$((${confMatrix[$a,UNKNOWN]} + 1))
+        a=$(echo "$fingerprint" | awk -F';' '{printf "%s", $5}' | tr -d '"')
+        confMatrix[UNKNOWN,$a]=$((${confMatrix[UNKNOWN,$a]} + 1))
     fi
 }
 
@@ -71,9 +47,9 @@ function main()
 {
     fingerprints=$1
     database=$2
-    quiet=$3
 
     declare -a apps=("boltfood" "damejidlo" "discord" "pinterest" "reddit" "rossmanclub" "signal" "twitch" "zalando" "zonky" "UNKNOWN")
+    declare -a databaseRecords
     declare -A confMatrix
 
     for i in "${apps[@]}"
@@ -84,10 +60,15 @@ function main()
         done
     done
 
+    while read -r record
+    do
+        databaseRecords+=($record)
+    done <<< $(tail -n +2 "$database")
+
     while read -r fingerprint
     do
-        compareToDatabase $fingerprint $database $quiet $confMatrix
-    done <<< $(tail -n +2 "$fingerprints") # Skip header
+        compareToDatabase $fingerprint databaseRecords[@] $confMatrix
+    done <<< $(tail -n +2 "$fingerprints")
 
     echo
     printf "%12s" "Conf. matrix:"
@@ -97,36 +78,82 @@ function main()
     done
     echo
 
+    STP=0
+    SFP=0
+    STN=0
+    SFN=0
+    SUM=0
+    sumPrc=0.0
+    sumRec=0.0
+
     for i in "${apps[@]}"
     do
         printf "%12s" $i
         for j in "${apps[@]}"
         do
             printf "%12s" ${confMatrix[$i,$j]}
+
+            SUM=$((SUM+${confMatrix[$i,$j]}))
         done
         echo
     done
     echo
 
+    for a in "${apps[@]}"
+    do
+        TP=0
+        FP=0
+        TN=0
+        FN=0
+
+        for i in "${apps[@]}"
+        do
+            for j in "${apps[@]}"
+            do
+                if [ "$i" = "$a" ] &&
+                   [ "$j" = "$a" ]; then
+                    TP=$((TP+${confMatrix[$i,$j]}))
+                elif [ "$i" = "$a" ]; then
+                    FP=$((FP+${confMatrix[$i,$j]}))
+                elif [ "$j" = "$a" ]; then
+                    FN=$((FN+${confMatrix[$i,$j]}))
+                else
+                    TN=$((TN+${confMatrix[$i,$j]}))
+                fi
+            done
+        done
+
+        if [ $(($TP + $FP)) -gt 0 ]; then
+            sumPrc=$(echo "$sumPrc + ($TP / ($TP + $FP))" | bc -l)
+        fi
+        if [ $(($TP + $FN)) -gt 0 ]; then
+            sumRec=$(echo "$sumRec + ($TP / ($TP + $FN))" | bc -l)
+        fi
+
+        STP=$(($STP+$TP))
+        SFP=$(($SFP+$FP))
+        STN=$(($STN+$TN))
+        SFN=$(($SFN+$FN))
+    done
+
     echo
-    echo "                 Predicted"
+    echo " [Summed stats]  Predicted"
     echo "                 +-----------------+-----------------+"
     echo "                 | Negative        | Positive        |"
     echo "      +----------+-----------------+-----------------+"
-    printf "GT    | Negative | (TN) %10d | (FP) %10d |\n" $TN $FP
+    printf "GT    | Negative | (TN) %10d | (FP) %10d |\n" $STN $SFP
     echo "      +----------+-----------------+-----------------+"
-    printf "      | Positive | (FN) %10d | (TP) %10d |\n" $FN $TP
+    printf "      | Positive | (FN) %10d | (TP) %10d |\n" $SFN $STP
     echo "      +----------+-----------------+-----------------+"
     echo
 
-    acc=$(echo "($TP + $TN) / ($TP + $TN + $FP + $FN)" | bc -l)
-    prc=$(echo "$TP / ($TP + $FP)" | bc -l)
-    rec=$(echo "$TP / ($TP + $FN)" | bc -l)
-
+    acc=$(echo "$STP / $SUM" | bc -l)
+    prc=$(echo "$sumPrc / 11" | bc -l)
+    rec=$(echo "$sumRec / 11" | bc -l)
     echo "Accuracy:        $acc"
     echo "Precision:       $prc"
     echo "Recall:          $rec"
     echo
 }
 
-main $1 $2 $3
+main $1 $2

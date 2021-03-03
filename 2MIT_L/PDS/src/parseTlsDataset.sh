@@ -22,7 +22,7 @@ for filename in $sourceDir/*.pcapng; do
     # Create new path + filename (e.g. appname.csv)
     target="$targetDir/$target.csv"
 
-    # Create csv header
+    # Create csv header (NO LONGER USED - since there may be multiple pcaps for one app and it would create headers inside the database)
     # echo "Source IP;Destination IP;Source port;Destination port;Handshake type;Handshake version;Handshake ciphersuite;Handshake extensions;Handshake SNI;Handshake supported EC;Handshake EC type" > $target
 
     # Extract relevant TCP & TLS handshake data
