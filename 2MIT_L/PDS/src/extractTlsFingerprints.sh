@@ -209,5 +209,4 @@ echo "JA3;JA3S;Cerificate;SNI;Application"
 
 for filename in $sourceDir/*.csv; do
     extractTlsFingerprints $filename $whitelistsDir $blacklist $testingSet
-    echo
 done

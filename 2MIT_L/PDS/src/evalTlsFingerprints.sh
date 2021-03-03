@@ -54,11 +54,9 @@ function compareToDatabase
 
     if [ "$found" = false ]; then
         if [ "$a" = "UNKNOWN" ]; then
-            # We didn't find it in the DB and its unknown (TN)
             [ "$quiet" == "-q" ] || echo "[${G}OK${N}]  True  negative: $a | ---"
             TN=$(($TN+1))
         else
-            # We didn't find it in the DB but its NOT unknown (FN)
             [ "$quiet" == "-q" ] || echo "[${R}NOK${N}] False negative: $a | ---"
             FN=$(($FN+1))
         fi
